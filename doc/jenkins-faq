@@ -1,0 +1,34 @@
+## jenkins issues
+
+if valid crumb was not found then disable csrf in jenkins - configure global security.
+
+2. Sample Jenkins Remote Build URL:
+curl -X POST "http://pankaj:aff8393a5b46b614368cdee1b23fe5d5@192.168.10.34:8080/job/Lenskart_Grid_Node_Server/buildWithParameters?token=kVfSb7gSm2eDaaFq&git_branch=master&test_suite_type=Test&host_entry=&test_env=prod&channel_type=mobile"
+
+3. In case of Authorization Required message is displayed from Java or Postman then use Authorization tab of Postman with Type as Basic Auth and provide
+jenkins credential.  
+refer #
+https://cloud.githubusercontent.com/assets/10685261/23099690/ff5885f6-f692-11e6-873f-5272b282c937.png
+https://github.com/WP-API/WP-API/issues/509
+
+
+
+If you installed Jenkins per default as a Windows service, you can copy a file named "known_hosts" under the directory
+C:\Windows\System32\Config\SystemProfile\ .ssh
+
+On Linux Machine while running code from jenkins:
+apt install Xvfb
+then run it with number of screens like:
+Xvfb :1
+
+and in build phase, export this variable like:
+unset DISPLAY
+export DISPLAY=:1
+#Ref
+https://www.blazemeter.com/blog/headless-execution-selenium-tests-jenkins
+
+kill Xvfb first and then start
+
+
+
+

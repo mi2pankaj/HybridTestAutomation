@@ -1,0 +1,28 @@
+set -x
+
+##Download Image: 
+./sdkmanager "system-images;android-25;google_apis;x86"
+
+emulator_name=ABC
+
+##Create Emulator:
+$ANDROID_HOME/tools/bin/avdmanager create avd -n $emulator_name -k "system-images;android-25;google_apis;x86" -b x86 -c 100M -f --device "Nexus 5X"
+
+##Launch Emulator && Update Chrome Version
+$ANDROID_HOME/tools/emulator -avd $emulator_name -writable-system
+$ANDROID_HOME/platform-tools/adb root
+$ANDROID_HOME/platform-tools/adb remount
+$ANDROID_HOME/platform-tools/adb shell
+
+## Push File
+./adb push /etc/hosts /system/etc/hosts
+
+cd /system/app
+rm Chrome -f -rR
+cd /data/data
+rm -r com.android.chrome
+adb -s $emulator_name install ~/Downloads/com.android.chrome_67.0.apk
+
+
+delete an emulator
+/Users/pankaj.katiyar/Library/Android/sdk/tools/bin/avdmanager delete avd -n Mobile_TC_14

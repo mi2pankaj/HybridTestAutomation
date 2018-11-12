@@ -1,0 +1,11 @@
+/logs/
+/bin/
+/target/
+/test-output/
+*.class
+*.classpath
+*.gz
+*.log
+*.DS_Store
+*.html
+*.xls#

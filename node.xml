@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Lenskart_Automation" parallel="false">
+
+	<test name="Lenskart Automated Test Suite">
+	
+		<!-- this value be set by hub server and passed to node via jenkins and will be used. For other cases, supplied value will be used. -->
+		<parameter name="channel_type" value="" />
+		
+		<!-- Node configuration will always have parallel execution true thats why GRID is being used. -->
+		<parameter name="is_parallel_execution" value="yes" />
+		
+		<classes>
+			<class name="lenskart.tests.TestSuiteClass" />
+			<class name="lenskart.tests.LenskartWebTest" />
+		</classes>
+	</test>
+</suite>

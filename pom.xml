@@ -1,0 +1,221 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>Hybrid_Automation</groupId>
+	<artifactId>Hybrid_Automation</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<name>maven</name>
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.19.1</version>
+				<configuration>
+
+					<systemPropertyVariables>
+						<java.awt.headless>false</java.awt.headless>
+					</systemPropertyVariables>
+
+					<!-- <suiteXmlFiles> <suiteXmlFile>testng.xml</suiteXmlFile> </suiteXmlFiles> -->
+
+					<!-- Added Param to control sanity / regression tests -->
+					<properties>
+						<name>{test_suite_type}</name>
+					</properties>
+					
+					<!-- This paramter will be set at hub machine and will be used at node machine only == Only in case of Mongo Execution -->
+					<properties>
+						<name>{channel_type}</name>
+					</properties>
+
+					<!-- Added Param to control run suite on other testing environment with 
+						proxy server -->
+					<properties>
+						<name>{host_ip_www}</name>
+					</properties>
+
+					<properties>
+						<name>{host_ip_api}</name>
+					</properties>
+
+					<properties>
+						<name>{block_optimizely}</name>
+					</properties>
+
+					<properties>
+						<name>{test_env}</name>
+					</properties>
+
+					<properties>
+						<name>{api_test_run}</name>
+					</properties>
+
+					<!-- Added Param to scale execution via mongo / maps -->
+					<properties>
+						<name>{scale_execution_via_mongo}</name>
+					</properties>
+
+					<!-- Added Param to control number of browsers for page load testing -->
+					<properties>
+						<name>{number_of_browsers}</name>
+					</properties>
+
+					<!-- Added Param to get ANDROID_HOME for windows and mac -->
+					<properties>
+						<name>{ANDROID_HOME}</name>
+					</properties>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>jxl</groupId>
+			<artifactId>jxl</artifactId>
+			<version>2.6</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/repo/com/jxl/2.6/jxl.jar</systemPath>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver -->
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongo-java-driver</artifactId>
+			<version>3.6.3</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.mongojack/mongojack -->
+		<dependency>
+			<groupId>org.mongojack</groupId>
+			<artifactId>mongojack</artifactId>
+			<version>2.8.0</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.jcraft/jsch -->
+		<dependency>
+			<groupId>com.jcraft</groupId>
+			<artifactId>jsch</artifactId>
+			<version>0.1.54</version>
+		</dependency>
+
+		<!-- Commenting it out.. obsolete version -->
+		<!-- <dependency> <groupId>org.seleniumhq.selenium</groupId> <artifactId>selenium-java</artifactId> 
+			<version>3.5.3</version> </dependency> -->
+
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>3.14.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.9.4</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.0.8</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.jcraft/jsch -->
+		<dependency>
+			<groupId>com.jcraft</groupId>
+			<artifactId>jsch</artifactId>
+			<version>0.1.54</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.json/json -->
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20080701</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.testng/testng -->
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>6.9.10</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/commons-configuration/commons-configuration -->
+		<dependency>
+			<groupId>commons-configuration</groupId>
+			<artifactId>commons-configuration</artifactId>
+			<version>1.10</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.codoid.products</groupId>
+			<artifactId>fillo</artifactId>
+			<version>1.15</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/net.lightbody.bmp/browsermob-proxy -->
+		<!-- <dependency> <groupId>net.lightbody.bmp</groupId> <artifactId>browsermob-proxy</artifactId> 
+			<version>2.0.0</version> </dependency> -->
+
+		<!-- ******* This is the legacy module where both ProxyServer and BrowserMobProxyServer 
+			will work ******* -->
+		<!-- https://mvnrepository.com/artifact/net.lightbody.bmp/browsermob-legacy -->
+		<dependency>
+			<groupId>net.lightbody.bmp</groupId>
+			<artifactId>browsermob-legacy</artifactId>
+			<version>2.1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.api-client</groupId>
+			<artifactId>google-api-client</artifactId>
+			<version>1.22.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.oauth-client</groupId>
+			<artifactId>google-oauth-client-jetty</artifactId>
+			<version>1.22.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.apis</groupId>
+			<artifactId>google-api-services-sheets</artifactId>
+			<version>v4-rev483-1.22.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.appium/java-client -->
+		<dependency>
+			<groupId>io.appium</groupId>
+			<artifactId>java-client</artifactId>
+			<version>6.1.0</version>
+		</dependency>
+
+
+	</dependencies>
+</project>

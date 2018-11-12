@@ -1,0 +1,11 @@
+	{
+		"method": "Post",
+		"input" :{"password":"valyoo123","username":"lenskart.test14@gmail.com"},
+		"inputType" : "application/json",
+		"request": "https://api.lenskart.com/v2/customers/authenticate",
+		"headers": {
+		"X-Api-Client":"mobilesite",
+		"X-Session-Token":"7713935a-b6b6-45e3-a108-641c8b998093",
+		"Content-Type":"application/json"
+		}
+	}
