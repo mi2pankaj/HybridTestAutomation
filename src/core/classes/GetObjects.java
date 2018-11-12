@@ -26,7 +26,7 @@ import org.openqa.selenium.WebElement;
 import core.utilities.CaptureScreenShotLib;
 import core.utilities.CustomException;
 import core.utilities.GenericMethodsLib;
-import tests.TestSuiteClass;
+import tests.SuiteClass;
 
 
 /**
@@ -71,7 +71,7 @@ public class GetObjects
 	 */
 	private WebElement getWebElementFromRepository(String objectName, WebDriver driver, By byLocator) throws CustomException
 	{
-		logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Got the object name : "+objectName);
+		logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Got the object name : "+objectName);
 
 		WebElement webelement = null;
 		boolean objectNotFound = false;
@@ -82,7 +82,7 @@ public class GetObjects
 			if(objectName.isEmpty())
 			{
 				objectNotFound = true;
-				logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Supplied object was empty or this object isn't present in OR, object name: "+objectName);
+				logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Supplied object was empty or this object isn't present in OR, object name: "+objectName);
 			}
 			else{
 				/** Get webelement for the supplied definition from object repository */
@@ -91,13 +91,13 @@ public class GetObjects
 		}
 		catch(Exception e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while getting webelement from repository:" +objectRepository, e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while getting webelement from repository:" +objectRepository, e);
 		}
 
 		/** Throw a Customexception if supplied object not found in repository */
 		if(objectNotFound)
 		{
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Either object: "+objectName +" was not found in repository or its definition is blank. ");
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Either object: "+objectName +" was not found in repository or its definition is blank. ");
 			throw new CustomException("Object: "+objectName +" was not found in repository. ");
 		}
 		return webelement;
@@ -126,12 +126,12 @@ public class GetObjects
 			try{identifierName = jsonObjectRepo.getJSONObject(objectName).getString("identifierName");}catch(JSONException e){}; 
 			try{identifierValue = jsonObjectRepo.getJSONObject(objectName).getString("identifierValue");}catch(JSONException e){};
 
-			logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : identifierName: "+identifierName+ " identifierValue: "+identifierValue + " for object: "+objectName);
+			logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : identifierName: "+identifierName+ " identifierValue: "+identifierValue + " for object: "+objectName);
 
 			if(identifierName.isEmpty() || identifierValue.isEmpty())
 			{
 				objectNotFound = true;
-				logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : There was no webelement definition found in Object Repository for object name: "+objectName);
+				logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : There was no webelement definition found in Object Repository for object name: "+objectName);
 			}
 			else
 			{
@@ -141,13 +141,13 @@ public class GetObjects
 		}
 		catch(Exception e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while getting by locator from repository:" +objectRepository, e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while getting by locator from repository:" +objectRepository, e);
 		}
 
 		/** Throw a Customexception if supplied object not found in repository */
 		if(objectNotFound)
 		{
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Object: "+objectName +" was not found in repository. ");
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Object: "+objectName +" was not found in repository. ");
 			throw new CustomException("Object: "+objectName +" was not found in repository. ");
 		}
 		return by;
@@ -167,7 +167,7 @@ public class GetObjects
 	{
 		WebElement webElementFound = null;
 
-		String locationToSaveSceenShot = TestSuiteClass.AUTOMATION_HOME.concat("/screenshots/").concat("ErrorElement").concat("/").concat(objectName + ".png");
+		String locationToSaveSceenShot = SuiteClass.AUTOMATION_HOME.concat("/screenshots/").concat("ErrorElement").concat("/").concat(objectName + ".png");
 
 		try
 		{
@@ -187,7 +187,7 @@ public class GetObjects
 				handleInvocationException(driver, byLocator, objectName);
 				
 				/** Retry Invoke WebDriver method like w.findElement(By.cssSelector("v")) and collect Web Element */
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : retrying for element: "+objectName );
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : retrying for element: "+objectName );
 				webElementFound = (WebElement) webDriverMethod.invoke(driver, byLocator);
 			}
 
@@ -198,7 +198,7 @@ public class GetObjects
 		{
 			/** Capture Screenshot */
 			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot); 
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Error occurred while finding element: "+objectName + " By Locator : " + byLocator + " screenshot: "+locationToSaveSceenShot, e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Error occurred while finding element: "+objectName + " By Locator : " + byLocator + " screenshot: "+locationToSaveSceenShot, e);
 		}
 		finally
 		{
@@ -220,7 +220,7 @@ public class GetObjects
 			/** wait for x sec until the element is not present */
 			new HandlerLib().applyExplicitWait(driver, byObjectCollectWebElement, new NoSuchElementException(""), Integer.parseInt(delay));
 
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : invocation exception handled by applying wait for: "+ delay +" for element: "+objectName );
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : invocation exception handled by applying wait for: "+ delay +" for element: "+objectName );
 		}
 	}
 
@@ -251,7 +251,7 @@ public class GetObjects
 		}
 		catch (Exception e) 
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Error occurred while finding element: "+objectName, e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Error occurred while finding element: "+objectName, e);
 		}
 		finally
 		{
@@ -269,7 +269,7 @@ public class GetObjects
 	 */
 	private HashMap<String, String> getObjectLocatorNameValueFromRepository(String objectName, JSONObject jsonObjectRepo) throws CustomException
 	{
-		logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Got the object name : "+objectName);
+		logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Got the object name : "+objectName);
 
 		String identifierName = "";
 		String identifierValue = "";
@@ -283,17 +283,17 @@ public class GetObjects
 			try{identifierName = jsonObjectRepo.getJSONObject(objectName).getString("identifierName");}catch(JSONException e){}; 
 			try{identifierValue = jsonObjectRepo.getJSONObject(objectName).getString("identifierValue");}catch(JSONException e){};
 
-			logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : identifierName: "+identifierName+ " identifierValue: "+identifierValue + " for object: "+objectName);
+			logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : identifierName: "+identifierName+ " identifierValue: "+identifierValue + " for object: "+objectName);
 		}
 		catch(Exception e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while getting by locator from repository:" +objectRepository, e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while getting by locator from repository:" +objectRepository, e);
 		}
 
 		/** Throw a Customexception if supplied object not found in repository */
 		if(identifierName.isEmpty() || identifierValue.isEmpty())
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : There was no webelement definition found in Object Repository for object name: "+objectName);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : There was no webelement definition found in Object Repository for object name: "+objectName);
 			throw new CustomException("Object: "+objectName +" was not found in repository. ");
 		}			
 
@@ -430,7 +430,7 @@ public class GetObjects
 		}
 		catch(Exception e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while getting webelement for object: "+objectName, e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while getting webelement for object: "+objectName, e);
 		}
 	
 		if(throwException)
@@ -473,7 +473,7 @@ public class GetObjects
 				locatorValue = getDynamicLocator_Original(locatorValue, data);
 			}
 		}catch (Exception e) {
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " : " + e.getMessage(), e );
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get() + " : " + e.getMessage(), e );
 		}
 		return locatorValue.trim(); 
 	}
@@ -505,7 +505,7 @@ public class GetObjects
 				}	
 			}
 		}catch (Exception e) {
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " : " + e.getMessage(), e );
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get() + " : " + e.getMessage(), e );
 		}
 		return locatorValue; 
 	}
@@ -542,7 +542,7 @@ public class GetObjects
 				locatorValue = getDynamicLocator(locatorValue, data).trim();
 			}
 		}catch (Exception e) {
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " error: "+e.getMessage(), e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get() + " error: "+e.getMessage(), e);
 		}
 		
 		return locatorValue;

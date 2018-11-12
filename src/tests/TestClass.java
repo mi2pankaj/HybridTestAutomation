@@ -46,9 +46,9 @@ import org.testng.SkipException;
 import org.testng.annotations.AfterClass;
 
 
-public class LenskartWebTest {
+public class TestClass {
 
-	Logger logger = Logger.getLogger(LenskartWebTest.class.getName());
+	Logger logger = Logger.getLogger(TestClass.class.getName());
 
 	String channel_type;
 	String is_parallel_execution;	
@@ -107,12 +107,12 @@ public class LenskartWebTest {
 			if(GenericMethodsLib.generalConfigurationProperties.getProperty("data_from_google").toString().equalsIgnoreCase("yes")){
 
 				/** load test case objects in list for sequential execution with data driven test object list */
-				testCaseObjectList = new LenskartWebTest_Utils().getRunnableTestCaseObjects_ChannelSpecific_FromGoogle(channel_type);
+				testCaseObjectList = new TestClass_Utils().getRunnableTestCaseObjects_ChannelSpecific_FromGoogle(channel_type);
 
 			}else{
 
 				/** load test case objects in list for sequential execution with data driven test object list */
-				testCaseObjectList = new LenskartWebTest_Utils().getRunnableTestCaseObjects_ChannelSpecific(channel_type); 
+				testCaseObjectList = new TestClass_Utils().getRunnableTestCaseObjects_ChannelSpecific(channel_type); 
 			}
 
 			/** update the testCaseObjectList as per test type received from testng.xml*/
@@ -126,12 +126,12 @@ public class LenskartWebTest {
 			if(GenericMethodsLib.generalConfigurationProperties.getProperty("data_from_google").toString().equalsIgnoreCase("yes")){
 
 				/** get object repository as json object from google sheet */
-				jsonObjectRepo = new LenskartWebTest_Utils().getObjectRepoAsJson_TestSpecificFromGoogle(channel_type);
+				jsonObjectRepo = new TestClass_Utils().getObjectRepoAsJson_TestSpecificFromGoogle(channel_type);
 
 			}else{
 
 				/** get object repository as json object from local excel sheet */
-				jsonObjectRepo = new LenskartWebTest_Utils().getObjectRepoAsJson_TestSpecific(channel_type);
+				jsonObjectRepo = new TestClass_Utils().getObjectRepoAsJson_TestSpecific(channel_type);
 			}
 
 
@@ -308,11 +308,11 @@ public class LenskartWebTest {
 		try {
 			/** convert the testcaseobject map { either from singleton class or from mongo db - depending on configuration }
 			 *  in a list -- as desired by write results method -- only in case of parallel execution */
-			new LenskartWebTest_Utils().getUpdatedTestCaseResultsListMongoJack(is_parallel_execution);
+			new TestClass_Utils().getUpdatedTestCaseResultsListMongoJack(is_parallel_execution);
 
 			/** create result directory  */
-			FileLib.CreateDirectory(TestSuiteClass.AUTOMATION_HOME+"/results/"+channel_type);
-			String resultFile=TestSuiteClass.AUTOMATION_HOME+"/results/"+channel_type+"/"+channel_type+"_TestResults.xlsx";
+			FileLib.CreateDirectory(SuiteClass.AUTOMATION_HOME+"/results/"+channel_type);
+			String resultFile=SuiteClass.AUTOMATION_HOME+"/results/"+channel_type+"/"+channel_type+"_TestResults.xlsx";
 
 			/** write result file - use mongo to get results - only in case of hub. if not scaling - then also use this menthod */
 			if((SingletonTestObject.getSingletonTestObject().isScale_execution_via_mongo() && SingletonTestObject.getSingletonTestObject().isHubMachine())
@@ -330,13 +330,15 @@ public class LenskartWebTest {
 			executionTime=Long.toString(executionDuration.toMinutes());
 
 			/** write owner wise data */
-			TestSuiteClass.templateData.storeEmailTemplate(resultData, channel_type, executionTime);
-			TestSuiteClass.templateData.SetOwnerWiseResultData(resultData, channel_type);
+			SuiteClass.templateData.storeEmailTemplate(resultData, channel_type, executionTime);
+			SuiteClass.templateData.SetOwnerWiseResultData(resultData, channel_type);
 
 			/** write fail cases in the google sheet*/
-			logger.info("**** Started writing fail test cases in google sheet ******");
-			WriteFailResultInGoogleSheet.writeFailCaseInGoogleSheet();
-
+			if(GenericMethodsLib.generalConfigurationProperties.getProperty("data_from_google").toString().equalsIgnoreCase("yes")){
+				logger.info("**** Started writing fail test cases in google sheet ******");
+				WriteFailResultInGoogleSheet.writeFailCaseInGoogleSheet();
+			}
+			
 			logger.info("***************** Test Ended: " +channel_type + " ************************ ");
 
 			/** this is for jenkins */

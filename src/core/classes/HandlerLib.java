@@ -73,7 +73,7 @@ import core.utilities.GenericMethodsLib;
 import core.utilities.IntegerLib;
 import core.utilities.httpClientWrap;
 import net.lightbody.bmp.proxy.ProxyServer;
-import tests.TestSuiteClass;
+import tests.SuiteClass;
 
 public class HandlerLib 
 {
@@ -95,7 +95,7 @@ public class HandlerLib
 		boolean flag = false;
 		try
 		{
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Explicit Wait for 60 seconds for exception: " + e.getClass().getName() +" is being applied ");
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Explicit Wait for 60 seconds for exception: " + e.getClass().getName() +" is being applied ");
 
 			WebDriverWait wait = new WebDriverWait(driver, 60);
 
@@ -116,15 +116,15 @@ public class HandlerLib
 			flag = true;
 		}
 		catch(TimeoutException t){
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+ " : " + t.getMessage());
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+ " : " + t.getMessage());
 		}
 		catch(Exception ex)
 		{
 			flag = false;
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Error occurred while performing external wait. ", ex);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Error occurred while performing external wait. ", ex);
 		}
 
-		logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" fixed explicit wait finish. ");
+		logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" fixed explicit wait finish. ");
 		return flag;
 	}
 
@@ -143,7 +143,7 @@ public class HandlerLib
 		boolean flag = false;
 		try
 		{
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Explicit Wait for time - "+timeoutSeconds +" seconds for exception: " + e.getClass().getName() +" is being applied ");
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Explicit Wait for time - "+timeoutSeconds +" seconds for exception: " + e.getClass().getName() +" is being applied ");
 
 			WebDriverWait wait = new WebDriverWait(driver, timeoutSeconds);
 
@@ -171,17 +171,17 @@ public class HandlerLib
 				String text = alert.getText();
 				alert.accept();
 
-				logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Unhandled alert found having text: "+text+ ", re-applying explicit wait ...",w);
+				logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Unhandled alert found having text: "+text+ ", re-applying explicit wait ...",w);
 				applyExplicitWait(driver, bylocator, e, timeoutSeconds);
 			}
 		}
 		catch(Exception ex)
 		{
 			flag = false;
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Error occurred while performing external wait. ", ex);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Error occurred while performing external wait. ", ex);
 		}
 
-		logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : received explicit wait finish. ");
+		logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : received explicit wait finish. ");
 
 		return flag;
 	}
@@ -204,7 +204,7 @@ public class HandlerLib
 
 		duration = TimeUnit.MILLISECONDS.toDays((dateFirst.getTime() - dateSecond.getTime()));
 
-		logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : date difference in days: "+duration);
+		logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : date difference in days: "+duration);
 
 		return duration;
 	}
@@ -224,7 +224,7 @@ public class HandlerLib
 
 		try
 		{	
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Desired Text: "+desiredText );
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Desired Text: "+desiredText );
 
 			//Adding explicit wait for webelement having upload text to appear
 			WebDriverWait wait = new WebDriverWait(driver, 600);
@@ -236,11 +236,11 @@ public class HandlerLib
 
 				String dynamicText = desiredWebElement.getText().trim();
 
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Print Text: " +dynamicText);
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Print Text: " +dynamicText);
 
 				if(dynamicText.toLowerCase().contains(desiredText.toLowerCase().trim()))
 				{
-					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Desired text is found: " +dynamicText);
+					logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Desired text is found: " +dynamicText);
 					flag = true;
 					break;
 				}
@@ -250,17 +250,17 @@ public class HandlerLib
 			if(flag)
 			{
 				result = "Pass: Video was uploaded successfully. ";
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Video is uploaded and notified for Video Ad: ");
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Video is uploaded and notified for Video Ad: ");
 			}
 			else
 			{
 				result = "Fail: Video wasn't uploaded. ";
-				logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Video uploaded message was not found. ");
+				logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Video uploaded message was not found. ");
 			}	
 		}
 		catch (Exception e) 
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred. ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred. ", e);
 		}
 		return result; 
 	}
@@ -275,7 +275,7 @@ public class HandlerLib
 		try
 		{
 			driver.switchTo().alert();
-			logger.warn(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Alert is displayed having text: " +driver.switchTo().alert().getText());
+			logger.warn(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Alert is displayed having text: " +driver.switchTo().alert().getText());
 
 			driver.switchTo().alert().accept();
 			return true;
@@ -323,11 +323,11 @@ public class HandlerLib
 		}
 		catch(WebDriverException w)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Error occurred while executing java script: "+javaScript +" for supplied element: "+webelement);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Error occurred while executing java script: "+javaScript +" for supplied element: "+webelement);
 		}
 		catch(Exception ex)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while executing java script: "+javaScript +" for supplied element: "+webelement, ex);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while executing java script: "+javaScript +" for supplied element: "+webelement, ex);
 		}
 		return objJsOutput;
 	}
@@ -351,7 +351,7 @@ public class HandlerLib
 		}
 		catch(Exception e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while performing mouse action. ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while performing mouse action. ", e);
 			return false;
 		}
 	}
@@ -410,7 +410,7 @@ public class HandlerLib
 					if(value == null)
 					{
 						value = "";
-						logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Received step id: "+key + " wasn't found in map, reassigning to space. ");
+						logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Received step id: "+key + " wasn't found in map, reassigning to space. ");
 					}
 				}
 				data = data.replace(matchString, value);
@@ -432,7 +432,7 @@ public class HandlerLib
 		}
 		catch(Exception e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while parsing supplied string: ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while parsing supplied string: ", e);
 		}
 		return data;
 	}
@@ -484,7 +484,7 @@ public class HandlerLib
 		catch(Exception e)
 		{
 			flag = false;
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while typing data: "+data, e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while typing data: "+data, e);
 		}
 		return flag;
 	}
@@ -502,7 +502,7 @@ public class HandlerLib
 		 */
 		String extension = data.substring(data.indexOf(".")+1, data.length()).toLowerCase().trim();
 
-		String videoLocation = TestSuiteClass.AUTOMATION_HOME.toString().concat("\\tc_data\\sample_videos");
+		String videoLocation = SuiteClass.AUTOMATION_HOME.toString().concat("\\tc_data\\sample_videos");
 
 		switch (extension)
 		{
@@ -553,7 +553,7 @@ public class HandlerLib
 			data = data.replace("\\", "/");
 		}
 
-		logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Video location is being returned = "+data);
+		logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Video location is being returned = "+data);
 		return data;
 
 	}
@@ -570,7 +570,7 @@ public class HandlerLib
 		 * Get extension of supplied file
 		 */
 		String extension = data.substring(data.indexOf(".")+1, data.length()).toLowerCase().trim();
-		String imageLocation = TestSuiteClass.AUTOMATION_HOME.toString().concat("\\tc_data\\sample_images");
+		String imageLocation = SuiteClass.AUTOMATION_HOME.toString().concat("\\tc_data\\sample_images");
 
 		switch (extension)
 		{
@@ -595,7 +595,7 @@ public class HandlerLib
 			data = data.replace("\\", "/");
 		}
 
-		logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Image location is being returned = "+data);
+		logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Image location is being returned = "+data);
 		return data;
 
 	}
@@ -676,7 +676,7 @@ public class HandlerLib
 		List<String> notPresentObjectList = new ArrayList<String>();
 
 		try{
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Checking presence of supplied element: "+objectName);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Checking presence of supplied element: "+objectName);
 
 			boolean listFlag = false;
 			List<String> suppliedObjectList = new ArrayList<String>();
@@ -693,7 +693,7 @@ public class HandlerLib
 				boolean iselementDisplayed = false;
 
 				webelement = new GetObjects().getFinalWebElement(driver, objectName, data, jsonObjectRepo);
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Element is: " + webelement);
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Element is: " + webelement);
 
 				if(webelement == null)
 				{
@@ -701,7 +701,7 @@ public class HandlerLib
 
 					/** Taking screenshot during exception */
 					CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : received webelement as null, Screenshot is captured at: "+locationToSaveSceenShot);
+					logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : received webelement as null, Screenshot is captured at: "+locationToSaveSceenShot);
 
 					result = failed_status + "Element is not present. ";
 				}
@@ -713,7 +713,7 @@ public class HandlerLib
 					}catch(StaleElementReferenceException e){
 
 						webelement = new GetObjects().getFinalWebElement(driver, objectName, data, jsonObjectRepo);
-						logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " : " + " Handling StaleElementReferenceException ... retried to find element ... ");
+						logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " : " + " Handling StaleElementReferenceException ... retried to find element ... ");
 
 						iselementDisplayed = webelement.isDisplayed();
 					}
@@ -722,7 +722,7 @@ public class HandlerLib
 						result = passed_status + "Element is present. ";
 					}else {
 						/** if element was not null, then only wait for visibility */
-						logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " : " + " element is not null, explicit waiting for visiblity..  ");
+						logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " : " + " element is not null, explicit waiting for visiblity..  ");
 
 						By byLocator = new GetObjects().getFinalByLocator(driver, objectName, data, jsonObjectRepo);
 						handler.applyExplicitWait(driver, byLocator, new ElementNotVisibleException(""));
@@ -732,7 +732,7 @@ public class HandlerLib
 						}else {
 							result = failed_status + "Element is not present. ";
 
-							logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " : " + " element not found, taking screenshot ... ");
+							logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " : " + " element not found, taking screenshot ... ");
 							CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
 						}
 					}
@@ -763,7 +763,7 @@ public class HandlerLib
 
 						/** Taking screenshot during exception */
 						CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-						logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+						logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 					}
 				}
 
@@ -790,11 +790,11 @@ public class HandlerLib
 			else
 			{
 				result = failed_status + "Couldn't check the presence of element. ";
-				logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while checking the presence of element. ", e);
+				logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while checking the presence of element. ", e);
 
 				/** Taking screenshot during exception */
 				CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 			}
 		}
 
@@ -833,7 +833,7 @@ public class HandlerLib
 
 				/** Taking screenshot during exception */
 				CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : element threw NullPointer - Screenshot is captured at: "+locationToSaveSceenShot);
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : element threw NullPointer - Screenshot is captured at: "+locationToSaveSceenShot);
 			}
 
 			if(iselementDisplayed){
@@ -844,11 +844,11 @@ public class HandlerLib
 
 		}catch(Exception e){
 			result = failed_status + "Couldn't check the presence of element. ";
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while checking the presence of element. ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while checking the presence of element. ", e);
 
 			/** Taking screenshot during exception */
 			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 		return result;
 	}
@@ -881,17 +881,17 @@ public class HandlerLib
 				webelement.click();
 			}
 
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Clicked checkbox is: " +webelement);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Clicked checkbox is: " +webelement);
 			result = passed_status+ "Clicked checkbox successfully";
 		}
 		catch(Exception e)
 		{
 			result = failed_status + "Couldn't click checkbox";
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while clicking checkbox : " +webelement, e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while clicking checkbox : " +webelement, e);
 
 			/** Taking screenshot during exception */
 			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 
 		return result;
@@ -1126,7 +1126,7 @@ public class HandlerLib
 			conditionResult = (boolean) conditionMethod.invoke(expressionObj, data1, data2);
 		}
 		catch (Exception e) {
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+ " -- " +e.getMessage(), e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+ " -- " +e.getMessage(), e);
 		}
 		return conditionResult;
 	}
@@ -1152,7 +1152,7 @@ public class HandlerLib
 
 				String result = new KeywordsExtended(connection, jsonObjectRepo, proxyServer).verifyelementpresent(driver, objectName, data);
 
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " : callable task result for element: " +data + " -- "+ result);
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " : callable task result for element: " +data + " -- "+ result);
 				return result;
 			}
 		};
@@ -1235,7 +1235,7 @@ public class HandlerLib
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+ " -- " +e.getMessage(), e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+ " -- " +e.getMessage(), e);
 		}
 		return dateString;
 	}
@@ -1293,7 +1293,7 @@ public class HandlerLib
 
 
 		}catch(Exception e){
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+ "error occured while modifying the template file" +e.getMessage(), e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+ "error occured while modifying the template file" +e.getMessage(), e);
 		}
 		finally{
 			try

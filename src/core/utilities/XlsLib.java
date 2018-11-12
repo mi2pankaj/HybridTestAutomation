@@ -28,7 +28,7 @@ import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
-import tests.TestSuiteClass;
+import tests.SuiteClass;
 
 public class XlsLib 
 {
@@ -63,7 +63,7 @@ public class XlsLib
 		}
 		catch(Exception e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Error: ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Error: ", e);
 		}
 		return testDataProvider;				
 	}
@@ -271,7 +271,7 @@ public class XlsLib
 		}
 		catch(Exception e)
 		{
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception Handled by Method: emptyExcel. ", e);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception Handled by Method: emptyExcel. ", e);
 
 		}
 	}
@@ -527,7 +527,7 @@ public class XlsLib
 					}
 				}
 
-				total_tc_count_inputFile = TestSuiteClass.totalTC.get(SheetName);
+				total_tc_count_inputFile = SuiteClass.totalTC.get(SheetName);
 
 				//System.out.println("FINAL VALUES OF TEST");
 				//System.out.println("TOTAL TC COUNT : " + total_tc_count);
@@ -566,7 +566,7 @@ public class XlsLib
 				}
 				catch(Exception e)
 				{
-					logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception: ", e);
+					logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception: ", e);
 				}
 			}
 		}
@@ -1087,7 +1087,7 @@ public class XlsLib
 		}
 		catch(Exception e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occured while inserting excel data into a hash map. ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occured while inserting excel data into a hash map. ", e);
 		}
 		finally
 		{

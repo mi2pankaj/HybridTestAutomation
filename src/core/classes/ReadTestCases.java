@@ -29,8 +29,8 @@ import io.appium.java_client.AppiumDriver;
 import jxl.Sheet;
 import jxl.Workbook;
 import net.lightbody.bmp.proxy.ProxyServer;
-import tests.LenskartWebTest_Utils;
-import tests.TestSuiteClass;
+import tests.TestClass_Utils;
+import tests.SuiteClass;
 import tpt.googleAPI.GoogleSheetUtils;
 
 
@@ -96,7 +96,7 @@ public class ReadTestCases implements Cloneable
 		this.tcStepDescriptionColumn = "Description";
 
 		/** Choosing input data column based on current test environment */
-		if(TestSuiteClass.currentTestEnv.equalsIgnoreCase("preprod"))
+		if(SuiteClass.currentTestEnv.equalsIgnoreCase("preprod"))
 		{
 			this.tcStepDataColumn = "inputData_Preprod";
 		}
@@ -310,7 +310,7 @@ public class ReadTestCases implements Cloneable
 			testStepSheetObj = book.getSheet(testStepSheet);
 		}catch(Exception e){
 			flag = false;
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exiting -- Please check the file location, Error occurred while loading file: "+fileNameWithLocation, e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exiting -- Please check the file location, Error occurred while loading file: "+fileNameWithLocation, e);
 		}
 
 		try
@@ -440,7 +440,7 @@ public class ReadTestCases implements Cloneable
 		boolean resultFlag;
 
 		try{			
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : "+"executeTestCaseObject Method -- iterating test case object ... ");
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : "+"executeTestCaseObject Method -- iterating test case object ... ");
 
 			/** This hashmap contains the test step id and corresponding test step data, will not reset for each test case id.
 			 * this will be used when user wants to give same (dynamic) data in multiple test steps for one test case.
@@ -520,7 +520,7 @@ public class ReadTestCases implements Cloneable
 				if(!haltExecution || keyword.equalsIgnoreCase("closebrowser") || keyword.equalsIgnoreCase("getproxylog") || keyword.equalsIgnoreCase("getbrowserconsolelogs")){
 
 					/** precondition check - hack to handle notification in emulator -- to be reviewed later on */
-					new LenskartWebTest_Utils().handlePreConditions(testCaseObject, driver);
+					new TestClass_Utils().handlePreConditions(testCaseObject, driver);
 
 					/** Performing action based on received keyword, object and input data */
 					PerformAction action = new PerformAction();
@@ -543,7 +543,7 @@ public class ReadTestCases implements Cloneable
 					logger.debug("halting steps now, test step: "+testStepID);
 				}
 
-				logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : "+"Keyword: "+keyword + ", Object Name: "+objectName + ", Input Data: "+data + ", Test Step: "+testStepID+ ", Result: "+result);
+				logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : "+"Keyword: "+keyword + ", Object Name: "+objectName + ", Input Data: "+data + ", Test Step: "+testStepID+ ", Result: "+result);
 
 				/** Setting up haltExecution flag to true if on_error_resume_next is found to be true and any fail result. 
 				 * If on_error_resume_next is found in first row as no and if there is any Fail result found then set haltExecution = true.
@@ -571,7 +571,7 @@ public class ReadTestCases implements Cloneable
 							|| result.toLowerCase().trim().startsWith("fail:") 
 							|| result.toLowerCase().contains("fail:")){
 						resultFlag = false;
-						logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : "+"Found Test Step: "+testStepID +" = Failed:");
+						logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : "+"Found Test Step: "+testStepID +" = Failed:");
 					}
 				}
 
@@ -579,7 +579,7 @@ public class ReadTestCases implements Cloneable
 				Instant testStepEndTime = Instant.now();
 				Duration timeElasped = Duration.between(testStepStartTime, testStepEndTime);
 				long timeTaken = timeElasped.toMillis();
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : "+"Found Test Step: "+testStepID +" Time Taken in seconds = "+Long.toString(timeTaken/1000));
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : "+"Found Test Step: "+testStepID +" Time Taken in seconds = "+Long.toString(timeTaken/1000));
 
 				/** Putting time taken of each test step in respective test step object */
 				testStepObject.setTestStepExecutionTime(Long.toString(timeTaken/1000));
@@ -609,14 +609,14 @@ public class ReadTestCases implements Cloneable
 			testCaseFinishTime =Instant.now();
 			testExecutionDuration =Duration.between(testCaseStartTime, testCaseFinishTime);
 			long duration = testExecutionDuration.toMillis()/1000;
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " Total Seconds Taken = "+Long.toString(duration) + " And Test Case Result: "+resultFlag);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " Total Seconds Taken = "+Long.toString(duration) + " And Test Case Result: "+resultFlag);
 
 			/** Set test case execution time*/
 			testCaseObject.setTestCaseExecutionTime(Long.toString(duration));
 		}
 		catch(Exception e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : "+" Exception occurred: ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : "+" Exception occurred: ", e);
 		}
 		return testCaseObject;
 	}
@@ -674,7 +674,7 @@ public class ReadTestCases implements Cloneable
 				}
 			}
 		}catch(Exception e){
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : "+" Exception occurred while getting module data: ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : "+" Exception occurred while getting module data: ", e);
 		}
 		return moduleMap;
 	}

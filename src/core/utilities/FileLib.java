@@ -34,7 +34,7 @@ import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
-import tests.TestSuiteClass;
+import tests.SuiteClass;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.comparator.LastModifiedFileComparator;
@@ -81,7 +81,7 @@ public class FileLib
 			}
 			else
 			{
-				logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Log folder wasn't created");
+				logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Log folder wasn't created");
 			}
 		}
 
@@ -91,9 +91,9 @@ public class FileLib
 		//System.setErr(logFile);
 
 		//Printing Test Start Time.
-		logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : ###################################################################");
-		logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : ******* Test Suite Execution Started At Time ********: " +GenericMethodsLib.DateTimeStamp("MMddyyyy_hhmmss"));
-		logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : ###################################################################");
+		logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : ###################################################################");
+		logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : ******* Test Suite Execution Started At Time ********: " +GenericMethodsLib.DateTimeStamp("MMddyyyy_hhmmss"));
+		logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : ###################################################################");
 	}
 
 
@@ -108,16 +108,16 @@ public class FileLib
 
 			if(!(testDataFolderLocation.exists()))
 			{
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Test Data folder doesn't exist at " +testFileLocation);
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Test Data folder doesn't exist at " +testFileLocation);
 				boolean b = testDataFolderLocation.mkdirs();
 
 				if(b)
 				{
-					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Test data folder was created successfully "); 
+					logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Test data folder was created successfully "); 
 				}
 				else
 				{
-					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Test data folder wasn't created");
+					logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Test data folder wasn't created");
 				}
 			}
 
@@ -135,7 +135,7 @@ public class FileLib
 		}catch(Exception t)
 		{
 			flag = false;
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Error occurred while writing file. ", t);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Error occurred while writing file. ", t);
 		}
 		return flag;
 	}
@@ -153,16 +153,16 @@ public class FileLib
 
 			if(!(testDataFolderLocation.exists()))
 			{
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Directory doesn't exist at " +testFileLocation);
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Directory doesn't exist at " +testFileLocation);
 				boolean b = testDataFolderLocation.mkdirs();
 
 				if(b)
 				{
-					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Directory was created successfully "); 
+					logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Directory was created successfully "); 
 				}
 				else
 				{
-					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Directory was not created");
+					logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Directory was not created");
 				}
 			}
 
@@ -173,13 +173,13 @@ public class FileLib
 			fw.write(strContent);
 			fw.close();
 
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : File : " +testFile+ " is written successfully");
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : File : " +testFile+ " is written successfully");
 
 			flag = true;
 		}catch(Exception e)
 		{
 			flag = false;
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occured while writing in file. ", e);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occured while writing in file. ", e);
 		}
 		finally
 		{
@@ -204,12 +204,12 @@ public class FileLib
 
 			if (testResultFile.exists())
 			{
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Test Result File Created At: " +testResultFile.getPath());
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Test Result File Created At: " +testResultFile.getPath());
 			}
 		}
 		catch(Exception e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occured while while copying excel file: "+sourceFileNameWithLocation, e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occured while while copying excel file: "+sourceFileNameWithLocation, e);
 		}
 
 		return testResultFile;	
@@ -222,18 +222,18 @@ public class FileLib
 	{
 		try
 		{
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : fileNameWithLocation: " +fileNameWithLocation);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : fileNameWithLocation: " +fileNameWithLocation);
 			//Getting WorkBook
 			Workbook book = Workbook.getWorkbook(new File(fileNameWithLocation));
 			WritableWorkbook copiedBook = Workbook.createWorkbook(new File(fileNameWithLocation), book);	
 			WritableSheet sheet = copiedBook.getSheet(0);	//.getSheet(sheetName);
 
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : total rows: " +sheet.getRows());
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : total rows: " +sheet.getRows());
 
 			for(int row=1;row<sheet.getRows();row++)
 			{
 				String flag = sheet.getCell(0, row).getContents().toString().toLowerCase().trim();
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : flag: " +flag + " at row: " +row);
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : flag: " +flag + " at row: " +row);
 
 				if (flag.equalsIgnoreCase("no"))
 				{
@@ -247,7 +247,7 @@ public class FileLib
 		}
 		catch(NullPointerException e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Error occured while writing data.", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Error occured while writing data.", e);
 		}
 	}
 
@@ -266,16 +266,16 @@ public class FileLib
 
 		if(!(testDataFolderLocation.exists()))
 		{
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Test Data folder doesn't exist at " + directory);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Test Data folder doesn't exist at " + directory);
 			boolean b = testDataFolderLocation.mkdirs();
 
 			if(b)
 			{
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Test data folder was created successfully "); 
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Test data folder was created successfully "); 
 			}
 			else
 			{
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Test data folder wasn't created");
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Test data folder wasn't created");
 			}
 		}
 
@@ -308,18 +308,18 @@ public class FileLib
 		}
 		catch (ArrayIndexOutOfBoundsException e) 
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : No Records Returned By The Query. Handled by Method : WritingMySQLRecordsInExcelSheet:", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : No Records Returned By The Query. Handled by Method : WritingMySQLRecordsInExcelSheet:", e);
 		}
 		catch (Exception e) 
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception Handled by Method : WritingMySQLRecordsInExcelSheet:", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception Handled by Method : WritingMySQLRecordsInExcelSheet:", e);
 		}
 		finally
 		{
 			book.write();
 			book.close();		
 		}
-		logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Data Was Successfully Written In Excel Sheet By Method WritingExcelSheet: " + " Rows: " +strRecord.length + ", Total Columns: " +strRecord[0].length);
+		logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Data Was Successfully Written In Excel Sheet By Method WritingExcelSheet: " + " Rows: " +strRecord.length + ", Total Columns: " +strRecord[0].length);
 	}			    
 
 
@@ -343,7 +343,7 @@ public class FileLib
 			book = Workbook.getWorkbook(new File(fileNameWithLocation));
 		}catch( IOException | BiffException e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Error occurred while reading excel file: "+fileNameWithLocation, e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Error occurred while reading excel file: "+fileNameWithLocation, e);
 		}
 
 		String [][]testDataProvider = null;
@@ -368,7 +368,7 @@ public class FileLib
 					}catch(NullPointerException n)
 					{
 						testDataProvider[row-1][c] = "";
-						logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : There may be a Leading or Trailing SPACE in this cell: " + "row: "+row + "  and coulmn: "+columnNo );
+						logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : There may be a Leading or Trailing SPACE in this cell: " + "row: "+row + "  and coulmn: "+columnNo );
 					}
 				}
 				//logger.info();
@@ -397,7 +397,7 @@ public class FileLib
 			book = Workbook.getWorkbook(new File(fileNameWithLocation));
 		}catch( IOException | BiffException e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Error occurred while reading excel file: "+fileNameWithLocation, e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Error occurred while reading excel file: "+fileNameWithLocation, e);
 		}
 
 		String [][]testDataProvider = null;
@@ -422,7 +422,7 @@ public class FileLib
 					}catch(NullPointerException n)
 					{
 						testDataProvider[row-1][c] = "";
-						logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : There may be a Leading or Trailing SPACE in this cell: " + "row: "+row + "  and coulmn: "+columnNo );
+						logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : There may be a Leading or Trailing SPACE in this cell: " + "row: "+row + "  and coulmn: "+columnNo );
 					}
 				}
 			}	   
@@ -452,7 +452,7 @@ public class FileLib
 			book = Workbook.getWorkbook(new File(fileNameWithLocation));
 		}catch( IOException | BiffException e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Error occurred while reading excel file: "+fileNameWithLocation, e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Error occurred while reading excel file: "+fileNameWithLocation, e);
 		}
 
 		/** this list will contain the 1D array of test step data */
@@ -486,7 +486,7 @@ public class FileLib
 						}catch(NullPointerException n)
 						{
 							testStepData[c] = "";
-							logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : There may be a Leading or Trailing SPACE in this cell: " + "row: "+row + "  and coulmn: "+c );
+							logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : There may be a Leading or Trailing SPACE in this cell: " + "row: "+row + "  and coulmn: "+c );
 						}
 					}
 
@@ -513,7 +513,7 @@ public class FileLib
 		Workbook book = Workbook.getWorkbook(new File(fileNameWithLocation));	
 		Sheet sheet = book.getSheet(0);	//getSheet(sheetName);
 
-		logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Total Rows: "+sheet.getRows());
+		logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Total Rows: "+sheet.getRows());
 
 		CellFinder cellFind = new CellFinder(sheet);	//Finding the Cell with a particular text and later on get the corresponding Row or Column;
 
@@ -535,7 +535,7 @@ public class FileLib
 					//System.out.print(strAd_Format + "   :   ");
 				}catch(NullPointerException n)
 				{
-					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : There may be a Leading or Trailing SPACE in this cell: " + "row: "+row + "  and coulmn: "+columnNo );
+					logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : There may be a Leading or Trailing SPACE in this cell: " + "row: "+row + "  and coulmn: "+columnNo );
 					n.printStackTrace();
 				}
 			}
@@ -554,14 +554,14 @@ public class FileLib
 		{
 			if(System.getProperty("os.name").matches("^Windows.*"))
 			{
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Environment Variable has been already setup for: "+System.getProperty("os.name"));
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Environment Variable has been already setup for: "+System.getProperty("os.name"));
 			}
 			else
 			{
 				//Applications Folder In Mac:
 				File sikuliIDE = new File("/Applications/Sikuli-IDE.app");
 
-				String sikuliSourceLocation = TestSuiteClass.AUTOMATION_HOME.concat("/tpt/Sikuli-IDE.app");
+				String sikuliSourceLocation = SuiteClass.AUTOMATION_HOME.concat("/tpt/Sikuli-IDE.app");
 				String sikuliDestination = "/Applications/";
 
 				if(!(sikuliIDE.exists()))
@@ -571,17 +571,17 @@ public class FileLib
 					String command = "cp -r " + sikuliSourceLocation + " " + sikuliDestination;
 					ExecuteCommands.ExecuteCommand_ReturnsOutput(command);
 
-					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Sikuli has been setup successfully in: "+ System.getProperty("os.name"));
+					logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Sikuli has been setup successfully in: "+ System.getProperty("os.name"));
 				}
 				else
 				{
-					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Sikuli already exists in: "+ System.getProperty("os.name"));
+					logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Sikuli already exists in: "+ System.getProperty("os.name"));
 				}
 			}
 		}
 		catch(Exception e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occured while setting up sikuli. ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occured while setting up sikuli. ", e);
 		}
 	}
 
@@ -595,7 +595,7 @@ public class FileLib
 		}
 		catch(Exception e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : ", e);
 		}
 	}
 
@@ -614,18 +614,18 @@ public class FileLib
 
 			if(b)
 			{
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Directory is created at: "+checkLocation);
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Directory is created at: "+checkLocation);
 				return b;
 			}
 			else
 			{
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Directory wasn't created at: "+checkLocation);
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Directory wasn't created at: "+checkLocation);
 				return b;
 			}
 		}
 		else
 		{
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Directory: " +checkLocation + " already exists.");
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Directory: " +checkLocation + " already exists.");
 			return true;
 		}
 	}
@@ -654,7 +654,7 @@ public class FileLib
 
 			if(fileList.length < 1)
 			{
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : No File was found having extension: "+fileExtension);
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : No File was found having extension: "+fileExtension);
 			}
 			else if(fileList.length == 1)
 			{
@@ -663,7 +663,7 @@ public class FileLib
 			else
 			{
 				//Print file list
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Printing List Of Files Found Having Extension: "+fileExtension);
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Printing List Of Files Found Having Extension: "+fileExtension);
 
 				for(int i=0; i<fileList.length; i++)
 				{
@@ -680,7 +680,7 @@ public class FileLib
 		}
 		catch(Exception e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception handled by method: GetFileWithSpecificExtensionInDirectory. ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception handled by method: GetFileWithSpecificExtensionInDirectory. ", e);
 		}
 		finally
 		{
@@ -698,7 +698,7 @@ public class FileLib
 		boolean flag = false;
 		try
 		{
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Text: "+desiredText + " is being searched in file: "+desiredFile);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Text: "+desiredText + " is being searched in file: "+desiredFile);
 			BufferedReader reader = new BufferedReader(new FileReader(desiredFile));
 
 			String line = "";
@@ -707,7 +707,7 @@ public class FileLib
 			{
 				if(line.contains(desiredText))
 				{
-					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : desired text: "+ desiredText+ " is found in line: "+line);
+					logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : desired text: "+ desiredText+ " is found in line: "+line);
 					flag = true;
 					break;
 				}
@@ -717,7 +717,7 @@ public class FileLib
 		catch(Exception e)
 		{
 			flag = false;
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception handled while searching text: "+desiredText+" in file: "+desiredFile.toString(), e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception handled while searching text: "+desiredText+" in file: "+desiredFile.toString(), e);
 		}
 		finally
 		{
@@ -748,7 +748,7 @@ public class FileLib
 		}
 		catch(Exception e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occured while reading file: "+desiredFile, e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occured while reading file: "+desiredFile, e);
 		}
 		return content;
 	}
@@ -787,7 +787,7 @@ public class FileLib
 		catch(Exception e)
 		{
 			flag = false;
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception handled while waiting for text: "+desiredText + " to appear in file. ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception handled while waiting for text: "+desiredText + " to appear in file. ", e);
 			Thread.sleep(1000);
 		}
 		finally
@@ -827,16 +827,16 @@ public class FileLib
 				{
 					FileUtils.copyFileToDirectory(tempFile, copyDir);
 				}
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : File: "+tempFile.toString() + " is copied successfully to directory: "+copyDir.toString());
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : File: "+tempFile.toString() + " is copied successfully to directory: "+copyDir.toString());
 			}
 
 			flag = true;
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : All files are copied. ");
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : All files are copied. ");
 		}
 		catch(Exception e)
 		{
 			flag = false;
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception handled by method: CopyAllFilesToDirectory. ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception handled by method: CopyAllFilesToDirectory. ", e);
 		}
 		finally
 		{
@@ -869,14 +869,14 @@ public class FileLib
 					if(requiredFiles[i].equalsIgnoreCase(checkFileName))
 					{
 						flag = true;
-						logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : File: "+checkFileName + " exists in directory: "+directory);
+						logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : File: "+checkFileName + " exists in directory: "+directory);
 					}
 				}
 			}
 		}
 		catch(Exception e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exceptin handled by method: CheckFileInDirectory. ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exceptin handled by method: CheckFileInDirectory. ", e);
 		}
 		finally
 		{
@@ -898,7 +898,7 @@ public class FileLib
 		boolean occurence = true;
 		try
 		{	
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : File: "+desiredFile+" is being replaced by the expected lines...");
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : File: "+desiredFile+" is being replaced by the expected lines...");
 
 			BufferedReader reader = new BufferedReader(new FileReader(desiredFile));
 
@@ -927,12 +927,12 @@ public class FileLib
 			writer.close();
 
 			flag = true;
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : File: " +desiredFile+ " has been replaced with desired lines successfully. ");
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : File: " +desiredFile+ " has been replaced with desired lines successfully. ");
 		}
 		catch(Exception e)
 		{
 			flag = false;
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : ********** Exception Handled By Method: ReplaceSingleLineInFile. ", e);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : ********** Exception Handled By Method: ReplaceSingleLineInFile. ", e);
 		}
 		finally
 		{
@@ -956,9 +956,9 @@ public class FileLib
 
 		try
 		{
-			logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Received file location: "+fileNameWithLocation);
+			logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Received file location: "+fileNameWithLocation);
 			String dir = StringLib.splitDirectoryFromFileLocation(fileNameWithLocation);
-			logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Splitted directory location: "+dir);
+			logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Splitted directory location: "+dir);
 
 			//Get the directory from file location 
 			File directory = new File(dir);
@@ -969,7 +969,7 @@ public class FileLib
 				//If not then create directory
 				if(directory.mkdirs())
 				{
-					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Directory: "+directory + " wasn't existed, its created now. ");
+					logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Directory: "+directory + " wasn't existed, its created now. ");
 				}
 			}
 
@@ -980,7 +980,7 @@ public class FileLib
 			{
 				if(file.createNewFile())
 				{
-					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : File: " +fileNameWithLocation + " wasn't existed, its created now. ");
+					logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : File: " +fileNameWithLocation + " wasn't existed, its created now. ");
 				}
 			}
 
@@ -995,7 +995,7 @@ public class FileLib
 		catch(Exception e)
 		{
 			flag = false;
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occured while writing text in file. ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occured while writing text in file. ", e);
 		}
 		finally
 		{
@@ -1021,7 +1021,7 @@ public class FileLib
 				//If not then create directory
 				if(directory.mkdirs())
 				{
-					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Directory: "+directory + " wasn't existed, its created now. ");
+					logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Directory: "+directory + " wasn't existed, its created now. ");
 				}
 			}
 
@@ -1033,19 +1033,19 @@ public class FileLib
 				if(file.createNewFile())
 				{
 					flag = true;
-					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : File: " +fileNameWithLocation + " wasn't existed, its created now. ");
+					logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : File: " +fileNameWithLocation + " wasn't existed, its created now. ");
 				}
 			}
 			else
 			{
 				flag = true;
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : File: " +fileNameWithLocation + " already existed. ");
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : File: " +fileNameWithLocation + " already existed. ");
 			}
 		}
 		catch(Exception e)
 		{
 			flag = false;
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception handled by method: CreateNewFile. ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception handled by method: CreateNewFile. ", e);
 		}
 		finally
 		{
@@ -1062,7 +1062,7 @@ public class FileLib
 		String modifiedFile = "NO_FILE"; 
 		try
 		{
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Searching the last modified file at location: "+directory);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Searching the last modified file at location: "+directory);
 
 			File dir = new File(directory);
 
@@ -1073,12 +1073,12 @@ public class FileLib
 
 			modifiedFile = files[0].toString();
 
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Found the last modified file: " +modifiedFile);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Found the last modified file: " +modifiedFile);
 		}
 		catch(Exception e)
 		{
 			modifiedFile = "NO_FILE";
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception handled by method: GetLastModifiedFile. ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception handled by method: GetLastModifiedFile. ", e);
 		}
 		finally
 		{

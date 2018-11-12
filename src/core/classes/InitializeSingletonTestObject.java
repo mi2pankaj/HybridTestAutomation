@@ -18,7 +18,7 @@ import core.grid.Node;
 import core.utilities.GenericMethodsLib;
 import core.utilities.MongoDBHandler;
 import core.utilities.httpClientWrap;
-import tests.LenskartWebTest_Utils;
+import tests.TestClass_Utils;
 
 /**
  * 
@@ -59,7 +59,7 @@ public class InitializeSingletonTestObject {
 			SingletonTestObject.getSingletonTestObject().setJsonObjectRepository(jsonObjectRepository);
 			
 			/** create avd dynamically asynchronously before starting tests rather than creating during tests - if required */
-			new LenskartWebTest_Utils().manageAVDDynamically();
+			new TestClass_Utils().manageAVDDynamically();
 
 			/** get system property to set mongodb for execution */
 			String scale_execution_via_mongo = get_scale_execution_via_mongo();

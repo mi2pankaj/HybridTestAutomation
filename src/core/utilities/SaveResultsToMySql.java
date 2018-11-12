@@ -14,7 +14,7 @@ import java.util.List;
 import jxl.read.biff.BiffException;
 import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
-import tests.TestSuiteClass;
+import tests.SuiteClass;
 
 import org.apache.log4j.Logger;
 
@@ -55,7 +55,7 @@ public class SaveResultsToMySql
 
 		try
 		{
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Chocolate results are being saved into db.... ");
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Chocolate results are being saved into db.... ");
 
 			Connection connection = getAutomationConnection();
 			String [][] data = FileLib.FetchDataFromExcelSheet(resultFile, "GetRequestURLs_Or_PostRequests", "Module_Name", "Test_Results");
@@ -71,17 +71,17 @@ public class SaveResultsToMySql
 
 			flag = true;
 
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Chocolate results are saved into db. ");
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Chocolate results are saved into db. ");
 		}
 		catch(MySQLSyntaxErrorException e)
 		{
 			flag = false;
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Check Query: "+insertSQL);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Check Query: "+insertSQL);
 		}
 		catch(Exception t)
 		{
 			flag = false;
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Error occurred while saving chocolate results to mysql db. ", t);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Error occurred while saving chocolate results to mysql db. ", t);
 		}
 
 		return flag;
@@ -130,7 +130,7 @@ public class SaveResultsToMySql
 
 		try
 		{
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Mobile Adserving results are being saved into db.... ");
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Mobile Adserving results are being saved into db.... ");
 
 			Connection connection = getAutomationConnection();
 			String [][] data = FileLib.FetchDataFromExcelSheet(resultFile, "Publisher_Email", "Campaign_Name", "Channel_APIKEY", "Publisher_ID", "Channel_ID", 
@@ -152,17 +152,17 @@ public class SaveResultsToMySql
 
 			flag = true;
 
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Mobile Adserving results are saved into db. ");
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Mobile Adserving results are saved into db. ");
 		}
 		catch(MySQLSyntaxErrorException e)
 		{
 			flag = false;
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Check Query: "+insertSQL);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Check Query: "+insertSQL);
 		}
 		catch(Exception t)
 		{
 			flag = false;
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Error occurred while saving Mobile Adserving results to mysql db. ", t);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Error occurred while saving Mobile Adserving results to mysql db. ", t);
 		}
 
 		return flag;
@@ -190,7 +190,7 @@ public class SaveResultsToMySql
 		}
 		catch(SQLException | ClassNotFoundException t)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Error occurred while getting automation connection. ", t);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Error occurred while getting automation connection. ", t);
 		}
 		return qaConnection;
 	}

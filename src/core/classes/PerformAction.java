@@ -15,7 +15,7 @@ import com.mysql.jdbc.Connection;
 
 import core.utilities.GenericMethodsLib;
 import net.lightbody.bmp.proxy.ProxyServer;
-import tests.TestSuiteClass;
+import tests.SuiteClass;
 
 
 @SuppressWarnings("deprecation")
@@ -56,7 +56,7 @@ public class PerformAction {
 			{
 				data = data.toLowerCase();
 				String key = data.substring(data.indexOf("getconfig(")+10, data.lastIndexOf(")"));
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " getting config value of key: "+key);
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " getting config value of key: "+key);
 
 				String configValue = GenericMethodsLib.generalConfigurationProperties.getProperty(key).toString();
 
@@ -85,12 +85,12 @@ public class PerformAction {
 				catch(NoSuchMethodException n)
 				{
 					flag = false;
-					logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : This keyword = "+keyword + " is not supported", n);
+					logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : This keyword = "+keyword + " is not supported", n);
 				}
 
 				if(flag)
 				{					
-					logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+ " : Test_Step_Id: " + testStepObject.getTestStepId() + " - " + keywordMethod.getName() + " is being executed for keyword: "+ keyword + " and object: " +object + " data: "+data);
+					logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+ " : Test_Step_Id: " + testStepObject.getTestStepId() + " - " + keywordMethod.getName() + " is being executed for keyword: "+ keyword + " and object: " +object + " data: "+data);
 
 					//Creating object of class Keywords class.
 					KeywordsExtended keywordObj = new KeywordsExtended(connection, jsonObjectRepo, proxyServer);
@@ -99,7 +99,7 @@ public class PerformAction {
 					 */
 					result = (String) keywordMethod.invoke(keywordObj, driver, object, data);
 
-					logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+ " : Test_Step_Id: " + testStepObject.getTestStepId() + " has result: " + result);
+					logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+ " : Test_Step_Id: " + testStepObject.getTestStepId() + " has result: " + result);
 				}
 
 				//Do not perform in case of wrong/unsupported keyword
@@ -112,7 +112,7 @@ public class PerformAction {
 		catch(Exception e)
 		{
 			result = "Fail: Error occurred while performing action.";
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while trying to perform action for keyword: "+keyword, e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while trying to perform action for keyword: "+keyword, e);
 		}
 		return result;
 	}

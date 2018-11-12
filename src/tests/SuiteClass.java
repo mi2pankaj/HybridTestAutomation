@@ -16,11 +16,11 @@ import core.utilities.EmailTemplate;
 import core.utilities.EmailTemplateData;
 import core.utilities.FileLib;
 import core.utilities.GenericMethodsLib;
-import tests.TestSuiteClass;
+import tests.SuiteClass;
 
 import org.testng.annotations.AfterSuite;
 
-public class TestSuiteClass
+public class SuiteClass
 {
 	public static String executionResult;
 
@@ -38,7 +38,7 @@ public class TestSuiteClass
 	public static String liveIpAddress_Lenskart_Com;
 
 	/** Declaring logger */
-	Logger logger = Logger.getLogger(TestSuiteClass.class.getName());
+	Logger logger = Logger.getLogger(SuiteClass.class.getName());
 
 
 	//@Parameters({"logFileLocation", "logFileName", "ReRun"})
@@ -57,8 +57,8 @@ public class TestSuiteClass
 			GenericMethodsLib.InitializeConfiguration();
 
 			/** Loading log4j.properties file for logger and creating logs folder in advance */
-			PropertyConfigurator.configure(TestSuiteClass.AUTOMATION_HOME.concat("/properties/log4j.properties"));
-			FileLib.CreateDirectory(TestSuiteClass.AUTOMATION_HOME.concat("/logs"));
+			PropertyConfigurator.configure(SuiteClass.AUTOMATION_HOME.concat("/properties/log4j.properties"));
+			FileLib.CreateDirectory(SuiteClass.AUTOMATION_HOME.concat("/logs"));
 			
 			try{
 				currentTestEnv = System.getProperty("test_env").trim();
@@ -88,7 +88,7 @@ public class TestSuiteClass
 	{
 		try{ 
 			/** create property file to store results summary for jenkins email */
-			TestSuiteClass.templateData.testDataInPropertiesFile();
+			SuiteClass.templateData.testDataInPropertiesFile();
 			
 			GenericMethodsLib.cleanProcesses();			
 		}

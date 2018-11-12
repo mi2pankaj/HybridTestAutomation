@@ -46,7 +46,7 @@ import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServerHasNotBeenStartedLocallyException;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import net.lightbody.bmp.proxy.ProxyServer;
-import tests.TestSuiteClass;
+import tests.SuiteClass;
 
 public class WebdriverSetup {
 
@@ -69,10 +69,10 @@ public class WebdriverSetup {
 		AndroidDriver<MobileElement>  driver = null;
 
 		try {
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " : " +" entering method to setup appium emulation .. ");
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " : " +" entering method to setup appium emulation .. ");
 
 			/** get a unique device name */
-			String deviceName = TestSuiteClass.UNIQ_EXECUTION_ID.get().toString();
+			String deviceName = SuiteClass.UNIQ_EXECUTION_ID.get().toString();
 
 			/** setup local service first */
 			AppiumDriverLocalService appiumDriverLocalService = getAppiumDriverLocalService();
@@ -87,7 +87,7 @@ public class WebdriverSetup {
 				appiumDriverLocalService = getAppiumDriverLocalService();
 
 				attempt ++;
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " restarting appium driver local service - attempt: "+attempt);
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " restarting appium driver local service - attempt: "+attempt);
 			}
 
 			/** get appium driver capability */
@@ -106,13 +106,13 @@ public class WebdriverSetup {
 			/** store appium driver properties in singleton */
 			storeAppiumDriverPropertiesInSingletonObject(driver);		
 
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " : appium driver is launched ... setting up testcase object : "+driver.getRemoteAddress());
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " : appium driver is launched ... setting up testcase object : "+driver.getRemoteAddress());
 		}catch(Exception e) {
 
 			/** in case of any exception kill respective emulator - to avoid any hanging or test execution stuck issues .., normally testexecution id is emulator name..  */
-			new GenericMethodsLib().killEmulator(TestSuiteClass.UNIQ_EXECUTION_ID.get().toString());	//--need to supply device id here not the name -- correction required
+			new GenericMethodsLib().killEmulator(SuiteClass.UNIQ_EXECUTION_ID.get().toString());	//--need to supply device id here not the name -- correction required
 
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+": exception occurred while starting the Appium Server. ",e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+": exception occurred while starting the Appium Server. ",e);
 		}
 
 		return driver;
@@ -131,9 +131,9 @@ public class WebdriverSetup {
 
 			HashMap<Object, Object> response = new httpClientWrap().sendPostRequestWithParams(chromedriverURL, postData);
 
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+": " + " response map from chromedriver timeout setup: "+response + " and url: "+chromedriverURL);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+": " + " response map from chromedriver timeout setup: "+response + " and url: "+chromedriverURL);
 		}catch (Exception e) {
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+": " + " No Impact - error occurred while setting up timeout with chromedriver. ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+": " + " No Impact - error occurred while setting up timeout with chromedriver. ", e);
 		}
 	}
 
@@ -148,22 +148,22 @@ public class WebdriverSetup {
 		{
 			if(driver!=null) {
 				/** store appium driver url in test case object */
-				SingletonTestObject.getSingletonTestObject().getTestCaseObjectMap().get(TestSuiteClass.UNIQ_EXECUTION_ID.get()).setAppiumDriverURL(driver.getRemoteAddress().toString());
+				SingletonTestObject.getSingletonTestObject().getTestCaseObjectMap().get(SuiteClass.UNIQ_EXECUTION_ID.get()).setAppiumDriverURL(driver.getRemoteAddress().toString());
 
 				/** set device id, session id in test case object */
 				String deviceUDID = driver.getCapabilities().asMap().get("deviceUDID").toString();
-				SingletonTestObject.getSingletonTestObject().getTestCaseObjectMap().get(TestSuiteClass.UNIQ_EXECUTION_ID.get()).setDeviceUDID(deviceUDID);
-				SingletonTestObject.getSingletonTestObject().getTestCaseObjectMap().get(TestSuiteClass.UNIQ_EXECUTION_ID.get()).setAppiumDriverSessionId(driver.getSessionId());
+				SingletonTestObject.getSingletonTestObject().getTestCaseObjectMap().get(SuiteClass.UNIQ_EXECUTION_ID.get()).setDeviceUDID(deviceUDID);
+				SingletonTestObject.getSingletonTestObject().getTestCaseObjectMap().get(SuiteClass.UNIQ_EXECUTION_ID.get()).setAppiumDriverSessionId(driver.getSessionId());
 
 				/** store chrome driver url */
 				String chromerdriverURL = getChromeDriverURLFromAppiumLogFile();
-				SingletonTestObject.getSingletonTestObject().getTestCaseObjectMap().get(TestSuiteClass.UNIQ_EXECUTION_ID.get()).setChromeDriverURLLaunchedByAppiumDriver(chromerdriverURL);
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " : stored values in singleton: device - "+deviceUDID + " chrome driver: "+chromerdriverURL + " appium driver: "+driver.getRemoteAddress());
+				SingletonTestObject.getSingletonTestObject().getTestCaseObjectMap().get(SuiteClass.UNIQ_EXECUTION_ID.get()).setChromeDriverURLLaunchedByAppiumDriver(chromerdriverURL);
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " : stored values in singleton: device - "+deviceUDID + " chrome driver: "+chromerdriverURL + " appium driver: "+driver.getRemoteAddress());
 			}else {
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " : not stored values in singleton: device - null appium driver received. ");
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " : not stored values in singleton: device - null appium driver received. ");
 			}
 		}catch (Exception e) {
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " error while storing values in sigleton: "+e.getMessage(), e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get() + " error while storing values in sigleton: "+e.getMessage(), e);
 		}
 	}
 
@@ -187,7 +187,7 @@ public class WebdriverSetup {
 				break;
 			}
 
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " : Attempt ReCreate Appium Driver : " +count);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " : Attempt ReCreate Appium Driver : " +count);
 			count ++;
 		}
 
@@ -217,10 +217,10 @@ public class WebdriverSetup {
 				new GenericMethodsLib().killEmulator(emulatorName);
 
 				driver =new AndroidDriver<MobileElement>(appiumDriverLocalService.getUrl(), desirecap);
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " - retried driver, after killing the - "+emulatorName);
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " - retried driver, after killing the - "+emulatorName);
 
 			}catch (Exception e1) {
-				logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " error while re-creating driver - "+e1.getMessage(), e1);
+				logger.error(SuiteClass.UNIQ_EXECUTION_ID.get() + " error while re-creating driver - "+e1.getMessage(), e1);
 			}
 		}
 
@@ -238,7 +238,7 @@ public class WebdriverSetup {
 
 		try {
 			/** appium log name is generic and set in builder setup method */
-			StringBuilder content = FileLib.ReadContentOfFile(System.getProperty("user.dir")+"/appiumLog."+TestSuiteClass.UNIQ_EXECUTION_ID.get());
+			StringBuilder content = FileLib.ReadContentOfFile(System.getProperty("user.dir")+"/appiumLog."+SuiteClass.UNIQ_EXECUTION_ID.get());
 			Pattern pattern = Pattern.compile("(?<=\\s-s\\s)(.*?)(?=\\sshell\\sgetprop\\sinit.svc.bootanim)");
 			Matcher matcher = pattern.matcher(content);
 
@@ -247,10 +247,10 @@ public class WebdriverSetup {
 			}
 
 		}catch (Exception e) {
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " : error while getting emulator name: "+e.getMessage(), e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get() + " : error while getting emulator name: "+e.getMessage(), e);
 		}
 
-		logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " Got emulator name: "+emulatorName);
+		logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " Got emulator name: "+emulatorName);
 
 		return emulatorName;
 	}
@@ -269,7 +269,7 @@ public class WebdriverSetup {
 
 		try {
 			/** appium log name is generic and set in builder setup method */
-			StringBuilder content = FileLib.ReadContentOfFile(System.getProperty("user.dir")+"/appiumLog."+TestSuiteClass.UNIQ_EXECUTION_ID.get());
+			StringBuilder content = FileLib.ReadContentOfFile(System.getProperty("user.dir")+"/appiumLog."+SuiteClass.UNIQ_EXECUTION_ID.get());
 
 			/** this regex will give the chromedriver url to set the timeout */
 			Pattern pattern = Pattern.compile("(?<=timeouts\\]\\sto\\s\\[POST\\s)(.*)(?=\\]\\swith\\sbody:\\s\\{\\\"implicit\\\":)");
@@ -283,10 +283,10 @@ public class WebdriverSetup {
 				chromeDriverURL = chromeDriverURL.replace("/timeouts", "").trim(); // to get the actual chromedriver url
 			}
 		}catch (Exception e) {
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " : error while getting chrome driver url: "+e.getMessage(), e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get() + " : error while getting chrome driver url: "+e.getMessage(), e);
 		}
 
-		logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " Got chrome driver url: "+chromeDriverURL);
+		logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " Got chrome driver url: "+chromeDriverURL);
 
 		return chromeDriverURL.trim();
 	}
@@ -318,10 +318,10 @@ public class WebdriverSetup {
 			}
 
 			driver.manage().window().setSize(dimension);
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " : applying browser dimension : "+browserDimensionWidth +"x"+ browserDimensionHeight);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " : applying browser dimension : "+browserDimensionWidth +"x"+ browserDimensionHeight);
 
 		}catch (Exception e) {
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " : "+ e.getMessage(), e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get() + " : "+ e.getMessage(), e);
 		}
 		return driver;
 	}
@@ -334,7 +334,7 @@ public class WebdriverSetup {
 	 */
 	public static DesiredCapabilities getAppiumDriverCapabilities(String deviceName)
 	{
-		logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " : " + " setting up appium capabilities ");
+		logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " : " + " setting up appium capabilities ");
 
 		DesiredCapabilities desirecap= DesiredCapabilities.android();
 		desirecap.setCapability(AndroidMobileCapabilityType.BROWSER_NAME,BrowserType.CHROME);
@@ -349,7 +349,7 @@ public class WebdriverSetup {
 		desirecap.setCapability(MobileCapabilityType.FULL_RESET, true);
 		desirecap.setCapability(MobileCapabilityType.APP, System.getProperty("user.dir")+"/drivers/com.android.chrome_v.67.0.apk");
 
-		desirecap.setCapability("chromedriverExecutableDir", TestSuiteClass.AUTOMATION_HOME.concat("/drivers"));
+		desirecap.setCapability("chromedriverExecutableDir", SuiteClass.AUTOMATION_HOME.concat("/drivers"));
 		desirecap.setCapability(MobileCapabilityType.SUPPORTS_JAVASCRIPT, true);
 
 		desirecap.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 300);
@@ -370,7 +370,7 @@ public class WebdriverSetup {
 		options.addArguments(args);
 		desirecap.setCapability(ChromeOptions.CAPABILITY, options);
 
-		logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " : " + " appium capabilities are being returned... "+desirecap);
+		logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " : " + " appium capabilities are being returned... "+desirecap);
 
 		return desirecap;
 	}
@@ -390,17 +390,17 @@ public class WebdriverSetup {
 				service.start();
 			}catch (AppiumServerHasNotBeenStartedLocallyException e) {
 
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " : Appium Driver Not Started, Retrying :  " + service.getUrl());
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " : Appium Driver Not Started, Retrying :  " + service.getUrl());
 				service = getAppiumServiceBuilder().build();
 				service.start();
 			}
 
 			/** putting up some delay so that service is up */
 			Thread.sleep(2500);
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " : Appium Driver URL:  " + service.getUrl());
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " : Appium Driver URL:  " + service.getUrl());
 
 		}catch (Exception e) {
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " : " + e.getMessage(), e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get() + " : " + e.getMessage(), e);
 		}
 
 		return service;
@@ -418,12 +418,12 @@ public class WebdriverSetup {
 		{
 			/** start appium server on any received free port  */
 			builder.usingPort(getFreePort());
-			builder.withLogFile(new File(System.getProperty("user.dir")+"/appiumLog."+TestSuiteClass.UNIQ_EXECUTION_ID.get()));
+			builder.withLogFile(new File(System.getProperty("user.dir")+"/appiumLog."+SuiteClass.UNIQ_EXECUTION_ID.get()));
 
 
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " : "+ " builder is created. ");
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " : "+ " builder is created. ");
 		}catch (Exception e) {
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " : " +e.getMessage(), e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get() + " : " +e.getMessage(), e);
 		}
 
 		return builder;
@@ -448,7 +448,7 @@ public class WebdriverSetup {
 			Thread.sleep(1000);
 
 		}catch(Exception io){
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while starting the chrome driver service: "+ io);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while starting the chrome driver service: "+ io);
 		}
 
 		return service;
@@ -464,9 +464,9 @@ public class WebdriverSetup {
 		try{
 			jsonObject=new JSONObject(browserInfoJson);
 			deviceType=jsonObject.getString("browser");
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Device type is :"+deviceType);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Device type is :"+deviceType);
 		}catch(Exception e){
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Unable to get device type", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Unable to get device type", e);
 		}
 		return deviceType;
 	}
@@ -486,7 +486,7 @@ public class WebdriverSetup {
 			port = socket.getLocalPort();
 			socket.close();
 		}catch (Exception e) {
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get() +  " : "+e.getMessage(), e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get() +  " : "+e.getMessage(), e);
 		}
 
 		return port;
@@ -506,7 +506,7 @@ public class WebdriverSetup {
 		String appiumRun="";
 
 		try{
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " entering invoke browser method --");
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " entering invoke browser method --");
 
 			boolean normalMode = false;
 			JSONObject jsonObject = new JSONObject(browserInfoJson);
@@ -521,12 +521,12 @@ public class WebdriverSetup {
 
 			try {
 				boolean handleNotificationForAppiumRequired = Boolean.parseBoolean(jsonObject.getString("handleNotificationForAppiumRequired").toString().trim());
-				SingletonTestObject.getSingletonTestObject().getTestCaseObjectMap().get(TestSuiteClass.UNIQ_EXECUTION_ID.get())
+				SingletonTestObject.getSingletonTestObject().getTestCaseObjectMap().get(SuiteClass.UNIQ_EXECUTION_ID.get())
 				.setHandleNotificationForAppiumRequired(handleNotificationForAppiumRequired);
 
 			}catch (JSONException e) {
 				/** in case of no specification then consider it true. */
-				SingletonTestObject.getSingletonTestObject().getTestCaseObjectMap().get(TestSuiteClass.UNIQ_EXECUTION_ID.get()).setHandleNotificationForAppiumRequired(true);
+				SingletonTestObject.getSingletonTestObject().getTestCaseObjectMap().get(SuiteClass.UNIQ_EXECUTION_ID.get()).setHandleNotificationForAppiumRequired(true);
 			}
 
 			/** find out on which mode the browser will run */
@@ -546,7 +546,7 @@ public class WebdriverSetup {
 				driver=mobileEmulation(browser, deviceType, proxyServer, normalMode, browserDimensionWidth, browserDimensionHeight,appiumRun);
 			}
 		}catch(Exception e){
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Unable to invoke browser", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Unable to invoke browser", e);
 		}
 
 		return driver;
@@ -576,11 +576,11 @@ public class WebdriverSetup {
 					if(browser.equalsIgnoreCase("chrome")){
 
 						if(System.getProperty("os.name").matches("^Windows.*")){
-							chromeDriver = TestSuiteClass.AUTOMATION_HOME.concat("/drivers/windows/chromedriver.exe");
+							chromeDriver = SuiteClass.AUTOMATION_HOME.concat("/drivers/windows/chromedriver.exe");
 						}else if (System.getProperty("os.name").matches("Linux.*")){
-							chromeDriver = TestSuiteClass.AUTOMATION_HOME.concat("/drivers/linux/chromedriver");
+							chromeDriver = SuiteClass.AUTOMATION_HOME.concat("/drivers/linux/chromedriver");
 						}else {
-							chromeDriver = TestSuiteClass.AUTOMATION_HOME.concat("/drivers/mac/chromedriver");
+							chromeDriver = SuiteClass.AUTOMATION_HOME.concat("/drivers/mac/chromedriver");
 						}
 						/** create chrome driver service */
 						ChromeDriverService service = retryChromeDriverService(chromeDriver);
@@ -619,26 +619,26 @@ public class WebdriverSetup {
 							}catch (SessionNotCreatedException e) 
 							{
 								/** if session is not created successfully then re-try to create it. Calling recursion */
-								logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Chrome driver session not setup, retrying ... ");
+								logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Chrome driver session not setup, retrying ... ");
 
 								driver = mobileEmulation(browser, deviceName, proxyServer, normalMode, browserDimensionWidth, browserDimensionHeight,appiumRun);
 							}
 						}else{
-							logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Chrome driver service seems not started while setting up driver ... ");
+							logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Chrome driver service seems not started while setting up driver ... ");
 						}
 
 					}else if(browser.equalsIgnoreCase("Firefox")){
 
-						logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Firefox mobile emulation is being setup");
+						logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Firefox mobile emulation is being setup");
 
 						String firfoxDriverPath;
 						if(System.getProperty("os.name").toLowerCase().startsWith("windows")) {
-							firfoxDriverPath =TestSuiteClass.AUTOMATION_HOME.concat("/drivers/windows/geckodriver.exe");
+							firfoxDriverPath =SuiteClass.AUTOMATION_HOME.concat("/drivers/windows/geckodriver.exe");
 						}else if(System.getProperty("os.name").toLowerCase().startsWith("linux")){
-							firfoxDriverPath =TestSuiteClass.AUTOMATION_HOME.concat("/drivers/linux/geckodriver");
+							firfoxDriverPath =SuiteClass.AUTOMATION_HOME.concat("/drivers/linux/geckodriver");
 
 						}else{
-							firfoxDriverPath =TestSuiteClass.AUTOMATION_HOME.concat("/drivers/mac/geckodriver");
+							firfoxDriverPath =SuiteClass.AUTOMATION_HOME.concat("/drivers/mac/geckodriver");
 						}
 
 						System.setProperty("webdriver.gecko.driver",firfoxDriverPath);
@@ -650,7 +650,7 @@ public class WebdriverSetup {
 						/** if nonrmal mode - no, then open incognito mode*/
 						if(!normalMode) {
 							profile.setPreference("browser.private.browsing.autostart",true);
-							logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " - "+ " FF incognito mode. ");
+							logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " - "+ " FF incognito mode. ");
 						}
 
 						//for windows,,, 
@@ -666,7 +666,7 @@ public class WebdriverSetup {
 						try {
 							driver=new FirefoxDriver(options);
 						}catch (Exception e) {
-							logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " - " +" retrying to create the firefix driver .. , received exception was- "+e.getMessage(), e);
+							logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " - " +" retrying to create the firefix driver .. , received exception was- "+e.getMessage(), e);
 							driver=new FirefoxDriver(options);
 						}
 					}
@@ -679,11 +679,11 @@ public class WebdriverSetup {
 					driver.manage().timeouts().implicitlyWait(driverImplicitDelay, TimeUnit.SECONDS);
 
 				}catch(Exception e){
-					logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Error while creating mobile browser emulation. ", e);
+					logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Error while creating mobile browser emulation. ", e);
 				}
 			}
 		}catch(Exception e) {
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+": exception occurred while starting the mobile emmulator: ",e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+": exception occurred while starting the mobile emmulator: ",e);
 
 		}
 		return driver;
@@ -704,13 +704,13 @@ public class WebdriverSetup {
 		{
 			if(service != null)
 			{
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Chrome driver service is started yet, attempt: "+i);
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Chrome driver service is started yet, attempt: "+i);
 				break;
 			}
 			else
 			{
 				service = getChromeDriverService(chromeDriver);
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Chrome driver service is not started yet, attempt: "+i);
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Chrome driver service is not started yet, attempt: "+i);
 			}
 
 			i++;
@@ -749,7 +749,7 @@ public class WebdriverSetup {
 				PropertiesConfiguration proxyProperties = getProxyProperties();
 				if(proxyProperties !=null) {
 
-					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " found proxy property - laoding domains ..");
+					logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " found proxy property - laoding domains ..");
 
 					/** get all domains */
 					Iterator<String> domains = proxyProperties.getKeys();
@@ -772,9 +772,9 @@ public class WebdriverSetup {
 
 					/** setting up proxy for api-preprod.com also if current test env is preprod and there is no ip address is received for api.lenskart.com so that 
 					 * all api requests go to live */
-					if((TestSuiteClass.currentTestEnv.equalsIgnoreCase("preprod")) && (serverIP_Api == null || serverIP_Api.trim().isEmpty()))
+					if((SuiteClass.currentTestEnv.equalsIgnoreCase("preprod")) && (serverIP_Api == null || serverIP_Api.trim().isEmpty()))
 					{
-						serverIP_Api = TestSuiteClass.liveIpAddress_Lenskart_Com;
+						serverIP_Api = SuiteClass.liveIpAddress_Lenskart_Com;
 					}
 
 					/** map server ip if passed as not null - separating condition so that atleast one can be applied - */
@@ -782,22 +782,22 @@ public class WebdriverSetup {
 					{
 						proxyServer.remapHost("www.lenskart.com", serverIP_Lenskart);
 						proxyServer.remapHost("lenskart.com", serverIP_Lenskart);
-						logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : host entry is set in proxy server for lenskart.com ="+serverIP_Lenskart);
+						logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : host entry is set in proxy server for lenskart.com ="+serverIP_Lenskart);
 					}
 
 					/** map server ip if passed as not null - separating condition so that atleast one condition can be applied - */
 					if(serverIP_Api != null && !serverIP_Api.trim().isEmpty())
 					{
 						proxyServer.remapHost("api.lenskart.com", serverIP_Api);
-						logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : host entry is set in proxy server for api ="+serverIP_Api);
+						logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : host entry is set in proxy server for api ="+serverIP_Api);
 					}
 
-					if((TestSuiteClass.currentTestEnv.equalsIgnoreCase("preprod")) && (serverIP_Api == null || serverIP_Api.trim().isEmpty()))
+					if((SuiteClass.currentTestEnv.equalsIgnoreCase("preprod")) && (serverIP_Api == null || serverIP_Api.trim().isEmpty()))
 					{
-						proxyServer.remapHost("api-preprod.lenskart.com", TestSuiteClass.liveIpAddress_Lenskart_Com);
-						proxyServer.remapHost("api.lenskart.com", TestSuiteClass.liveIpAddress_Lenskart_Com);
+						proxyServer.remapHost("api-preprod.lenskart.com", SuiteClass.liveIpAddress_Lenskart_Com);
+						proxyServer.remapHost("api.lenskart.com", SuiteClass.liveIpAddress_Lenskart_Com);
 
-						logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : host entry is set in proxy server for api and api-preprod ="+TestSuiteClass.liveIpAddress_Lenskart_Com);
+						logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : host entry is set in proxy server for api and api-preprod ="+SuiteClass.liveIpAddress_Lenskart_Com);
 					}
 				}
 
@@ -809,20 +809,20 @@ public class WebdriverSetup {
 					proxyServer.remapHost("www.googletagmanager.com", "127.0.0.1");
 					proxyServer.remapHost("cdn.optimizely.com", "127.0.0.1");
 					proxyServer.remapHost("secure.livechatinc.com", "127.0.0.1");
-					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : " + " blocking optimizely .. ");
+					logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : " + " blocking optimizely .. ");
 				}else {
-					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : " + " Not blocking optimizely .. ");
+					logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : " + " Not blocking optimizely .. ");
 				}
 
 				/** block live chat */
 				proxyServer.remapHost("secure.livechatinc.com", "127.0.0.1");
 
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Port Started On:"+proxyServer.getPort());
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Port Started On:"+proxyServer.getPort());
 			}else{
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : No need to set proxy server:");
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : No need to set proxy server:");
 			}
 		}catch(Exception e){
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Unable to start proxy server", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Unable to start proxy server", e);
 		}
 		return proxyServer;
 	}
@@ -837,7 +837,7 @@ public class WebdriverSetup {
 		PropertiesConfiguration proxyProperties = null;
 		try {
 
-			File proxyConfigFile = new File(TestSuiteClass.AUTOMATION_HOME.concat("/properties/proxy.properties"));
+			File proxyConfigFile = new File(SuiteClass.AUTOMATION_HOME.concat("/properties/proxy.properties"));
 
 			/** read file - only if it is not empty */
 			if(FileLib.ReadContentOfFile(proxyConfigFile.getAbsolutePath()).toString().isEmpty()) {
@@ -846,7 +846,7 @@ public class WebdriverSetup {
 
 			proxyProperties = new PropertiesConfiguration(proxyConfigFile);
 		}catch (Exception e) {
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " - "+e.getMessage(), e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get() + " - "+e.getMessage(), e);
 		}
 
 		return proxyProperties;
@@ -868,12 +868,12 @@ public class WebdriverSetup {
 			String output = httpClientWrap.sendGetRequest((service.getUrl().toString()));
 			if(output.isEmpty())
 			{
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Chrome driver is not started yet, attempt: "+i);
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Chrome driver is not started yet, attempt: "+i);
 				try {Thread.sleep(1000);} catch (InterruptedException e) {}
 			}
 			else
 			{
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Chrome driver is started, exiting loop at attempt: "+i);
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Chrome driver is started, exiting loop at attempt: "+i);
 				try {Thread.sleep(1000);} catch (InterruptedException e) {}
 				break;
 			}
@@ -901,15 +901,15 @@ public class WebdriverSetup {
 				String firfoxDriverPath;
 				FirefoxOptions options=new FirefoxOptions();
 
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Firefox is being setup");
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Firefox is being setup");
 
 				if(System.getProperty("os.name").toLowerCase().startsWith("window")) {
-					firfoxDriverPath =TestSuiteClass.AUTOMATION_HOME.concat("/drivers/windows/geckodriver.exe");
+					firfoxDriverPath =SuiteClass.AUTOMATION_HOME.concat("/drivers/windows/geckodriver.exe");
 				}else if(System.getProperty("os.name").toLowerCase().startsWith("linux")){
-					firfoxDriverPath =TestSuiteClass.AUTOMATION_HOME.concat("/drivers/linux/geckodriver");
+					firfoxDriverPath =SuiteClass.AUTOMATION_HOME.concat("/drivers/linux/geckodriver");
 				}
 				else {
-					firfoxDriverPath =TestSuiteClass.AUTOMATION_HOME.concat("/drivers/mac/geckodriver");
+					firfoxDriverPath =SuiteClass.AUTOMATION_HOME.concat("/drivers/mac/geckodriver");
 				}
 
 				System.setProperty("webdriver.gecko.driver",firfoxDriverPath);
@@ -917,7 +917,7 @@ public class WebdriverSetup {
 				/** when ever normal mode is false then it launch  the firefox in Private mode */
 				if(!normalMode) {
 					options.addArguments("-private");
-					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " - " + " starting browser in Private mode. ");
+					logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " - " + " starting browser in Private mode. ");
 				}
 				/** setting the browser proxy for firefox */
 				if(proxyServer!=null) {
@@ -927,7 +927,7 @@ public class WebdriverSetup {
 				try {
 					driver = new FirefoxDriver(options);
 				}catch (WebDriverException e) {
-					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " - retrying to create driver ==> ");
+					logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " - retrying to create driver ==> ");
 					driver = new FirefoxDriver(options);
 				}
 
@@ -937,14 +937,14 @@ public class WebdriverSetup {
 				String chromeDriver = null;
 				if(System.getProperty("os.name").matches("^Windows.*"))
 				{
-					chromeDriver = TestSuiteClass.AUTOMATION_HOME.concat("/drivers/windows/chromedriver.exe");
+					chromeDriver = SuiteClass.AUTOMATION_HOME.concat("/drivers/windows/chromedriver.exe");
 				}
 				else if(System.getProperty("os.name").matches("Linux.*")){
-					chromeDriver = TestSuiteClass.AUTOMATION_HOME.concat("/drivers/linux/chromedriver");
+					chromeDriver = SuiteClass.AUTOMATION_HOME.concat("/drivers/linux/chromedriver");
 				}
 				else
 				{
-					chromeDriver = TestSuiteClass.AUTOMATION_HOME.concat("/drivers/mac/chromedriver");
+					chromeDriver = SuiteClass.AUTOMATION_HOME.concat("/drivers/mac/chromedriver");
 				}
 
 				/** create chrome driver service */
@@ -960,7 +960,7 @@ public class WebdriverSetup {
 
 					if(!normalMode){
 						options.addArguments("incognito");
-						logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " - " + " starting browser in incognito mode. ");
+						logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " - " + " starting browser in incognito mode. ");
 					}
 
 					/** disable notification */
@@ -984,34 +984,34 @@ public class WebdriverSetup {
 					}catch (SessionNotCreatedException e) 
 					{
 						/** if session is not created successfully then re-try to create it. Calling recursion */
-						logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Chrome driver session not setup, retrying ... ");
+						logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Chrome driver session not setup, retrying ... ");
 
 						driver = WebDriverSetUp(browser, proxyServer, normalMode);
 					}
 					catch (WebDriverException e) 
 					{
 						/** if session is not created successfully then re-try to create it. Calling recursion */
-						logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Chrome driver session not setup coz of webdriver exception, retrying ... ");
+						logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Chrome driver session not setup coz of webdriver exception, retrying ... ");
 
 						driver = WebDriverSetUp(browser, proxyServer, normalMode);
 					}
 				}
 				else
 				{
-					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Chrome driver service seems not started while setting up driver ... ");
+					logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Chrome driver service seems not started while setting up driver ... ");
 				}
 
 				/** browsing google.com to check if driver is launched successfully */
 				try{driver.get("http://www.google.com");}catch(NoSuchWindowException n)
 				{
-					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Chrome browser was closed coz of unknown reason, retrying ... ");
+					logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Chrome browser was closed coz of unknown reason, retrying ... ");
 
 					driver = WebDriverSetUp(browser, proxyServer, normalMode);
 				}
 			}
 			else 
 			{	
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : No Support For: "+browser +" Browser. ");
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : No Support For: "+browser +" Browser. ");
 			}			
 
 			int driverImplicitDelay = Integer.parseInt(GenericMethodsLib.generalConfigurationProperties.getProperty("driverImplicitDelay").toString());
@@ -1032,7 +1032,7 @@ public class WebdriverSetup {
 		}
 		catch (Exception e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while setting up browser: " + browser, e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while setting up browser: " + browser, e);
 		} 
 
 		return driver;
@@ -1048,9 +1048,9 @@ public class WebdriverSetup {
 		try{
 			jsonObject=new JSONObject(browserInfoJson);
 			isProxy=jsonObject.getString("proxy");
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Proxy is :"+isProxy);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Proxy is :"+isProxy);
 		}catch(Exception e){
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Unable to get Proxy info", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Unable to get Proxy info", e);
 		}
 		return isProxy;
 	}

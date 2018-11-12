@@ -12,8 +12,8 @@
 		<parameter name="is_parallel_execution" value="yes" />
 		
 		<classes>
-			<class name="tests.TestSuiteClass" />
-			<class name="tests.LenskartWebTest" />
+			<class name="tests.SuiteClass" />
+			<class name="tests.TestClass" />
 		</classes>
 	</test>
 </suite>

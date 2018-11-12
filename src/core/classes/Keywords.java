@@ -56,7 +56,7 @@ import core.utilities.KeyBoardActionsUsingRobotLib;
 import core.utilities.httpClientWrap;
 import io.appium.java_client.AppiumDriver;
 import net.lightbody.bmp.proxy.ProxyServer;
-import tests.TestSuiteClass;
+import tests.SuiteClass;
 
 
 // TODO: Auto-generated Javadoc
@@ -105,7 +105,7 @@ public class Keywords {
 		this.skip_following_steps="skipFollowing";
 		this.noObjectSuppliedMessage = failed_status + "Please supply the desired object from object repository.";
 		this.noDataSuppliedMessage = failed_status + "Please supply the desired test data.";
-		this.locationToSaveSceenShot = TestSuiteClass.AUTOMATION_HOME.concat("/screenshots/").concat("ErrorKeywords").concat("/");
+		this.locationToSaveSceenShot = SuiteClass.AUTOMATION_HOME.concat("/screenshots/").concat("ErrorKeywords").concat("/");
 
 		this.jsonObjectRepo = jsonObjectRepo;
 		this.proxyServer = proxyServer;
@@ -124,19 +124,19 @@ public class Keywords {
 		String result;
 
 		try{
-			logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Received browser name is: "+data);
+			logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Received browser name is: "+data);
 
 			if(data.isEmpty())
 			{
-				logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Empty browser is received. ");
+				logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Empty browser is received. ");
 				result = failed_status + "Browser type: "+data +" can't be empty, please supply the supported browser: chrome or firefox.";
 			}
 			else if(data.equalsIgnoreCase("chrome") || data.equalsIgnoreCase("firefox"))
 			{
-				logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Setting up browser: "+data);
+				logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Setting up browser: "+data);
 
 				driver = WebdriverSetup.WebDriverSetUp(data, null,false);
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Launched browser name is: "+data + " browsername "+ driver );			
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Launched browser name is: "+data + " browsername "+ driver );			
 
 				/** Bring browser in focus, normally chrome opens in background. */
 				getbrowserinfocus(driver, objectName, data);
@@ -145,17 +145,17 @@ public class Keywords {
 			}
 			else
 			{
-				logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Supplied browser: "+data + " is not supported. ");
+				logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Supplied browser: "+data + " is not supported. ");
 				result = failed_status + "Supplied browser type: "+data +" is not supported, supported ones are chrome and firefox.";
 			}
 		}catch(Exception e)
 		{
 			result = failed_status + "Couldn't launch browser";
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred: "+e+" while launching browser: "+data, e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred: "+e+" while launching browser: "+data, e);
 
 			/** Taking screenshot during exception */
 			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 		return result;
 	}
@@ -184,7 +184,7 @@ public class Keywords {
 		}
 		catch(Exception e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception: ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception: ", e);
 		}
 
 		/** no need to fail case based on this failures */
@@ -202,11 +202,11 @@ public class Keywords {
 	{
 		String result;
 		try{
-			logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Closing browser. ");
+			logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Closing browser. ");
 
 			/** kill emulator for appium driver */
 			if(driver instanceof AppiumDriver<?>) {
-				String deviceUDID = SingletonTestObject.getSingletonTestObject().getTestCaseObjectMap().get(TestSuiteClass.UNIQ_EXECUTION_ID.get()).getDeviceUDID();
+				String deviceUDID = SingletonTestObject.getSingletonTestObject().getTestCaseObjectMap().get(SuiteClass.UNIQ_EXECUTION_ID.get()).getDeviceUDID();
 				new GenericMethodsLib().killEmulator(deviceUDID);
 			}else {
 				/** for normal browser */
@@ -217,11 +217,11 @@ public class Keywords {
 		}catch(Exception e)
 		{
 			result = warning_status + "Couldn't close browser. ";
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while closing browser. ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while closing browser. ", e);
 
 			/** Taking screenshot during exception */
 			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 		return result;
 	}
@@ -244,19 +244,19 @@ public class Keywords {
 			/** putting a random delay to avoid simultaneous load on server */
 			int delay = IntegerLib.GetRandomNumber(2000, 1000);
 			Thread.sleep(delay);
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : random delay of: "+delay);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : random delay of: "+delay);
 
 			if(driver != null)
 			{
-				logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Received url is: "+data+ " and browser is: " +driver);
+				logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Received url is: "+data+ " and browser is: " +driver);
 				try{driver.get(data);}catch(Exception e)
 				{
 					Thread.sleep(IntegerLib.GetRandomNumber(1000, 500));
 					driver.get(data);
-					logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred, reloading again : "+data);
+					logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred, reloading again : "+data);
 				}
 
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Navigated url is: "+data);
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Navigated url is: "+data);
 				result = passed_status+ "Navigated url successfully.";				
 			}
 			else
@@ -266,11 +266,11 @@ public class Keywords {
 		}catch(Exception e)
 		{
 			result = failed_status + "Couldn't navigate to url";
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred: "+e+" while navigating url : "+data+ " at browser : " +driver, e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred: "+e+" while navigating url : "+data+ " at browser : " +driver, e);
 
 			/** Taking screenshot during exception */
 			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 		return result;
 	}
@@ -290,19 +290,19 @@ public class Keywords {
 			/** putting a random delay to avoid simultaneous load on server */
 			int delay = IntegerLib.GetRandomNumber(5000, 1000);
 			Thread.sleep(delay);
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : random delay of: "+delay);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : random delay of: "+delay);
 
 			if(driver != null)
 			{
-				logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Received driver url is: "+driver.getCurrentUrl());
+				logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Received driver url is: "+driver.getCurrentUrl());
 				try{driver.navigate().back();;}catch(Exception e)
 				{
 					Thread.sleep(IntegerLib.GetRandomNumber(1500, 500));
 					driver.navigate().back();
-					logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred, reloading again : "+data);
+					logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred, reloading again : "+data);
 				}
 
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Navigated back url is: "+driver.getCurrentUrl());
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Navigated back url is: "+driver.getCurrentUrl());
 				result = passed_status+ "Navigated back successfully.";
 			}
 			else
@@ -312,11 +312,11 @@ public class Keywords {
 		}catch(Exception e)
 		{
 			result = failed_status + "Couldn't navigate back";
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred: "+e+" while navigating back url : "+data+ "at browser : " +driver, e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred: "+e+" while navigating back url : "+data+ "at browser : " +driver, e);
 
 			/** Taking screenshot during exception */
 			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 		return result;
 	}
@@ -332,12 +332,12 @@ public class Keywords {
 	{
 		String result;
 		try{
-			logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Moving to new browser window" );
+			logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Moving to new browser window" );
 
 			String currentState="";
 			try{currentState = driver.getWindowHandle().toString();}catch (Exception e) 
 			{
-				logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception handled : "+e.getMessage() );
+				logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception handled : "+e.getMessage() );
 			}
 
 			/** This code will explicitly wait for max 5 sec to appear multiple window 
@@ -357,25 +357,25 @@ public class Keywords {
 				if(!handles.equalsIgnoreCase(currentState))
 				{
 					driver.switchTo().window(handles);
-					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Switched window has title: "+driver.getTitle());
+					logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Switched window has title: "+driver.getTitle());
 				}
 				/** special case handling - where web page is closed and driver has to be moved to new window then 
 				 **/
 				else if(currentState==""){
 					driver.switchTo().window(handles);
-					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Switched window has title: "+driver.getTitle());
+					logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Switched window has title: "+driver.getTitle());
 				}
 			}
-			logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Moved to new window: "+driver.getCurrentUrl());
+			logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Moved to new window: "+driver.getCurrentUrl());
 			result = passed_status+ "Moved to new window successfully";
 		}catch(Exception e)
 		{
 			result = failed_status + "Couldn't moved to new window";
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred: "+e+" while moving to new window ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred: "+e+" while moving to new window ", e);
 
 			/** Taking screenshot during exception */
 			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 		return result;
 	}
@@ -393,13 +393,13 @@ public class Keywords {
 		String result;
 		try{
 
-			logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Received file name with location is: " +data);
+			logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Received file name with location is: " +data);
 
 			/**
 			 * Getting relative image file
 			 */
 			data = handler.getUploadImageLocation(data);
-			logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Uploading image file: "+data);
+			logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Uploading image file: "+data);
 
 			Thread.sleep(1500);
 
@@ -428,11 +428,11 @@ public class Keywords {
 		catch(Exception e)
 		{
 			result = failed_status + "Couldn't upload creative";
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while uploading file : "+data, e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while uploading file : "+data, e);
 
 			/** Taking screenshot during exception */
 			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 		return result;
 	}
@@ -469,7 +469,7 @@ public class Keywords {
 
 					//This is jugaad to be reviewed.
 					if(objectName.equalsIgnoreCase("productPage_TAT_check_button")){
-						logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " MANDEEP/DEEP/ABHIRAJ/ASHIT ==> This is a jugad, need to remove this asap ... ");
+						logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " MANDEEP/DEEP/ABHIRAJ/ASHIT ==> This is a jugad, need to remove this asap ... ");
 
 						scrollpagedown(driver, objectName, data);
 						webelement.click();
@@ -486,7 +486,7 @@ public class Keywords {
 									(w instanceof WebDriverException && 
 											w.getMessage().contains("Other element would receive the click")) ){
 
-								logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " not clickable exception is being handled by scolling element into view.");
+								logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " not clickable exception is being handled by scolling element into view.");
 								String javaScript = "arguments[0].scrollIntoView(true);";
 								handler.executeJavaScript(driver, javaScript, webelement);
 								webelement.click();
@@ -509,25 +509,25 @@ public class Keywords {
 			}
 
 			Thread.sleep(2500);
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Clicking element: " + webelement );
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Clicking element: " + webelement );
 			result = passed_status+ "Clicked link successfully";
 
 		}
 		catch(Exception e)
 		{
 			result = failed_status + "Couldn't click link";
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while clicking link: " +webelement, e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while clicking link: " +webelement, e);
 
 			if(!(e instanceof NullPointerException)) {
 
 				/** Taking screenshot during exception */
 				CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 			}
 			else
 			{
 				CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" :  Taking Screenshot For Nullpointer Exception. ");
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" :  Taking Screenshot For Nullpointer Exception. ");
 			}
 		}
 		return result;
@@ -561,7 +561,7 @@ public class Keywords {
 			int dataStartingLength = temp.indexOf("with")+4;
 			value=data.substring(dataStartingLength, data.length()).trim();
 
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Condition = "+actionCondition + " keywordAction = "+keyword + " and data: "+value  );
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Condition = "+actionCondition + " keywordAction = "+keyword + " and data: "+value  );
 
 			KeywordsExtended keywordsObj=new KeywordsExtended(SingletonTestObject.getSingletonTestObject().getMysqlDbConnection(), jsonObjectRepo, proxyServer);
 
@@ -580,7 +580,7 @@ public class Keywords {
 							!obj.toString().toLowerCase().startsWith(skip_status.toLowerCase())){
 
 						status=true;
-						logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : condition = "+actionCondition+" passed. ");
+						logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : condition = "+actionCondition+" passed. ");
 					}
 				}catch (NoSuchMethodException e) {
 					/** in case supplied condition is not a keyword rather its a custom expression like "SUBSTRING contains STRING" then parse sub-condition */						
@@ -589,17 +589,17 @@ public class Keywords {
 
 				/** perform action if condition passed */
 				if(status){
-					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Performing action "+keyword+" on the data");
+					logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Performing action "+keyword+" on the data");
 					Method method = keywordsObj.getClass().getMethod(keyword, WebDriver.class, String.class, String.class);
 
 					Object resultObj = method.invoke(keywordsObj, driver, objectName, value);
-					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : action "+keyword+" invoked successfully");
+					logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : action "+keyword+" invoked successfully");
 
 					result = (String) resultObj;
 
 				}else{
 					result = skip_status + " Supplied Condition Failed. ";
-					logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : action "+keyword+" is not invoked");
+					logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : action "+keyword+" is not invoked");
 				}
 				/** in case any such condition is retrieved like when #TC_10_01#	       contains 				newsite then dothis with
 				 * then this -- #TC_10_01#	       contains 				newsite will be handled differently
@@ -607,18 +607,18 @@ public class Keywords {
 
 			}else{
 				result = skip_status + " No condition was supplied with when keyword. ";
-				logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : action "+keyword+" is not invoked as not condition is specified");
+				logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : action "+keyword+" is not invoked as not condition is specified");
 			}
 
 		}
 		catch(Exception e)
 		{
 			result = skip_status + "Exception occurred while evaluating expression.";
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Element is not available" +e.getMessage());
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Element is not available" +e.getMessage());
 
 			/** Taking screenshot during exception */
 			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 
 		return result;
@@ -645,7 +645,7 @@ public class Keywords {
 			if(!webelement.isSelected())
 			{
 				webelement.click();
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Selected radio button option is: " +webelement);
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Selected radio button option is: " +webelement);
 				result = passed_status+ "Selected radio button successfully";
 			}
 			else
@@ -656,11 +656,11 @@ public class Keywords {
 		catch(Exception e)
 		{
 			result = failed_status + "Couldn't select radio button";
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while selecting radio button option : ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while selecting radio button option : ", e);
 
 			/** Taking screenshot during exception */
 			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 
 		return result;
@@ -722,17 +722,17 @@ public class Keywords {
 				webelement.click();
 			}
 
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Checkbox is cleared. ");
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Checkbox is cleared. ");
 			result = passed_status+ "Checkbox cleared successfully";
 		}
 		catch(Exception e)
 		{
 			result = failed_status + "Couldn't clear checkbox. ";
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while clearing checkbox : " +webelement, e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while clearing checkbox : " +webelement, e);
 
 			/** Taking screenshot during exception */
 			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 		return result;
 	}
@@ -765,11 +765,11 @@ public class Keywords {
 		catch(Exception e)
 		{
 			result = failed_status + "Couldn't check the supplied checkbox selection. ";
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while checking selection of checkbox : " +webelement, e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while checking selection of checkbox : " +webelement, e);
 
 			/** Taking screenshot during exception */
 			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 
 		}
 		return result;
@@ -815,7 +815,7 @@ public class Keywords {
 				}
 
 				result = passed_status+ "Selected value: "+data+" successfully";
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Selected value: "+data+" successfully");
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Selected value: "+data+" successfully");
 			}
 			else
 			{
@@ -825,11 +825,11 @@ public class Keywords {
 		catch(Exception e)
 		{
 			result = failed_status + "Couldn't select "+data +" from list. ";
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while selecting value: "+data +" from list. ");
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while selecting value: "+data +" from list. ");
 
 			/** Taking screenshot during exception */
 			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 		return result;
 	}
@@ -864,12 +864,12 @@ public class Keywords {
 					webelement.sendKeys(data);
 				}
 
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Typing the value : " + data + " in the element: " + webelement );
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Typing the value : " + data + " in the element: " + webelement );
 				result = passed_status+ "Value typed successfully";
 			}
 			else
 			{
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : No object was provided to type value. " );
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : No object was provided to type value. " );
 				result = failed_status+ "No object was provided to type value. ";
 			}
 		}
@@ -880,11 +880,11 @@ public class Keywords {
 		catch(Exception e)
 		{
 			result = failed_status + "Couldn't type value";
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred: "+e+" while Typing the value : " + data + " in the element: " + webelement, e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred: "+e+" while Typing the value : " + data + " in the element: " + webelement, e);
 
 			/** Taking screenshot during exception */
 			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 
 		return result;
@@ -914,14 +914,14 @@ public class Keywords {
 
 					Thread.sleep(1500);
 					webelement.sendKeys(String.valueOf(chars[i]));
-					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Typing the value : " + chars[i] + " in the element: " + webelement );
+					logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Typing the value : " + chars[i] + " in the element: " + webelement );
 				}
 
 				result = passed_status+ "Value typed successfully";
 			}
 			else
 			{
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : No object was provided to type value. " );
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : No object was provided to type value. " );
 				result = failed_status+ "No object was provided to type value. ";
 			}
 		}
@@ -932,11 +932,11 @@ public class Keywords {
 		catch(Exception e)
 		{
 			result = failed_status + "Couldn't type value";
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred: "+e+" while Typing the value : " + data + " in the element: " + webelement, e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred: "+e+" while Typing the value : " + data + " in the element: " + webelement, e);
 
 			/** Taking screenshot during exception */
 			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 
 		return result;
@@ -999,7 +999,7 @@ public class Keywords {
 							if(actualValue.contains("#")){
 								actualValue=actualValue.split("#")[1];
 							}
-							logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : actual text of element: " + actualValue);
+							logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : actual text of element: " + actualValue);
 
 							if(actualValue.equalsIgnoreCase(data))
 							{
@@ -1027,12 +1027,12 @@ public class Keywords {
 
 				if(actualValue.equalsIgnoreCase(data))
 				{
-					logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Actual and Expected Text Matched. ");
+					logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Actual and Expected Text Matched. ");
 					result = passed_status + "Text is as expected.";
 				}
 				else 
 				{
-					logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Actual and Expected Text Doesn't Match. ");
+					logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Actual and Expected Text Doesn't Match. ");
 					result = failed_status + "The actual value is: " + actualValue + ", the expected value is: " + data;
 				}
 			}
@@ -1044,18 +1044,18 @@ public class Keywords {
 		catch (TimeoutException e) 
 		{
 			result = failed_status + "Could not retrieve the text."; 
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Timed out while waiting for text to be present: "+data);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Timed out while waiting for text to be present: "+data);
 		}
 		catch(Exception e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+ " : " + failed_status + "Exception occurred while verifying the text: " + data + " of the element: " +webelement, e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+ " : " + failed_status + "Exception occurred while verifying the text: " + data + " of the element: " +webelement, e);
 			result = failed_status + "Could not retrieve the text."; 
 
 			/** Taking screenshot during exception */
 			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
-		logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Current url: "+driver.getCurrentUrl());
+		logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Current url: "+driver.getCurrentUrl());
 		return result;
 	}
 
@@ -1081,7 +1081,7 @@ public class Keywords {
 			if(objectName.isEmpty())
 			{
 				result = failed_status + "No query was supplied. ";
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+ ": " + result);
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+ ": " + result);
 			}
 			else
 			{
@@ -1090,14 +1090,14 @@ public class Keywords {
 
 				/** Parsing the supplied sql query. */
 				String sqlQuery = objectName.replace("\"", "'");
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Executing supplied query: "+sqlQuery);
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Executing supplied query: "+sqlQuery);
 
 				String [] records = GenericMethodsLib.ExecuteMySQLQueryReturns1DArray(connection, sqlQuery);
 
 				/** proceed to test only if received records is not null */
 				if(records != null)
 				{
-					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Received Number Of Records: "+records.length);
+					logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Received Number Of Records: "+records.length);
 
 					boolean dataListFlag = false;
 					List<String> dataList = new ArrayList<>();
@@ -1226,18 +1226,18 @@ public class Keywords {
 				else
 				{
 					result = failed_status + "Received null in database. ";
-					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : No Records Received ... ");
+					logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : No Records Received ... ");
 				}
 			}
 		}
 		catch(Exception e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+ " : " + failed_status + "Exception occurred while verifying the database details." , e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+ " : " + failed_status + "Exception occurred while verifying the database details." , e);
 			result = failed_status + "Could not get database details. "; 
 
 			/** Taking screenshot during exception */
 			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 		return result;
 	}
@@ -1265,7 +1265,7 @@ public class Keywords {
 			{
 				/** Parsing the supplied sql query. */
 				String sqlQuery = objectName.replace("\"", "'");
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Executing supplied query: "+sqlQuery);
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Executing supplied query: "+sqlQuery);
 
 				boolean flag = new DBLib().executeUpdateInsertQuery(connection, sqlQuery);
 				if(flag)
@@ -1279,12 +1279,12 @@ public class Keywords {
 		}
 		catch(Exception e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+ " : " + failed_status + "Exception occurred while verifying the database details." , e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+ " : " + failed_status + "Exception occurred while verifying the database details." , e);
 			result = failed_status + "Could not get database details. "; 
 
 			/** Taking screenshot during exception */
 			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 		return result;
 	}
@@ -1339,7 +1339,7 @@ public class Keywords {
 					expectedValue = data.split(",")[1].trim();
 				}
 
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Search parameter is: " + searchParam);
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Search parameter is: " + searchParam);
 
 				/** Create the dynamic element using searchParam, putting sleep to handle sync
 				 */
@@ -1355,17 +1355,17 @@ public class Keywords {
 					}catch(Exception e){
 					}
 					String actualValue = webelement.getText().trim();
-					logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : actual text of element : " + actualValue);
+					logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : actual text of element : " + actualValue);
 
 					/** Matching expected and actual values */
 					if(actualValue.equals(expectedValue))
 					{
-						logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Actual and Expected Text Matched. ");
+						logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Actual and Expected Text Matched. ");
 						result = passed_status + "Text is as expected.";
 					}
 					else 
 					{
-						logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Actual and Expected Text Doesn't Match. ");
+						logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Actual and Expected Text Doesn't Match. ");
 						result = failed_status + "The actual value is: " + actualValue + ", the expected value is: " + expectedValue;
 					}
 				}
@@ -1386,7 +1386,7 @@ public class Keywords {
 
 			/** Taking screenshot during exception */
 			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 		return result;
 	}
@@ -1410,9 +1410,9 @@ public class Keywords {
 				data = data.split(",")[0].trim();
 			}
 
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Verifying the title of browser : " + driver );
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Verifying the title of browser : " + driver );
 			String actualValue = driver.getTitle().trim();
-			logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Title of browser is: "+actualValue);
+			logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Title of browser is: "+actualValue);
 
 			if(actualValue.equalsIgnoreCase(data))
 			{
@@ -1428,7 +1428,7 @@ public class Keywords {
 
 			/** Taking screenshot during exception */
 			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 
 			return failed_status + ": could not retrive the browser title."; 
 		}
@@ -1448,7 +1448,7 @@ public class Keywords {
 			webelement = getObject.getFinalWebElement(driver, objectName, data, jsonObjectRepo);
 
 			String actualValue = webelement.getText().trim();
-			logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Actual Text of element is: " +actualValue);
+			logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Actual Text of element is: " +actualValue);
 			
 			return actualValue;
 		}
@@ -1458,7 +1458,7 @@ public class Keywords {
 
 			/** Taking screenshot during exception */
 			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 
 			return failed_status + "could not retrieve the text.";
 		}
@@ -1478,7 +1478,7 @@ public class Keywords {
 
 			//Accepting alert
 			acceptalert(driver,objectName, data);
-			logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : actual text present in alert: " + actualText );
+			logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : actual text present in alert: " + actualText );
 			return actualText;
 		}
 		catch(NoAlertPresentException e)
@@ -1492,7 +1492,7 @@ public class Keywords {
 
 			/** Taking screenshot during exception */
 			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 
 			return failed_status + "could not retrieve the alert text."; 
 		}
@@ -1521,7 +1521,7 @@ public class Keywords {
 
 			/** Taking screenshot during exception */
 			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 
 			return String.valueOf(false); 
 		}
@@ -1539,9 +1539,9 @@ public class Keywords {
 	public String getbrowsertitle  (WebDriver driver, String objectName, String data)
 	{
 		try{			
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Title of browser : " + driver );
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Title of browser : " + driver );
 			String actualValue = driver.getTitle().trim();
-			logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Title of browser is: "+actualValue);
+			logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Title of browser is: "+actualValue);
 			return actualValue;
 		}
 		catch(Exception e)
@@ -1550,7 +1550,7 @@ public class Keywords {
 
 			/** Taking screenshot during exception */
 			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 
 			return failed_status + " : could not retrive the page title"; 
 		}
@@ -1571,12 +1571,12 @@ public class Keywords {
 			WebDriverWait wait = new WebDriverWait(driver, 60);
 			wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(data));
 
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Switched to iframe: "+data);			
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Switched to iframe: "+data);			
 			return passed_status;
 		}
 		catch(Exception e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Error occurred while switching frame: ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Error occurred while switching frame: ", e);
 			return failed_status;
 		}
 
@@ -1624,11 +1624,11 @@ public class Keywords {
 			else
 			{
 				result = failed_status + "Couldn't check the presence of element. ";
-				logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while checking the presence of element. ", e);
+				logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while checking the presence of element. ", e);
 
 				/** Taking screenshot during exception */
 				CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 			}
 		}
 
@@ -1662,7 +1662,7 @@ public class Keywords {
 
 				for(String elementName : objects){
 					set.add(handler.getCallableTask_VerifyElementPresent(connection, jsonObjectRepo, proxyServer, driver, elementName, data));
-					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " : " + " callable task added for element:  " +elementName);
+					logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " : " + " callable task added for element:  " +elementName);
 				}
 			}
 
@@ -1679,11 +1679,11 @@ public class Keywords {
 		}
 		catch (Exception e) {
 			result = failed_status + " Couldn't check the presence of element. ";
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while checking the presence of element. ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while checking the presence of element. ", e);
 
 			/** Taking screenshot during exception */
 			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 
 		return result;
@@ -1702,7 +1702,7 @@ public class Keywords {
 		List<String> notPresentObjectList = new ArrayList<String>();
 
 		try{
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Checking presence of supplied element: "+objectName);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Checking presence of supplied element: "+objectName);
 
 			boolean listFlag = false;
 			List<String> suppliedObjectList = new ArrayList<String>();
@@ -1798,11 +1798,11 @@ public class Keywords {
 			else
 			{
 				result = failed_status + "Couldn't check the presence of element. ";
-				logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while checking the presence of element. ", e);
+				logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while checking the presence of element. ", e);
 
 				/** Taking screenshot during exception */
 				CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 			}
 		}
 
@@ -1826,7 +1826,7 @@ public class Keywords {
 			{
 				driver.switchTo().alert().accept();
 				result = passed_status+ "Alert accepted.";
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Accepted alert. ");
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Accepted alert. ");
 			}
 			else
 			{
@@ -1841,11 +1841,11 @@ public class Keywords {
 		catch(Exception e)
 		{
 			result = failed_status + "Couldn't move to alert.";
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while accepting alert. ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while accepting alert. ", e);
 
 			/** Taking screenshot during exception */
 			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 		return result;
 	}
@@ -1867,7 +1867,7 @@ public class Keywords {
 			{
 				driver.switchTo().alert().dismiss();
 				result = passed_status+ "Alert dismissed.";
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Alert dismissed. ");
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Alert dismissed. ");
 			}
 			else
 			{
@@ -1882,11 +1882,11 @@ public class Keywords {
 		catch(Exception e)
 		{
 			result = failed_status + "Couldn't move to alert.";
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while dismissing alert. ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while dismissing alert. ", e);
 
 			/** Taking screenshot during exception */
 			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 		return result;
 	}
@@ -1915,16 +1915,16 @@ public class Keywords {
 			//Accepting alert
 			acceptalert(driver,objectName, data);
 
-			logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : actual text present in alert: " + actualText );
+			logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : actual text present in alert: " + actualText );
 
 			if(actualText.equals(data))
 			{
-				logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Actual and Expected Text Matched. ");
+				logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Actual and Expected Text Matched. ");
 				return passed_status;
 			}
 			else 
 			{
-				logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Actual and Expected Text Doesn't Match. ");
+				logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Actual and Expected Text Doesn't Match. ");
 				return failed_status + "The actual value is: " + actualText + " but the expected value is: " + data;
 			}
 		}
@@ -1939,7 +1939,7 @@ public class Keywords {
 
 			/** Taking screenshot during exception */
 			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 
 			return failed_status + "could not retrieve the alert text."; 
 
@@ -1962,14 +1962,14 @@ public class Keywords {
 
 			String alertText = driver.switchTo().alert().getText().toString();
 
-			logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : An alert was present having text = "+alertText);
+			logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : An alert was present having text = "+alertText);
 			driver.switchTo().alert().accept();
 
 			return passed_status + "An alert is present having text = "+alertText;
 		}
 		catch(NoAlertPresentException a)
 		{
-			logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : No Alert Was Found.");
+			logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : No Alert Was Found.");
 			return failed_status + "No alert was present."; 
 		}
 		catch(Exception e)
@@ -1978,7 +1978,7 @@ public class Keywords {
 
 			/** Taking screenshot during exception */
 			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 
 			return failed_status + "could not verify the presence of alert.";
 		}
@@ -1999,14 +1999,14 @@ public class Keywords {
 
 			String alertText = driver.switchTo().alert().getText().toString();
 
-			logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : An alert was present having text = "+alertText);
+			logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : An alert was present having text = "+alertText);
 			driver.switchTo().alert().accept();
 
 			return failed_status + "An alert is present having text = "+alertText;
 		}
 		catch(NoAlertPresentException a)
 		{
-			logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : No Alert Was Found.");
+			logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : No Alert Was Found.");
 			return passed_status + "No alert was present."; 
 		}
 		catch(Exception e)
@@ -2015,7 +2015,7 @@ public class Keywords {
 
 			/** Taking screenshot during exception */
 			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 
 			return failed_status + "could not verify the presence of alert.";
 		}
@@ -2054,19 +2054,19 @@ public class Keywords {
 				 */
 				webelement = getObject.getFinalWebElement(driver, objectName, data, jsonObjectRepo);
 
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Verifying the value of element: " + webelement );
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Verifying the value of element: " + webelement );
 				String actualValue = webelement.getAttribute("value").trim();
 
-				logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : actual value of element : " + actualValue);
+				logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : actual value of element : " + actualValue);
 
 				if(actualValue.equalsIgnoreCase(data))
 				{
-					logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Actual and Expected Value Matched. ");
+					logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Actual and Expected Value Matched. ");
 					result = passed_status + "Value is as expected.";
 				}
 				else 
 				{
-					logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Actual and Expected Value Doesn't Match. ");
+					logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Actual and Expected Value Doesn't Match. ");
 					result = failed_status + "The actual value is: " + actualValue + ", the expected value is: " + data;
 				}
 			}
@@ -2082,7 +2082,7 @@ public class Keywords {
 
 			/** Taking screenshot during exception */
 			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 
 		}
 		return result;
@@ -2108,13 +2108,13 @@ public class Keywords {
 			handler.executeJavaScript(driver, javaScript, webelement);
 
 			result = passed_status+ "Scrolled the bar successfully";
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Scrolled the bar successfully " );
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Scrolled the bar successfully " );
 		}
 		catch(Exception e){
 			result = failed_status + ": Unable to scroll the bar";
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while scrolling the bar ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while scrolling the bar ", e);
 			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 		return result;
 	}
@@ -2132,7 +2132,7 @@ public class Keywords {
 		try{
 			By bylocator = getObject.getFinalByLocator(driver, objectName, data, jsonObjectRepo);
 
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" wait for the element visibility - by locator: "+bylocator.toString());
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" wait for the element visibility - by locator: "+bylocator.toString());
 
 			/** wait for element using by locator - not creating element - to avoid timeout while finding the element */
 			if(handler.applyExplicitWait(driver, bylocator, new ElementNotVisibleException(""), 60)) {
@@ -2150,10 +2150,10 @@ public class Keywords {
 		}catch(Exception ex){
 			result = failed_status + "Unable to wait for the element visibility.";
 
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" Unable to wait for the element visibility because of: ", ex);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" Unable to wait for the element visibility because of: ", ex);
 
 			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 		return result;
 	}
@@ -2203,7 +2203,7 @@ public class Keywords {
 					break;
 				}
 
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " : " +" retry wait for values - "+counter);
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " : " +" retry wait for values - "+counter);
 				counter ++;
 			}
 
@@ -2213,15 +2213,15 @@ public class Keywords {
 				if(optionValue.equalsIgnoreCase(data)){
 					element.click();
 					result = passed_status + "Clicked on the element matched";
-					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" Selected the option successfully -- Actual ="+optionValue+" and Expected ="+data);
+					logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" Selected the option successfully -- Actual ="+optionValue+" and Expected ="+data);
 					break;
 				}else{
-					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Input is not matched with the getText() -- Actual ="+optionValue+" and Expected ="+data);
+					logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Input is not matched with the getText() -- Actual ="+optionValue+" and Expected ="+data);
 				}
 			}
 		}
 		catch(Exception e){
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception in selecting from the dropdown", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception in selecting from the dropdown", e);
 			result = failed_status + " Error occurred while selecting drop down list. ";
 		}
 		return result;
@@ -2268,25 +2268,25 @@ public class Keywords {
 				String javaScript = "arguments[0].scrollIntoView(false);";
 				Thread.sleep(1000);
 
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Executing java script: " +javaScript);
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Executing java script: " +javaScript);
 				handler.executeJavaScript(driver, javaScript, webelement);
 
 				result = passed_status+ "script executed successfully";
 			}
 			else
 			{
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : No Object received to bring into focus.");
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : No Object received to bring into focus.");
 				result = failed_status+ "No Object received to bring into focus. ";
 			}
 		}
 		catch(Exception e)
 		{
 			result = failed_status + "Couldn't bring the element in focus. ";
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred: "+e+" while moving foucs on element: " +webelement, e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred: "+e+" while moving foucs on element: " +webelement, e);
 
 			/** Taking screenshot during exception */
 			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 
 		return result;
@@ -2333,12 +2333,12 @@ public class Keywords {
 		}
 		catch (TimeoutException e) {
 			result = warning_status +" Object wasn't disappeared even after waiting for 60 sec. ";
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Element wasn't invisbile. ");
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Element wasn't invisbile. ");
 		}
 		catch(Exception e)
 		{
 			result = failed_status +" error occurred while waiting for disappearance of supplied object. ";
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" :Exception occured: ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" :Exception occured: ", e);
 		}
 		return result;
 
@@ -2363,11 +2363,11 @@ public class Keywords {
 		catch(Exception e)
 		{
 			result = passed_status +" page was not refreshed";
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred: ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred: ", e);
 
 			/** Taking screenshot during exception */
 			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 
 		return result;
@@ -2402,7 +2402,7 @@ public class Keywords {
 		{
 			delay = IntegerLib.GetRandomNumber(6000, 3000);
 			Thread.sleep(delay);
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" Applied Random Delay: "+delay);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" Applied Random Delay: "+delay);
 		}catch(Exception e){}
 		return "PASS: Applied Random Delay of: "+delay;
 	}
@@ -2443,7 +2443,7 @@ public class Keywords {
 			}
 		}
 		catch(Exception e){
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+ "-" +e.getMessage(), e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+ "-" +e.getMessage(), e);
 		}
 		if (brokenlinks.size()==0){
 			return passed_status+" No Broken Link on.";
@@ -2479,15 +2479,15 @@ public class Keywords {
 				}
 			}
 
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " : Received URL List: " +urlList.toString());
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " : Received URL List: " +urlList.toString());
 
 		}catch (Exception e) {
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while getting list: ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while getting list: ", e);
 		}
 
 		/** just to maintain the same return format -- returning string */
 		String urls = urlList.toString().replace("[", "").replace("]", "");
-		logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " : " +" received urls : "+urls);
+		logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " : " +" received urls : "+urls);
 
 		return urls;
 	}
@@ -2502,7 +2502,7 @@ public class Keywords {
 	{
 		List<String> urlList = Arrays.asList(data.split(","));
 
-		logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " : "+ " Received url list to verify: "+urlList.toString());
+		logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " : "+ " Received url list to verify: "+urlList.toString());
 
 		if(urlList.size() < 1) {
 			return skip_status+ " No Links Were Supplied To Check. ";
@@ -2536,7 +2536,7 @@ public class Keywords {
 		Object objJsOutput;
 		try
 		{
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : " +" Executing java script: "+data);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : " +" Executing java script: "+data);
 
 			/** for sync */
 			Thread.sleep(1000);
@@ -2562,18 +2562,18 @@ public class Keywords {
 			else{
 				/** if object name is not supplied then execute the supplied js and return the output */
 				objJsOutput = js.executeScript(javaScript);
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : " + " javascript output is: "+objJsOutput);
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : " + " javascript output is: "+objJsOutput);
 
 				return String.valueOf(objJsOutput);
 			}
 		}
 		catch(Exception ex)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while executing java script: "+data +" for supplied element: "+webelement, ex);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while executing java script: "+data +" for supplied element: "+webelement, ex);
 
 			/** Taking screenshot during exception */
 			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 
 			return failed_status+ "Java Script Executed With Errors. ";
 		}
@@ -2590,7 +2590,7 @@ public class Keywords {
 	{
 		String result= "";
 
-		String har = TestSuiteClass.AUTOMATION_HOME+"/HAR-"+TestSuiteClass.UNIQ_EXECUTION_ID.get()+"-"+new Date().getTime();
+		String har = SuiteClass.AUTOMATION_HOME+"/HAR-"+SuiteClass.UNIQ_EXECUTION_ID.get()+"-"+new Date().getTime();
 		try{
 			if(proxyServer != null){
 				proxyServer.getHar().writeTo(new File(har));
@@ -2646,15 +2646,15 @@ public class Keywords {
 							"\nResponse ==> " + responseText +
 							"\nHeaders ==> " + headers + "\n";
 				}
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" Logs are generated for the test case");	
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" Logs are generated for the test case");	
 
 				/** stopping server after getting har file */
 				proxyServer.stop();
 			}else{
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" Proxy server wasn't started. ");
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" Proxy server wasn't started. ");
 			}
 		}catch(Exception e){
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : error occured while getting the log file", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : error occured while getting the log file", e);
 		}
 
 		return result;
@@ -2674,7 +2674,7 @@ public class Keywords {
 
 		if(driver instanceof FirefoxDriver){
 
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " firefix driver doen't support console logs. ");
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " firefix driver doen't support console logs. ");
 			result=warning_status +" can not get log in firefox.";
 
 			return result;
@@ -2690,7 +2690,7 @@ public class Keywords {
 					result = result + e.getLevel() + " ==> " + e.getMessage() + "\n";
 				}
 			}catch (Exception e) {
-				logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : error occurred while getting console browser logs. ", e);
+				logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : error occurred while getting console browser logs. ", e);
 			}
 			return result;
 		}
@@ -2707,10 +2707,10 @@ public class Keywords {
 		String result=skip_status;
 		try{
 			result=skip_following_steps;
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+"Expected result matched hence skipping following steps ");
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+"Expected result matched hence skipping following steps ");
 
 		}catch(Exception e){
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : skip status set ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : skip status set ", e);
 		}
 		return result;
 	}
@@ -2736,11 +2736,11 @@ public class Keywords {
 
 		}catch (Exception e) {
 			result = failed_status + " hover unsuccessful due to some error ";
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : error occurred while hover ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : error occurred while hover ", e);
 
 			/** Taking screenshot during exception */
 			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 
 		return result;
@@ -2774,11 +2774,11 @@ public class Keywords {
 			}
 		}catch (Exception e) {
 			result = failed_status + " Scroll unsuccessful due to some error ";
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : error occurred while scrolling ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : error occurred while scrolling ", e);
 
 			/** Taking screenshot during exception */
 			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 
 		return result;
@@ -2801,18 +2801,18 @@ public class Keywords {
 			String mouseOverScript = "if(document.createEvent){var evObj = document.createEvent('MouseEvents');evObj.initEvent('mouseover', "
 					+ "true, false); arguments[0].dispatchEvent(evObj);} else if(document.createEventObject) { arguments[0].fireEvent('onmouseover');}";
 
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " : " + " executing js to hover: "+mouseOverScript);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " : " + " executing js to hover: "+mouseOverScript);
 			((JavascriptExecutor) driver).executeScript(mouseOverScript, webelement);
 
 			result = passed_status + " hover successful using js. ";
 
 		}catch (Exception e) {
 			result = failed_status + " hover unsuccessful due to some error ";
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : error occurred while hover ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : error occurred while hover ", e);
 
 			/** Taking screenshot during exception */
 			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 
 		return result;
@@ -2831,11 +2831,11 @@ public class Keywords {
 			return driver.getCurrentUrl();
 
 		}catch (Exception e) {
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : error occurred getting url.", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : error occurred getting url.", e);
 
 			/** Taking screenshot during exception */
 			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 
 			return failed_status + " couldn't get driver url. ";
 		}
@@ -2853,7 +2853,7 @@ public class Keywords {
 		Object objJsOutput;
 		try
 		{
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : " +" Executing java script: ");
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : " +" Executing java script: ");
 
 			String javaScript = "arguments[0].click()";
 			webelement = getObject.getFinalWebElement(driver, objectName, data, jsonObjectRepo);
@@ -2869,25 +2869,25 @@ public class Keywords {
 					javaScript = "document.evaluate(\""+xpathLocator+"\" ,document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null ).singleNodeValue.click();";
 				}
 
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " : " + " executing js: "+javaScript );
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " : " + " executing js: "+javaScript );
 				objJsOutput = js.executeScript(javaScript, webelement);
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " : " + " executed js: "+javaScript + " and js output - : "+objJsOutput);
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " : " + " executed js: "+javaScript + " and js output - : "+objJsOutput);
 				return passed_status + "Java Script Executed. ";					
 			}
 			else
 			{
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " : " + " null element found, skipping execute js. ");
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " : " + " null element found, skipping execute js. ");
 
 				/** Taking screenshot during exception */
 				CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 
 				return failed_status + "Null Element Received, Java Script Execution Skipped. ";
 			}
 		}
 		catch(Exception ex)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while executing java script: "+data +" for supplied element: "+webelement, ex);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while executing java script: "+data +" for supplied element: "+webelement, ex);
 			return failed_status + "Java Script Executed With Errors: "+ex.getMessage();
 		}
 	}
@@ -2909,7 +2909,7 @@ public class Keywords {
 			selectedValue= selctedelement.getFirstSelectedOption().getText();
 
 		}catch(Exception e) {
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" :  exception occurred  while  getting selected value " + e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" :  exception occurred  while  getting selected value " + e);
 		}
 
 		return selectedValue;
@@ -2954,7 +2954,7 @@ public class Keywords {
 			}
 
 		}catch (Exception e) {
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : error occured while checking browser console logs. ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : error occured while checking browser console logs. ", e);
 			result = failed_status + "Exception occurred while checking browser console logs. ";
 		}
 		return result;
@@ -2972,11 +2972,11 @@ public class Keywords {
 	{
 		String result;
 		try{
-			logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Closing current browser tab. ");
+			logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Closing current browser tab. ");
 
 			/** kill emulator for appium driver */
 			if(driver instanceof AppiumDriver<?>) {
-				String deviceUDID = SingletonTestObject.getSingletonTestObject().getTestCaseObjectMap().get(TestSuiteClass.UNIQ_EXECUTION_ID.get()).getDeviceUDID();
+				String deviceUDID = SingletonTestObject.getSingletonTestObject().getTestCaseObjectMap().get(SuiteClass.UNIQ_EXECUTION_ID.get()).getDeviceUDID();
 				new GenericMethodsLib().killEmulator(deviceUDID);
 			}
 			else{
@@ -2989,11 +2989,11 @@ public class Keywords {
 		}catch(Exception e)
 		{
 			result = warning_status + "Couldn't close browser tab. ";
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while closing browser tab. ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while closing browser tab. ", e);
 
 			/** Taking screenshot during exception */
 			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 		return result;
 	}

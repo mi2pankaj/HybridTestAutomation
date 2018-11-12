@@ -85,7 +85,7 @@ import java.awt.event.KeyEvent;
 import org.apache.log4j.Logger; 
 import org.openqa.selenium.WebDriver;
 
-import tests.TestSuiteClass;
+import tests.SuiteClass;
 
 
 
@@ -134,7 +134,7 @@ public class KeyBoardActionsUsingRobotLib
 				{
 					String clipBoardForWindows = clipBoard.replace("/", "\\");
 
-					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : File: "+clipBoardForWindows +" is being selected on: " +System.getProperty("os.name") + " and Browser: " +driver.toString());
+					logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : File: "+clipBoardForWindows +" is being selected on: " +System.getProperty("os.name") + " and Browser: " +driver.toString());
 
 					stringSelection = new StringSelection(clipBoardForWindows);
 					Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
@@ -154,7 +154,7 @@ public class KeyBoardActionsUsingRobotLib
 				}
 				else
 				{
-					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : File: "+clipBoard +" is being selected on: " +System.getProperty("os.name") + " and Browser: " +driver.toString());
+					logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : File: "+clipBoard +" is being selected on: " +System.getProperty("os.name") + " and Browser: " +driver.toString());
 
 					Thread.sleep(250);
 
@@ -198,13 +198,13 @@ public class KeyBoardActionsUsingRobotLib
 				{
 					String clipBoardForWindows = clipBoard.replace("/", "\\");
 
-					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : File: "+clipBoardForWindows +" is being selected on: " +System.getProperty("os.name") + " and Browser: " +driver.toString());
+					logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : File: "+clipBoardForWindows +" is being selected on: " +System.getProperty("os.name") + " and Browser: " +driver.toString());
 
 					ChooseFileToUploadUsingKeyBoard(clipBoardForWindows);
 				}
 				else
 				{
-					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : File: "+clipBoard +" is being selected on: " +System.getProperty("os.name") + " and Browser: " +driver.toString());
+					logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : File: "+clipBoard +" is being selected on: " +System.getProperty("os.name") + " and Browser: " +driver.toString());
 					ChooseFileToUploadUsingKeyBoard(clipBoard);
 				}
 			}
@@ -212,7 +212,7 @@ public class KeyBoardActionsUsingRobotLib
 		}
 		catch(Exception e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occured while uploading file. ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occured while uploading file. ", e);
 		}
 
 	}
@@ -230,7 +230,7 @@ public class KeyBoardActionsUsingRobotLib
 			{
 				rt.keyPress(KeyEvent.VK_CONTROL);
 				rt.keyPress(KeyEvent.VK_END);
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Scroll Down To The Bottom Of The Web Page in " + System.getProperty("os.name").toString());
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Scroll Down To The Bottom Of The Web Page in " + System.getProperty("os.name").toString());
 				Thread.sleep(1000);
 
 				rt.keyRelease(KeyEvent.VK_CONTROL);
@@ -241,7 +241,7 @@ public class KeyBoardActionsUsingRobotLib
 			{
 				rt.keyPress(KeyEvent.VK_META);
 				rt.keyPress(KeyEvent.VK_DOWN);
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Scroll Down To The Bottom Of The Web Page in " + System.getProperty("os.name").toString());
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Scroll Down To The Bottom Of The Web Page in " + System.getProperty("os.name").toString());
 				Thread.sleep(1000);
 
 				rt.keyRelease(KeyEvent.VK_META);
@@ -251,7 +251,7 @@ public class KeyBoardActionsUsingRobotLib
 		}
 		catch(Exception e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occured while scrolling page. ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occured while scrolling page. ", e);
 		}
 	}
 
@@ -273,7 +273,7 @@ public class KeyBoardActionsUsingRobotLib
 					rt.keyRelease(KeyEvent.VK_RIGHT);
 				}
 				Thread.sleep(1000);
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Move Right to the Web Page in " + System.getProperty("os.name").toString());
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Move Right to the Web Page in " + System.getProperty("os.name").toString());
 			}
 			else
 			{
@@ -284,12 +284,12 @@ public class KeyBoardActionsUsingRobotLib
 					rt.keyRelease(KeyEvent.VK_RIGHT);
 				}
 				Thread.sleep(1000);
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Move Right to the Web Page in " + System.getProperty("os.name").toString());
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Move Right to the Web Page in " + System.getProperty("os.name").toString());
 			}
 		}
 		catch(Exception e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occured. ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occured. ", e);
 		}
 	}
 
@@ -303,7 +303,7 @@ public class KeyBoardActionsUsingRobotLib
 
 			if(System.getProperty("os.name").matches("^Windows.*"))
 			{
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Minimize All Windows On Your Desktop: " + System.getProperty("os.name").toString());
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Minimize All Windows On Your Desktop: " + System.getProperty("os.name").toString());
 
 				rt.keyPress(KeyEvent.VK_WINDOWS);
 				rt.keyPress(KeyEvent.VK_M);
@@ -316,7 +316,7 @@ public class KeyBoardActionsUsingRobotLib
 			}
 			else
 			{
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Minimize All Windows On Your Desktop: "  + System.getProperty("os.name").toString());
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Minimize All Windows On Your Desktop: "  + System.getProperty("os.name").toString());
 
 				for(int i=0; i<2; i++)
 				{
@@ -333,7 +333,7 @@ public class KeyBoardActionsUsingRobotLib
 		}
 		catch(Exception e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occured. ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occured. ", e);
 		}
 	}
 
@@ -364,7 +364,7 @@ public class KeyBoardActionsUsingRobotLib
 				rt.keyPress(KeyEvent.VK_CONTROL);
 				rt.keyPress(KeyEvent.VK_C);
 
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Selected Text is copied on desktop: " + System.getProperty("os.name").toString());
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Selected Text is copied on desktop: " + System.getProperty("os.name").toString());
 
 				Thread.sleep(100);
 
@@ -388,7 +388,7 @@ public class KeyBoardActionsUsingRobotLib
 				rt.keyPress(KeyEvent.VK_META);
 				rt.keyPress(KeyEvent.VK_C);
 
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Selected Text is copied on desktop: " + System.getProperty("os.name").toString());
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Selected Text is copied on desktop: " + System.getProperty("os.name").toString());
 
 				Thread.sleep(100);
 
@@ -403,7 +403,7 @@ public class KeyBoardActionsUsingRobotLib
 		}
 		catch(Exception e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occured. ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occured. ", e);
 		}
 		return data;
 	}
@@ -425,7 +425,7 @@ public class KeyBoardActionsUsingRobotLib
 			if(System.getProperty("os.name").matches("^Windows.*"))
 			{
 				filePath = filePath.replace("/", "\\");
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : File: " +filePath + " is being browsed on os: " +System.getProperty("os.name"));
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : File: " +filePath + " is being browsed on os: " +System.getProperty("os.name"));
 			}
 			else
 			{
@@ -438,10 +438,10 @@ public class KeyBoardActionsUsingRobotLib
 				Thread.sleep(250);
 
 				filePath = filePath.substring(1, filePath.length());	
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : File: " +filePath + " is being browsed on os: " +System.getProperty("os.name"));
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : File: " +filePath + " is being browsed on os: " +System.getProperty("os.name"));
 			}
 
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Each character from the supplied file path is being typed here using Keyboard...");
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Each character from the supplied file path is being typed here using Keyboard...");
 
 			type(filePath);
 			Thread.sleep(250);
@@ -456,7 +456,7 @@ public class KeyBoardActionsUsingRobotLib
 		}
 		catch(Exception e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occured. ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occured. ", e);
 		}
 	} 
 
@@ -470,7 +470,7 @@ public class KeyBoardActionsUsingRobotLib
 	{
 		boolean flag = false;
 		try{
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : External Mouse Click Using Robot Class.");
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : External Mouse Click Using Robot Class.");
 			rt = new Robot();
 
 			Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -486,7 +486,7 @@ public class KeyBoardActionsUsingRobotLib
 		}catch(Exception e)
 		{
 			flag = false;
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occured: ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occured: ", e);
 		}
 		return flag;
 	}
@@ -503,7 +503,7 @@ public class KeyBoardActionsUsingRobotLib
 		}
 		catch(Exception e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occured: ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occured: ", e);
 		}
 	}
 

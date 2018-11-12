@@ -14,7 +14,7 @@ import com.codoid.products.fillo.Connection;
 import com.codoid.products.fillo.Fillo;
 import com.codoid.products.fillo.Recordset;
 
-import tests.TestSuiteClass;
+import tests.SuiteClass;
 
 
 public class TestDataObject {
@@ -193,7 +193,7 @@ public class TestDataObject {
 			}
 
 		}catch (Exception e) {
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " : " + e.getMessage(), e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get() + " : " + e.getMessage(), e);
 		}
 		return testcaseobj;
 	}

@@ -16,7 +16,7 @@ import java.util.TreeMap;
 
 import org.apache.log4j.Logger;
 
-import tests.TestSuiteClass; 
+import tests.SuiteClass; 
 
 
 
@@ -52,11 +52,11 @@ public class StringLib
 		}
 		else
 		{
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Received String: " + MainString);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Received String: " + MainString);
 			//String[] OSlist = new String[1];
 			String[] OSlist = { MainString };
 			//OSlist[] = targetingDetail.split(Limiter).toString();
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Value Returned: " + OSlist[0]);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Value Returned: " + OSlist[0]);
 			return OSlist;
 		}
 
@@ -103,7 +103,7 @@ public class StringLib
 		//String t = "<img src=\"http://serve.qa.vdopia.com/adserver/tracker.php?m=ti;ci=3708;ai=11010;chid=111400;ou=rd;rand=[timestamp]\" style=\"height:1px;width:1px;position:absolute;visibility:hidden;\" /><script language='javascript' src='http://serve.qa.vdopia.com/adserver/html5/inwapads/?sleepAfter=0;adFormat=banner;ak=960e42b72b82ea66b00d2cfea8a16795;version=1.0;cb=[timestamp]'></script><noscript><img src=\"http://serve.qa.vdopia.com/adserver/tracker.php?m=nji;ci=3708;ai=11011;chid=111400;ou=rd;rand=[timestamp]\" style=\"height:1px;width:1px;position:absolute;visibility:hidden;\" /></noscript>";
 
 		String testURL = null;
-		logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Received Channel Tag: "+channelTag);
+		logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Received Channel Tag: "+channelTag);
 
 		List<String> list = Arrays.asList(channelTag.split(" "));
 
@@ -118,7 +118,7 @@ public class StringLib
 					if(list01.get(j).contains("inwapads"))
 					{
 						testURL = list01.get(j);
-						logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Found Test URL: " +list01.get(j));
+						logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Found Test URL: " +list01.get(j));
 					}
 				}
 			}
@@ -162,14 +162,14 @@ public class StringLib
 				if(di.get(i).startsWith("di="))
 				{
 					diParam = Arrays.asList(di.get(i).split("=")).get(1);
-					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : di parameter in test url is: "+diParam);
+					logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : di parameter in test url is: "+diParam);
 				}
 			}
 		}
 		catch(Exception e)
 		{	
 			diParam = null;
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception handled by method: GetUniqueParamFromURL. "+e.getMessage());
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception handled by method: GetUniqueParamFromURL. "+e.getMessage());
 		}
 		finally
 		{
@@ -199,7 +199,7 @@ public class StringLib
 					{
 
 						loopresult = true;
-						logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : PASS : " + Subset.get(i) + " exist");
+						logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : PASS : " + Subset.get(i) + " exist");
 						loopresultString = loopresultString + "PASS : " +  Subset.get(i) + " exist \n";
 					}	
 				}
@@ -208,7 +208,7 @@ public class StringLib
 			}
 			if(loopresult == false)
 			{
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : FAIL : " + Subset.get(i) + " does not exist");
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : FAIL : " + Subset.get(i) + " does not exist");
 				loopresultString = loopresultString + "FAIL : " +  Subset.get(i) + " does not exist\n";
 			}
 
@@ -250,7 +250,7 @@ public class StringLib
 					{
 
 						loopresult = true;
-						logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : PASS : Impression URL : " + Subset.get(i) + " exist in Adserver XML.");
+						logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : PASS : Impression URL : " + Subset.get(i) + " exist in Adserver XML.");
 						loopresultString = loopresultString + "PASS : Impression URL : " +  Subset.get(i) + " exist in Adserver XML.\n";
 					}	
 				}
@@ -259,7 +259,7 @@ public class StringLib
 			}
 			if(loopresult == false)
 			{
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : FAIL : Impression URL : " + Subset.get(i) + " does not exist in Adserver XML.");
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : FAIL : Impression URL : " + Subset.get(i) + " does not exist in Adserver XML.");
 				loopresultString = loopresultString + "FAIL : Impression URL : " +  Subset.get(i) + " does not exist in Adserver XML.\n";
 			}
 
@@ -285,13 +285,13 @@ public class StringLib
 
 		for (Entry<String, ArrayList<String>>  map : SuperSetMap.entrySet())
 		{	
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : SuperSetMap : Key: "+map.getKey() + " Value: "+ map.getValue());
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : SuperSetMap : Key: "+map.getKey() + " Value: "+ map.getValue());
 		}
 
 
 		for (Entry<String, ArrayList<String>>  map : SubsetMap.entrySet())
 		{	
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : SubSetMap : Key: "+map.getKey() + " Value: "+ map.getValue());
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : SubSetMap : Key: "+map.getKey() + " Value: "+ map.getValue());
 		}
 
 
@@ -308,7 +308,7 @@ public class StringLib
 					if(SubsetKey.equalsIgnoreCase(SuperSetKey))
 					{
 						SubsetKetExist = true;
-						logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Key : " + SubsetKey + " exist in main hashmap.");
+						logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Key : " + SubsetKey + " exist in main hashmap.");
 
 						logger.info(SuperSetMap.get(SubsetKey) + ", "+  SubsetMap.get(SuperSetKey));
 
@@ -321,7 +321,7 @@ public class StringLib
 			}
 			if( SubsetKetExist == false)
 			{
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Key : " + SubsetKey + " does not exist in main hashmap");
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Key : " + SubsetKey + " does not exist in main hashmap");
 				Mainresult.add("false, "  + SubsetKey + " does not exist in adserve vast xml");
 
 			}
@@ -415,7 +415,7 @@ public class StringLib
 		}
 		catch(Exception e)
 		{
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred: " + e.getMessage());
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred: " + e.getMessage());
 		} 
 		return recordOutput;
 	}
@@ -433,7 +433,7 @@ public class StringLib
 		}
 		catch(Exception e)
 		{
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred: " + e.getMessage());
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred: " + e.getMessage());
 		}
 		return recordOutput;
 	}
@@ -496,7 +496,7 @@ public class StringLib
 		}
 		catch(Exception e)
 		{
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while comparing two lists. "+e);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while comparing two lists. "+e);
 		}
 		finally
 		{

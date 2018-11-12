@@ -15,7 +15,7 @@ import java.util.Locale;
 
 import org.apache.log4j.Logger;
 
-import tests.TestSuiteClass; 
+import tests.SuiteClass; 
 
 
 
@@ -47,11 +47,11 @@ public class DateParser
 
 			SimpleDateFormat convertedFormat = new SimpleDateFormat("dd/MM/yy");
 			convertedDate = convertedFormat.format(date);
-			logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Converted Date: "+convertedDate);
+			logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Converted Date: "+convertedDate);
 		}
 		catch(Exception e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Couldn't convert the supplied date: "+suppliedDate);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Couldn't convert the supplied date: "+suppliedDate);
 		}
 		return convertedDate;
 	}
@@ -106,7 +106,7 @@ public class DateParser
 		}
 		catch(Exception e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occured while parsing supplied date: "+strDate, e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occured while parsing supplied date: "+strDate, e);
 		}
 
 		return desiredValue;

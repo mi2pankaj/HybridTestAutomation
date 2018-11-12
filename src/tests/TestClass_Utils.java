@@ -38,9 +38,9 @@ import tpt.googleAPI.GoogleSheetUtils;
 import tpt.googleAPI.TestDataFromGoogleSheet;
 
 
-public class LenskartWebTest_Utils {
+public class TestClass_Utils {
 
-	Logger logger = Logger.getLogger(LenskartWebTest_Utils.class.getName());
+	Logger logger = Logger.getLogger(TestClass_Utils.class.getName());
 
 	/** Get repo according to supplied channel type.
 	 * 
@@ -54,10 +54,10 @@ public class LenskartWebTest_Utils {
 		if(channel_type.trim().equalsIgnoreCase("desktop"))
 		{
 			/**get React/Revamp object repository as JSON object */
-			String objectRepoReact=TestSuiteClass.AUTOMATION_HOME.concat("/object_repository/desktopSiteObjectRepository/desktopSite_ObjectRepository_Desktop_Revamp.xls");
+			String objectRepoReact=SuiteClass.AUTOMATION_HOME.concat("/object_repository/desktopSiteObjectRepository/desktopSite_ObjectRepository_Desktop_Revamp.xls");
 			JSONObject jsonObjectRepoReact=new GetObjectRepoAsJson().getObjectRepoAsJson(objectRepoReact);
 
-			String objectRepoPhp=TestSuiteClass.AUTOMATION_HOME.concat("/object_repository/desktopSiteObjectRepository/desktopSite_ObjectRepository_PHP.xls");
+			String objectRepoPhp=SuiteClass.AUTOMATION_HOME.concat("/object_repository/desktopSiteObjectRepository/desktopSite_ObjectRepository_PHP.xls");
 			JSONObject jsonObjectRepoPhp=new GetObjectRepoAsJson().getObjectRepoAsJson(objectRepoPhp);
 
 			/** combine both repo - for react */
@@ -66,13 +66,13 @@ public class LenskartWebTest_Utils {
 		else if (channel_type.trim().equalsIgnoreCase("mobile"))
 		{
 			/** get object repository as json object for mobile */
-			String objectRepo = TestSuiteClass.AUTOMATION_HOME.concat("/object_repository/mobileSiteObjectRepository/mobileSite_ObjectRepository.xls");
+			String objectRepo = SuiteClass.AUTOMATION_HOME.concat("/object_repository/mobileSiteObjectRepository/mobileSite_ObjectRepository.xls");
 			jsonObjectRepo = new GetObjectRepoAsJson().getObjectRepoAsJson(objectRepo);
 		}
 		else if (channel_type.trim().equalsIgnoreCase("vsm"))
 		{
 			/** get object repository as json object for vsm */
-			String objectRepo = TestSuiteClass.AUTOMATION_HOME.concat("/object_repository/vsmObjectRepository/vsm_ObjectRepository.xls");
+			String objectRepo = SuiteClass.AUTOMATION_HOME.concat("/object_repository/vsmObjectRepository/vsm_ObjectRepository.xls");
 			jsonObjectRepo = new GetObjectRepoAsJson().getObjectRepoAsJson(objectRepo);
 		}
 		else
@@ -433,7 +433,7 @@ public class LenskartWebTest_Utils {
 					/** submitting the set of task to executor */
 					if(set.size() > 0) {
 						ex.invokeAll(set);
-						logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " : " + " submitted task to create avds .. ");
+						logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " : " + " submitted task to create avds .. ");
 					}
 
 				}catch (Exception e) {
@@ -469,7 +469,7 @@ public class LenskartWebTest_Utils {
 					if(driver.getPageSource().contains("<android.widget.Button index=\"0\" text=\"BLOCK\" class=\"android.widget.Button\" package=\"com.android.chrome\"")) {
 						//if(pageSource.contains("<android.widget.Button index=\"0\" text=\"BLOCK\" class=\"android.widget.Button\" package=\"com.android.chrome\"")) {
 
-						logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " - Alert Found. " );
+						logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " - Alert Found. " );
 						((AndroidDriver<?>)driver).findElement(By.xpath(xpath)).click();	
 
 						testCaseObject.setAppiumDriverAlertHandled(true);
@@ -478,7 +478,7 @@ public class LenskartWebTest_Utils {
 					((AndroidDriver<?>)driver).context("CHROMIUM");
 
 				}catch (Exception e) {
-					try{((AndroidDriver<?>)driver).context("CHROMIUM");}catch (Exception e1) {logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " - exception while handling alert: "+e.getMessage(), e);}
+					try{((AndroidDriver<?>)driver).context("CHROMIUM");}catch (Exception e1) {logger.error(SuiteClass.UNIQ_EXECUTION_ID.get() + " - exception while handling alert: "+e.getMessage(), e);}
 				}
 			}
 		}
@@ -515,13 +515,13 @@ public class LenskartWebTest_Utils {
 			if( (response == null || response.isEmpty()) || (Integer)response.get("statuscode") != 200 || response.get("response").toString().isEmpty()) {
 
 				proceed = new AtomicBoolean(false);
-				try{logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : pre-condition failed - with appium url: " +url + " not proceeding to further tests. " + " received map: "+response);}catch (Exception e) {}
+				try{logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : pre-condition failed - with appium url: " +url + " not proceeding to further tests. " + " received map: "+response);}catch (Exception e) {}
 			}
 			else {
 				proceed = new AtomicBoolean(true);
 			}
 		}catch (Exception e) {
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " : " + e.getMessage(), e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get() + " : " + e.getMessage(), e);
 		}
 		return proceed;
 	}

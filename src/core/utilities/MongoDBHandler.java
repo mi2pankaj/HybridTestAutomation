@@ -27,7 +27,7 @@ import com.mongodb.client.MongoDatabase;
 
 import core.classes.SingletonTestObject;
 import core.classes.TestCaseObject;
-import tests.TestSuiteClass;
+import tests.SuiteClass;
 
 public class MongoDBHandler {
 
@@ -299,7 +299,7 @@ public class MongoDBHandler {
 
 		}catch (Exception e) {
 
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " - error occurred while updating mongodb document. " + e.getMessage(), e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get() + " - error occurred while updating mongodb document. " + e.getMessage(), e);
 			return false;
 		}
 	}
@@ -319,12 +319,12 @@ public class MongoDBHandler {
 			/** update the document now */
 			mongoClient.getDatabase("Automation").getCollection("testcaseobjects").replaceOne(filter, Document.parse(jsonDocument));
 
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " - replacing mongodb document. " +filterMap.toString());
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get() + " - replacing mongodb document. " +filterMap.toString());
 
 			return true;
 		}catch (Exception e) {
 
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " - error occurred while replacing mongodb document. " + e.getMessage(), e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get() + " - error occurred while replacing mongodb document. " + e.getMessage(), e);
 			return false;
 		}
 	}
@@ -341,12 +341,12 @@ public class MongoDBHandler {
 		{
 			/**Updating the document*/
 			SingletonTestObject.getSingletonTestObject().getMongoDBCollection().update(DBQuery.is(fieldName, value), testCaseObject);
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " - replacing mongodb document. " + value);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get() + " - replacing mongodb document. " + value);
 
 			return true;
 		}catch (Exception e) {
 
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " - error occurred while replacing mongodb document. " + e.getMessage(), e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get() + " - error occurred while replacing mongodb document. " + e.getMessage(), e);
 			return false;
 		}
 	}

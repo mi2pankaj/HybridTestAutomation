@@ -23,7 +23,7 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.client.FindIterable;
 
 import core.utilities.MongoDBHandler;
-import tests.TestSuiteClass;
+import tests.SuiteClass;
 
 
 public class TestObjectHandler {
@@ -413,9 +413,9 @@ public class TestObjectHandler {
 				TestCaseObject testCaseObject = testCaseObjectMapToBeExecuted.firstEntry().getValue();
 
 				/** setting up execution id - as test case id */
-				TestSuiteClass.UNIQ_EXECUTION_ID.set(testCaseObject.getTestCaseId());
+				SuiteClass.UNIQ_EXECUTION_ID.set(testCaseObject.getTestCaseId());
 
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+": starting test ... "+testCaseObject.getTestCaseId());
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+": starting test ... "+testCaseObject.getTestCaseId());
 
 				String testCaseKey = testCaseObjectMapToBeExecuted.firstEntry().getKey();
 
@@ -429,7 +429,7 @@ public class TestObjectHandler {
 				/** update mongodb document - if required */				
 				replaceMongoDBDocumentWithMongoJackObject(testCaseObject);
 
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+": test object completed ... ");
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+": test object completed ... ");
 			}
 			else {
 				logger.info("No_Free_Task_Received");
@@ -439,10 +439,10 @@ public class TestObjectHandler {
 
 		}
 		catch(Exception e){
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get() +" : " +e.getMessage(), e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get() +" : " +e.getMessage(), e);
 		}
 
-		return TestSuiteClass.UNIQ_EXECUTION_ID.get()+" - Test_Completed";
+		return SuiteClass.UNIQ_EXECUTION_ID.get()+" - Test_Completed";
 	}
 
 
@@ -578,20 +578,20 @@ public class TestObjectHandler {
 				Map<String, Object> filterMap = new HashMap<>();
 				filterMap.put("testCaseId", testCaseId);
 
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " : " + " document is being updated in mongodb. ");
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " : " + " document is being updated in mongodb. ");
 
 				/** update existing document */
 				new MongoDBHandler().replaceMongoDbDocument(SingletonTestObject.getSingletonTestObject().getMongoDBClientConnnection()
 						,filterMap
 						,testCaseObjectJson);
 
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " : " + " document updated in mongodb. ");
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " : " + " document updated in mongodb. ");
 			}
 
 			return true;
 		}
 		catch (Exception e) {
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " - " + e.getMessage(), e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get() + " - " + e.getMessage(), e);
 
 			return false;
 		}
@@ -610,7 +610,7 @@ public class TestObjectHandler {
 		try {
 			if(SingletonTestObject.getSingletonTestObject().isScale_execution_via_mongo()) {
 
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " : " + " document is being updated in mongodb. ");
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " : " + " document is being updated in mongodb. ");
 
 				String fieldName = "testCaseId";
 
@@ -623,13 +623,13 @@ public class TestObjectHandler {
 				SingletonTestObject.getSingletonTestObject().getMongoDBCollection().findAndRemove(DBQuery.is(fieldName, testCaseObject.getTestCaseId()));
 				SingletonTestObject.getSingletonTestObject().getMongoDBCollection().insert(testCaseObject);				
 
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " : " + " document updated in mongodb. ");
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " : " + " document updated in mongodb. ");
 			}
 
 			return true;
 		}
 		catch (Exception e) {
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " - " + e.getMessage(), e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get() + " - " + e.getMessage(), e);
 
 			return false;
 		}

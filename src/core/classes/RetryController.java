@@ -13,7 +13,7 @@ import com.mysql.jdbc.Connection;
 import core.utilities.CaptureScreenShotLib;
 import core.utilities.GenericMethodsLib;
 import net.lightbody.bmp.proxy.ProxyServer;
-import tests.TestSuiteClass;
+import tests.SuiteClass;
 
 public class RetryController {
 
@@ -70,10 +70,10 @@ public class RetryController {
 			}
 
 		}catch(Exception e){
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " error while evaulating retry condition");
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get() + " error while evaulating retry condition");
 		}
 
-		logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " Final Action OnRetry Step: " +retryStatus);
+		logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " Final Action OnRetry Step: " +retryStatus);
 
 		return retryStatus;
 	}
@@ -107,7 +107,7 @@ public class RetryController {
 
 				result = action.performAction(driver, testStepObject.getKeyword(), testStepObject.getObjectName(), testStepObject.getData(), 
 						connection, jsonObjectRepo, proxyServer, testStepObject);
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + "Retry action "+retryAction + " is performed successfully");
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + "Retry action "+retryAction + " is performed successfully");
 
 			}else if(retryAction.equalsIgnoreCase(retryPreviousStep)){
 
@@ -122,19 +122,19 @@ public class RetryController {
 				testStepObjectList.get(index-1).setTestStepRetryResult(result);
 
 				if(result.contains("Pass")){
-					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + "Pervious Step execution is successful");
+					logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + "Pervious Step execution is successful");
 
 					result= action.performAction(driver, testStepObject.getKeyword(), testStepObject.getObjectName(), testStepObject.getData(), 
 							connection, jsonObjectRepo, proxyServer, testStepObject);
-					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + "Current action is performed successfully");
+					logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + "Current action is performed successfully");
 				}else{
-					logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " Retry previous Test step failed");
+					logger.error(SuiteClass.UNIQ_EXECUTION_ID.get() + " Retry previous Test step failed");
 				}
 
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + "Retry action "+retryAction + " is performed successfully");
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + "Retry action "+retryAction + " is performed successfully");
 			}
 		}catch(Exception e){
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " Unable to perform the retry action");
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get() + " Unable to perform the retry action");
 		}
 
 		return result;
@@ -157,7 +157,7 @@ public class RetryController {
 				url = driver.getCurrentUrl();
 			}catch (NullPointerException e) {
 
-				logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get() + "received null driver ... ", e);
+				logger.error(SuiteClass.UNIQ_EXECUTION_ID.get() + "received null driver ... ", e);
 				return "Fail: "+" Null driver is received. "; 
 			}
 
@@ -170,16 +170,16 @@ public class RetryController {
 			/** Now check if still mobbed page is getting displayed then mark it as failed*/
 			if(driver.getPageSource().contains("cloudfront.net/overcrowded.jpg") || driver.getPageSource().contains("The connection was reset") ) {
 				result= "Fail: Page is still not displayed correctly";
-				logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " mobbed page is displayed even after the page reload, page source is as - ");
+				logger.error(SuiteClass.UNIQ_EXECUTION_ID.get() + " mobbed page is displayed even after the page reload, page source is as - ");
 			}else{
 
 				result= "Pass: Page is displayed upon retrying";
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " Page is reloaded and mobbed page is not coming the the source code ");
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " Page is reloaded and mobbed page is not coming the the source code ");
 			}
 		}catch(Exception e){
 
 			result= "Fail: Page is not displayed correctly on reload / retry { may be error occurred while getting current page url. }. ";
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " Unable to reload the page, error: "+ e.getMessage(), e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get() + " Unable to reload the page, error: "+ e.getMessage(), e);
 		}
 		return result;
 	}
@@ -210,7 +210,7 @@ public class RetryController {
 
 					/** to avoid reloading a null driver */
 					testStepObject.setPageLoadedProperly(true);
-					logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " - received null driver - will not be reloading ... ", e); 
+					logger.error(SuiteClass.UNIQ_EXECUTION_ID.get() + " - received null driver - will not be reloading ... ", e); 
 				}
 
 				testStepObject.setCurrentStepUrl(url);
@@ -223,7 +223,7 @@ public class RetryController {
 				}
 			}
 		}catch (Exception e) {
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get() + ":  "+e.getMessage(), e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get() + ":  "+e.getMessage(), e);
 		}
 		return testStepObject;
 	}
@@ -280,7 +280,7 @@ public class RetryController {
 
 						/** Taking screenshot during exception */
 						CaptureScreenShotLib.captureScreenShot(driver, new KeywordsExtended(connection, jsonObjectRepo, proxyServer).locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
-						logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Retry - Screenshot is captured at: "+new KeywordsExtended(connection, jsonObjectRepo, proxyServer).locationToSaveSceenShot);
+						logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Retry - Screenshot is captured at: "+new KeywordsExtended(connection, jsonObjectRepo, proxyServer).locationToSaveSceenShot);
 					}
 				}
 				else{
@@ -290,7 +290,7 @@ public class RetryController {
 				return result;
 			}
 		}catch(Exception e){
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " error occured while performing the action "+ e.getMessage(), e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get() + " error occured while performing the action "+ e.getMessage(), e);
 			result = "Fail: Unable to complete the checkAndPerform Retry";
 		}
 		return result;

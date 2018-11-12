@@ -10,7 +10,7 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
-import tests.TestSuiteClass;
+import tests.SuiteClass;
 
 public class EmailTemplateData {
 
@@ -25,34 +25,34 @@ public class EmailTemplateData {
 
 			if(channelType.equalsIgnoreCase("mobile")){
 
-				TestSuiteClass.email.setMobileTestPassed(Integer.toString(pass));
-				TestSuiteClass.email.setMobileTestFailed(Integer.toString(fail));
-				TestSuiteClass.email.setMobileTestTotalCases(Integer.toString(pass+fail));
-				TestSuiteClass.email.setMobileExecutionTime(executionTime+"(mins)");
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+ " - mobile suite data is stored");
+				SuiteClass.email.setMobileTestPassed(Integer.toString(pass));
+				SuiteClass.email.setMobileTestFailed(Integer.toString(fail));
+				SuiteClass.email.setMobileTestTotalCases(Integer.toString(pass+fail));
+				SuiteClass.email.setMobileExecutionTime(executionTime+"(mins)");
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+ " - mobile suite data is stored");
 			}
 
 			else if(channelType.equalsIgnoreCase("desktop")){
 
-				TestSuiteClass.email.setDesktopTestPassed(Integer.toString(pass));
-				TestSuiteClass.email.setDesktopTestFailed(Integer.toString(fail));
-				TestSuiteClass.email.setDesktopTestTotalCases(Integer.toString(pass+fail));
-				TestSuiteClass.email.setDesktopExecutionTime(executionTime+"(mins)");
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+ " - Desktop suite data is stored");
+				SuiteClass.email.setDesktopTestPassed(Integer.toString(pass));
+				SuiteClass.email.setDesktopTestFailed(Integer.toString(fail));
+				SuiteClass.email.setDesktopTestTotalCases(Integer.toString(pass+fail));
+				SuiteClass.email.setDesktopExecutionTime(executionTime+"(mins)");
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+ " - Desktop suite data is stored");
 			}
 
 			else if(channelType.equalsIgnoreCase("vsm")){
 
-				TestSuiteClass.email.setVsmTestPassed(Integer.toString(pass));
-				TestSuiteClass.email.setVsmTestFailed(Integer.toString(fail));
-				TestSuiteClass.email.setVsmTestTotalCases(Integer.toString(pass+fail));
-				TestSuiteClass.email.setVsmExecutionTime(executionTime+"(mins)");
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+ " - vsm suite data is stored");
+				SuiteClass.email.setVsmTestPassed(Integer.toString(pass));
+				SuiteClass.email.setVsmTestFailed(Integer.toString(fail));
+				SuiteClass.email.setVsmTestTotalCases(Integer.toString(pass+fail));
+				SuiteClass.email.setVsmExecutionTime(executionTime+"(mins)");
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+ " - vsm suite data is stored");
 			}
 
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+ " - email template data is stored in object for channel: "+channelType);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+ " - email template data is stored in object for channel: "+channelType);
 		}catch(Exception e){
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+ " - Unable to store the email template data", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+ " - Unable to store the email template data", e);
 		}
 
 	}
@@ -80,7 +80,7 @@ public class EmailTemplateData {
 			count[1]=failCount;
 
 		}catch(Exception e){
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+ " -- " +e.getMessage(), e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+ " -- " +e.getMessage(), e);
 		}
 		return count;
 	}
@@ -135,13 +135,13 @@ public class EmailTemplateData {
 					finalMap.put(channelType+"_"+key, failedCases+"/"+totalCases);
 				}
 				if(channelType.equalsIgnoreCase("mobile")){
-					TestSuiteClass.email.setMobile_ownerWiseTestResult(finalMap);
+					SuiteClass.email.setMobile_ownerWiseTestResult(finalMap);
 				}else if(channelType.equalsIgnoreCase("desktop")){
-					TestSuiteClass.email.setDesktop_ownerWiseTestResult(finalMap);
+					SuiteClass.email.setDesktop_ownerWiseTestResult(finalMap);
 				}
 			}
 		}catch(Exception e){
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+ "error occured while creating the owner's properties file" +e.getMessage(), e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+ "error occured while creating the owner's properties file" +e.getMessage(), e);
 		}
 	}
 
@@ -149,13 +149,13 @@ public class EmailTemplateData {
 	 * This method will write owner wise test result in properties file
 	 */
 	public void ownerTestResultDataInPropertyFile(){
-		String filePath = TestSuiteClass.AUTOMATION_HOME+"/OwnerWiseTestResult.properties";
+		String filePath = SuiteClass.AUTOMATION_HOME+"/OwnerWiseTestResult.properties";
 		try{
 			Properties property=new Properties();
 
-			Map<String, String> mobileResultMap=TestSuiteClass.email.getMobile_ownerWiseTestResult();
+			Map<String, String> mobileResultMap=SuiteClass.email.getMobile_ownerWiseTestResult();
 
-			Map<String, String> desktopResultMap=TestSuiteClass.email.getDesktop_ownerWiseTestResult();
+			Map<String, String> desktopResultMap=SuiteClass.email.getDesktop_ownerWiseTestResult();
 
 			for(Entry<String, String> map : desktopResultMap.entrySet()){
 				String key = map.getKey();
@@ -175,7 +175,7 @@ public class EmailTemplateData {
 			logger.info("Writing Owner_wise summary property file at: "+filePath);
 
 		}catch(Exception e){
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+ "error occured while creating the Owner wise test result properties file" +e.getMessage(), e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+ "error occured while creating the Owner wise test result properties file" +e.getMessage(), e);
 		}
 	}
 
@@ -185,28 +185,28 @@ public class EmailTemplateData {
 	public void testDataInPropertiesFile(){
 		try{
 
-			String filePath = TestSuiteClass.AUTOMATION_HOME+"/testResult.properties";
+			String filePath = SuiteClass.AUTOMATION_HOME+"/testResult.properties";
 
 			/** creating the test result properties file*/
 			Properties property=new Properties();
 
-			property.setProperty("Total_TestCases_Desktop", TestSuiteClass.email.getDesktopTestTotalCases());
-			property.setProperty("TestCases_Passed_Desktop", TestSuiteClass.email.getDesktopTestPassed());
-			property.setProperty("TestCases_Failed_Desktop", TestSuiteClass.email.getDesktopTestFailed());
-			property.setProperty("Execution_Time_Desktop", TestSuiteClass.email.getDesktopExecutionTime());
+			property.setProperty("Total_TestCases_Desktop", SuiteClass.email.getDesktopTestTotalCases());
+			property.setProperty("TestCases_Passed_Desktop", SuiteClass.email.getDesktopTestPassed());
+			property.setProperty("TestCases_Failed_Desktop", SuiteClass.email.getDesktopTestFailed());
+			property.setProperty("Execution_Time_Desktop", SuiteClass.email.getDesktopExecutionTime());
 
-			property.setProperty("Total_TestCases_mobile", TestSuiteClass.email.getMobileTestTotalCases());
-			property.setProperty("TestCases_Passed_mobile", TestSuiteClass.email.getMobileTestPassed());
-			property.setProperty("TestCases_Failed_mobile", TestSuiteClass.email.getMobileTestFailed());
-			property.setProperty("Execution_Time_mobile", TestSuiteClass.email.getMobileExecutionTime());
+			property.setProperty("Total_TestCases_mobile", SuiteClass.email.getMobileTestTotalCases());
+			property.setProperty("TestCases_Passed_mobile", SuiteClass.email.getMobileTestPassed());
+			property.setProperty("TestCases_Failed_mobile", SuiteClass.email.getMobileTestFailed());
+			property.setProperty("Execution_Time_mobile", SuiteClass.email.getMobileExecutionTime());
 
-			property.setProperty("Total_TestCases_Vsm", TestSuiteClass.email.getVsmTestTotalCases());
-			property.setProperty("TestCases_Passed_Vsm", TestSuiteClass.email.getVsmTestPassed());
-			property.setProperty("TestCases_Failed_Vsm", TestSuiteClass.email.getVsmTestFailed());
-			property.setProperty("Execution_Time_Vsm", TestSuiteClass.email.getVsmExecutionTime());
+			property.setProperty("Total_TestCases_Vsm", SuiteClass.email.getVsmTestTotalCases());
+			property.setProperty("TestCases_Passed_Vsm", SuiteClass.email.getVsmTestPassed());
+			property.setProperty("TestCases_Failed_Vsm", SuiteClass.email.getVsmTestFailed());
+			property.setProperty("Execution_Time_Vsm", SuiteClass.email.getVsmExecutionTime());
 
 			/** setting up owner wise contribution */
-			Map<String, String> desktopResultMap=TestSuiteClass.email.getDesktop_ownerWiseTestResult();
+			Map<String, String> desktopResultMap=SuiteClass.email.getDesktop_ownerWiseTestResult();
 
 			for(Entry<String, String> map : desktopResultMap.entrySet()){
 				String key = map.getKey();
@@ -214,7 +214,7 @@ public class EmailTemplateData {
 				property.setProperty(key, value);
 			}
 
-			Map<String, String> mobileResultMap=TestSuiteClass.email.getMobile_ownerWiseTestResult();
+			Map<String, String> mobileResultMap=SuiteClass.email.getMobile_ownerWiseTestResult();
 
 			for(Entry<String, String> map : mobileResultMap.entrySet()){
 				String key = map.getKey();
@@ -222,7 +222,7 @@ public class EmailTemplateData {
 				property.setProperty(key, value);
 			}
 
-			Map<String, String> vsmResultMap=TestSuiteClass.email.getVsm_ownerWiseTestResult();
+			Map<String, String> vsmResultMap=SuiteClass.email.getVsm_ownerWiseTestResult();
 
 			for(Entry<String, String> map : vsmResultMap.entrySet()){
 				String key = map.getKey();
@@ -237,7 +237,7 @@ public class EmailTemplateData {
 			logger.info("Writing test summary property file at: "+filePath);
 
 		}catch(Exception e){
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+ "error occured while creating the test result properties file" +e.getMessage(), e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+ "error occured while creating the test result properties file" +e.getMessage(), e);
 		}
 
 	}

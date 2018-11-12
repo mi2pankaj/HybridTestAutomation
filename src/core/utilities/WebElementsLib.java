@@ -18,7 +18,7 @@ import java.util.Map;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
-import tests.TestSuiteClass;
+import tests.SuiteClass;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -55,7 +55,7 @@ public class WebElementsLib {
 
 		WebElement webElementFound = null;
 
-		String locationToSaveSceenShot = TestSuiteClass.AUTOMATION_HOME.concat("/screenshots/").concat(GenericMethodsLib.DateTimeStamp("MMddyy")).concat("/").concat("Webelement_"+GenericMethodsLib.DateTimeStamp("MMddyy_hhmmss")+".png");
+		String locationToSaveSceenShot = SuiteClass.AUTOMATION_HOME.concat("/screenshots/").concat(GenericMethodsLib.DateTimeStamp("MMddyy")).concat("/").concat("Webelement_"+GenericMethodsLib.DateTimeStamp("MMddyy_hhmmss")+".png");
 
 		try
 		{
@@ -104,7 +104,7 @@ public class WebElementsLib {
 			throws BiffException, IOException, SecurityException, IllegalArgumentException, ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException
 			{
 
-		String locationToSaveSceenShot = TestSuiteClass.AUTOMATION_HOME.concat("/screenshots/").concat(GenericMethodsLib.DateTimeStamp("MMddyy")).concat("/").concat("Webelement_"+GenericMethodsLib.DateTimeStamp("MMddyy_hhmmss")+".png");
+		String locationToSaveSceenShot = SuiteClass.AUTOMATION_HOME.concat("/screenshots/").concat(GenericMethodsLib.DateTimeStamp("MMddyy")).concat("/").concat("Webelement_"+GenericMethodsLib.DateTimeStamp("MMddyy_hhmmss")+".png");
 
 		//Object Repository Sheet Location Will be set by calling the WebElementsLib constructor.
 		Workbook wb = Workbook.getWorkbook(new File(objectRepositoryLocation));
@@ -202,7 +202,7 @@ public class WebElementsLib {
 		Workbook wb = Workbook.getWorkbook(new File(objectRepositoryLocation));
 		Sheet sheet = wb.getSheet(0);
 
-		String locationToSaveSceenShot = TestSuiteClass.AUTOMATION_HOME.concat("/screenshots/").concat(GenericMethodsLib.DateTimeStamp("MMddyy")).concat("/").concat("Webelement_"+GenericMethodsLib.DateTimeStamp("MMddyy_hhmmss")+".png");
+		String locationToSaveSceenShot = SuiteClass.AUTOMATION_HOME.concat("/screenshots/").concat(GenericMethodsLib.DateTimeStamp("MMddyy")).concat("/").concat("Webelement_"+GenericMethodsLib.DateTimeStamp("MMddyy_hhmmss")+".png");
 
 		String []arrFieldsFromRepository ={"Fields", "Identifier", "Value", "Labels"};
 		int moduleColumn = sheet.findCell("Modules").getColumn(); 
@@ -286,7 +286,7 @@ public class WebElementsLib {
 			throws BiffException, IOException, SecurityException, IllegalArgumentException, ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException
 			{
 
-		String locationToSaveSceenShot = TestSuiteClass.AUTOMATION_HOME.concat("/screenshots/").concat(GenericMethodsLib.DateTimeStamp("MMddyy")).concat("/").concat("Webelement_"+GenericMethodsLib.DateTimeStamp("MMddyy_hhmmss")+".png");
+		String locationToSaveSceenShot = SuiteClass.AUTOMATION_HOME.concat("/screenshots/").concat(GenericMethodsLib.DateTimeStamp("MMddyy")).concat("/").concat("Webelement_"+GenericMethodsLib.DateTimeStamp("MMddyy_hhmmss")+".png");
 
 		//Object Repository Sheet Location Will be set by calling the WebElementsLib constructor.
 		//Workbook wb = Workbook.getWorkbook(new File("/Users/user/Desktop/Automation/qascripting/Vdopia_Automation/object_repository/mobileObjectRepository/mobile_ObjectRepository.xls"));
@@ -460,7 +460,7 @@ public class WebElementsLib {
 	// This method will validate presence of screen.
 	public static boolean ValidateScreen(String pageName)
 	{
-		String locationToSaveSceenShot = TestSuiteClass.AUTOMATION_HOME.concat("/screenshots/").concat(GenericMethodsLib.DateTimeStamp("MMddyy")).concat("/").concat("Webelement_"+GenericMethodsLib.DateTimeStamp("MMddyy_hhmmss")+".png");
+		String locationToSaveSceenShot = SuiteClass.AUTOMATION_HOME.concat("/screenshots/").concat(GenericMethodsLib.DateTimeStamp("MMddyy")).concat("/").concat("Webelement_"+GenericMethodsLib.DateTimeStamp("MMddyy_hhmmss")+".png");
 
 		boolean status = false;
 		try

@@ -14,7 +14,7 @@ import java.io.FileWriter;
 import org.apache.log4j.Logger;
 
 import core.utilities.XlsLib;
-import tests.TestSuiteClass;
+import tests.SuiteClass;
 
 
 public class Excel2Html 
@@ -31,7 +31,7 @@ public class Excel2Html
 		boolean flag = false;
 		try
 		{
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Excel File: "+excelFile + " is being converted into HTML File... ");
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Excel File: "+excelFile + " is being converted into HTML File... ");
 			
 			String Data[][] = FileLib.FetchDataFromExcelSheetWithColumnNames(excelFile, "Campaign_ID", "ADS_ID", "Test_Results");
 			
@@ -45,7 +45,7 @@ public class Excel2Html
 
 				if(!dir.mkdirs())
 				{
-					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Desired HTML Directory: "+dir.toString() + " wasn't created. " );
+					logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Desired HTML Directory: "+dir.toString() + " wasn't created. " );
 				}
 
 			}
@@ -58,11 +58,11 @@ public class Excel2Html
 			{
 				if(htmlfile.createNewFile())
 				{
-					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Created New File: "+htmlfile);
+					logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Created New File: "+htmlfile);
 				}
 				else
 				{
-					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Couldn't Create File: "+htmlfile);
+					logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Couldn't Create File: "+htmlfile);
 				}
 			}
 
@@ -184,12 +184,12 @@ public class Excel2Html
 
 			flag = true;
 
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Excel File: "+excelFile + " is converted into HTML File: "+desiredHtmlFile);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Excel File: "+excelFile + " is converted into HTML File: "+desiredHtmlFile);
 		}
 		catch(Exception e)
 		{
 			flag = false;
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Excel File: "+excelFile + " is not converted into HTML File. ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Excel File: "+excelFile + " is not converted into HTML File. ", e);
 		}
 		finally
 		{
@@ -358,7 +358,7 @@ public class Excel2Html
 		boolean flag = false;
 		try
 		{
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Process Start => Excel File: "+excelFile + " is being converted into HTML File : " + desiredHtmlFile);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Process Start => Excel File: "+excelFile + " is being converted into HTML File : " + desiredHtmlFile);
 
 			XlsLib result = new XlsLib();
 			String Data[][] = result.dataFromExcel(excelFile);
@@ -475,7 +475,7 @@ public class Excel2Html
 					"<table width='" + width + "' class = \"bordered\" class=\"sortable\" id=\"result_table\"> \n";
 
 			String HTML_Footer = "</table> \n <h5 align=\"center\">Generated at: "+ dateTimeStamp + "</h5> \n" +
-					"<script type=\"text/javascript\" src=\"" + TestSuiteClass.AUTOMATION_HOME + "/tpt/html_js_css/sorttable.js\"></script> \n" +
+					"<script type=\"text/javascript\" src=\"" + SuiteClass.AUTOMATION_HOME + "/tpt/html_js_css/sorttable.js\"></script> \n" +
 					" </body>\n </html>\n";
 
 			bw.write(HTML_header);
@@ -539,12 +539,12 @@ public class Excel2Html
 
 			flag = true;
 
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Process End => Excel File: "+excelFile + " is converted into HTML File: "+desiredHtmlFile);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Process End => Excel File: "+excelFile + " is converted into HTML File: "+desiredHtmlFile);
 		}
 		catch(Exception e)
 		{
 			flag = false;
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Process Error => Excel File: "+excelFile + " is not converted into HTML File. ",e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Process Error => Excel File: "+excelFile + " is not converted into HTML File. ",e);
 		}
 		finally
 		{
@@ -563,7 +563,7 @@ public class Excel2Html
 		boolean flag = false;
 		try
 		{
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Process Start => Excel File: "+excelFile + " is being converted into HTML File : " + desiredHtmlFile);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Process Start => Excel File: "+excelFile + " is being converted into HTML File : " + desiredHtmlFile);
 
 			XlsLib result = new XlsLib();
 			String Data[][] = result.dataFromExcel(excelFile);
@@ -585,7 +585,7 @@ public class Excel2Html
 					"<title>Main Result Page</title> \n" +
 					"<meta charset=\"UTF-8\"> \n" +
 					"<title>Main Result Table</title> \n" + 
-					"<link rel=\"stylesheet\" href=\"file://" + TestSuiteClass.AUTOMATION_HOME + "/tpt/html_js_css/main_table_style.css\" media=\"screen\" type=\"text/css\" /> \n" + 
+					"<link rel=\"stylesheet\" href=\"file://" + SuiteClass.AUTOMATION_HOME + "/tpt/html_js_css/main_table_style.css\" media=\"screen\" type=\"text/css\" /> \n" + 
 					"</head> \n" +
 					"<body> \n" +
 					"<h2 align=\"center\">Main Result of Automation Execution</h2> \n" +
@@ -622,7 +622,7 @@ public class Excel2Html
 						}
 						else
 						{
-							bw.write("<td><a href=\"file://" + TestSuiteClass.resultFileLocation + "/" + Data[i][j] + ".html" + "\">" + Data[i][j] + "</a></td>");
+							bw.write("<td><a href=\"file://" + SuiteClass.resultFileLocation + "/" + Data[i][j] + ".html" + "\">" + Data[i][j] + "</a></td>");
 						}
 					}
 					else
@@ -649,12 +649,12 @@ public class Excel2Html
 
 			flag = true;
 
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Process End => Excel File: "+excelFile + " is converted into HTML File: "+desiredHtmlFile);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Process End => Excel File: "+excelFile + " is converted into HTML File: "+desiredHtmlFile);
 		}
 		catch(Exception e)
 		{
 			flag = false;
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Process Error => Excel File: "+excelFile + " is not converted into HTML File. ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Process Error => Excel File: "+excelFile + " is not converted into HTML File. ", e);
 		}
 		finally
 		{

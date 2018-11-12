@@ -26,7 +26,7 @@ import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
 import org.json.simple.parser.JSONParser;
 
-import tests.TestSuiteClass; 
+import tests.SuiteClass; 
 
 
 public class httpClientWrap 
@@ -59,7 +59,7 @@ public class httpClientWrap
 		{
 			if(ServerURL.isEmpty() || ServerURL.equalsIgnoreCase(""))
 			{	
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Provided server url is Either BLANK or EMPTY, Please check it again. "+ServerURL);
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Provided server url is Either BLANK or EMPTY, Please check it again. "+ServerURL);
 			}
 			else
 			{
@@ -70,16 +70,16 @@ public class httpClientWrap
 				try{
 					response = httpclient.execute(GetRequest);
 				}catch(HttpHostConnectException h){
-					logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Couldn't connect to host: "+ServerURL);
+					logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Couldn't connect to host: "+ServerURL);
 				}
 
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : --------------------------RESPONSE ----------------------------");
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : --------------------------RESPONSE ----------------------------");
 				BufferedReader rd = null;
 				try{
 					logger.info(response.getStatusLine());
 					rd = new BufferedReader( new InputStreamReader(response.getEntity().getContent()));
 				}catch(NullPointerException e){
-					logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : No RESPONSE RECEIVED.");
+					logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : No RESPONSE RECEIVED.");
 				}
 
 				if(rd != null)
@@ -96,7 +96,7 @@ public class httpClientWrap
 		} 
 		catch(Exception e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while getting response from url: "+ServerURL, e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while getting response from url: "+ServerURL, e);
 		}
 		finally 
 		{
@@ -106,9 +106,9 @@ public class httpClientWrap
 				httpclient.close();
 			}
 			catch(NullPointerException n)
-			{ logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : null pointer exception handled. ");}
+			{ logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : null pointer exception handled. ");}
 			catch(Exception e){
-				logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while closing channel. ",e);
+				logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while closing channel. ",e);
 			}
 
 
@@ -141,7 +141,7 @@ public class httpClientWrap
 		{
 			if(ServerURL.isEmpty() || ServerURL.equalsIgnoreCase(""))
 			{	
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Provided server url is Either BLANK or EMPTY, Please check it again. "+ServerURL);
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Provided server url is Either BLANK or EMPTY, Please check it again. "+ServerURL);
 			}
 			else
 			{
@@ -152,16 +152,16 @@ public class httpClientWrap
 				try{
 					response = httpclient.execute(GetRequest);
 				}catch(HttpHostConnectException h){
-					logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Couldn't connect to host: "+ServerURL);
+					logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Couldn't connect to host: "+ServerURL);
 				}
 
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : --------------------------RESPONSE ----------------------------");
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : --------------------------RESPONSE ----------------------------");
 				BufferedReader rd = null;
 				try{
 					logger.info(response.getStatusLine());
 					rd = new BufferedReader( new InputStreamReader(response.getEntity().getContent()));
 				}catch(NullPointerException e){
-					logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : No RESPONSE RECEIVED.");
+					logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : No RESPONSE RECEIVED.");
 				}
 
 				if(rd != null)
@@ -178,7 +178,7 @@ public class httpClientWrap
 		} 
 		catch(Exception e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while getting response from url: "+ServerURL, e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while getting response from url: "+ServerURL, e);
 		}
 		finally 
 		{
@@ -194,9 +194,9 @@ public class httpClientWrap
 				httpclient.close();
 			}
 			catch(NullPointerException n)
-			{ logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : null pointer exception handled. ");}
+			{ logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : null pointer exception handled. ");}
 			catch(Exception e){
-				logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while closing channel. ",e);
+				logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while closing channel. ",e);
 			}
 
 
@@ -211,7 +211,7 @@ public class httpClientWrap
 		serverURL = serverURL.replace("}", "");
 		serverURL = serverURL.trim();
 
-		logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Received URL: "+serverURL);
+		logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Received URL: "+serverURL);
 
 		StringBuffer result = new StringBuffer();
 		CloseableHttpClient httpclient = null;
@@ -221,14 +221,14 @@ public class httpClientWrap
 		{
 			if(serverURL.isEmpty() || serverURL.equalsIgnoreCase(""))
 			{	
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Provided server url is Either BLANK or EMPTY, Please check it again. "+serverURL);
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Provided server url is Either BLANK or EMPTY, Please check it again. "+serverURL);
 			}
 			else
 			{
 				httpclient = HttpClients.createDefault();
 				HttpGet GetRequest = new HttpGet(serverURL);
 
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Adding custom headers... ");
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Adding custom headers... ");
 
 				//Adding add custom headers in request
 				for(Entry<String, String> map : headers.entrySet())
@@ -241,7 +241,7 @@ public class httpClientWrap
 
 				response = httpclient.execute(GetRequest);
 
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : --------------------------RESPONSE ----------------------------");
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : --------------------------RESPONSE ----------------------------");
 				logger.debug(response.getStatusLine());
 
 				BufferedReader rd = new BufferedReader( new InputStreamReader(response.getEntity().getContent()));
@@ -260,7 +260,7 @@ public class httpClientWrap
 		} 
 		catch(Exception e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while getting response from url: "+serverURL, e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while getting response from url: "+serverURL, e);
 		}
 		//		finally 
 		//		{
@@ -281,7 +281,7 @@ public class httpClientWrap
 		serverURL = serverURL.replace("}", "");
 		serverURL = serverURL.trim();
 
-		logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Received URL: "+serverURL);
+		logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Received URL: "+serverURL);
 
 		StringBuffer result = new StringBuffer();
 		CloseableHttpClient httpclient = null;
@@ -292,7 +292,7 @@ public class httpClientWrap
 		{
 			if(serverURL.isEmpty() || serverURL.equalsIgnoreCase(""))
 			{	
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Provided server url is Either BLANK or EMPTY, Please check it again. "+serverURL);
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Provided server url is Either BLANK or EMPTY, Please check it again. "+serverURL);
 			}
 			else
 			{
@@ -302,7 +302,7 @@ public class httpClientWrap
 				//Adding add custom headers in request
 				if(headers != null)
 				{
-					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Adding custom headers... ");
+					logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Adding custom headers... ");
 					for(Entry<String, String> map : headers.entrySet())
 					{
 						String name = map.getKey().trim();
@@ -313,7 +313,7 @@ public class httpClientWrap
 
 				response = httpclient.execute(GetRequest);
 
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : --------------------------RESPONSE ----------------------------");
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : --------------------------RESPONSE ----------------------------");
 				logger.debug(response.getStatusLine());
 
 				BufferedReader rd = new BufferedReader( new InputStreamReader(response.getEntity().getContent()));
@@ -329,7 +329,7 @@ public class httpClientWrap
 		} 
 		catch(Exception e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while getting response from url: "+serverURL, e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while getting response from url: "+serverURL, e);
 		}
 		finally 
 		{
@@ -367,9 +367,9 @@ public class httpClientWrap
 			HttpEntity entity = httpResponse.getEntity();
 			response = EntityUtils.toString(entity,"UTF-8");
 
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + "url == "+url + " response == " +response);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + "url == "+url + " response == " +response);
 		}catch (Exception e) {
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get() +  " error while requesting url: "+url + " ===> " + e.getMessage(), e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get() +  " error while requesting url: "+url + " ===> " + e.getMessage(), e);
 		}
 
 		return response;
@@ -404,7 +404,7 @@ public class httpClientWrap
 			try {
 				httpResponse = httpClient.execute(httppost);
 			}catch (Exception e) {
-				logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Timeout in "+timeout + " ===> "+ e.getMessage() + " for URL: "+url + " post data: "+postData);
+				logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Timeout in "+timeout + " ===> "+ e.getMessage() + " for URL: "+url + " post data: "+postData);
 
 				/** in case server is not up .. putting status 404 */
 				responseMap.put("statuscode", 404);
@@ -417,7 +417,7 @@ public class httpClientWrap
 					logger.info(httpResponse.getStatusLine().getStatusCode() + "  ----  " + httpResponse.getStatusLine());
 					rd = new BufferedReader( new InputStreamReader(httpResponse.getEntity().getContent()));
 				}catch(NullPointerException e){
-					logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : No RESPONSE RECEIVED FROM URL: "+url);
+					logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : No RESPONSE RECEIVED FROM URL: "+url);
 				}
 
 				StringBuffer response = new StringBuffer();
@@ -433,7 +433,7 @@ public class httpClientWrap
 				responseMap.put("statuscode", httpResponse.getStatusLine().getStatusCode());
 			}
 		}catch (Exception e) {
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception while sending post request - "+e.getMessage(), e);	
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception while sending post request - "+e.getMessage(), e);	
 		}
 
 		return responseMap;
@@ -463,7 +463,7 @@ public class httpClientWrap
 				httpResponse = httpClient.execute(new HttpGet(url));
 			}catch (Exception e) {
 
-				logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Timeout in "+timeout + " ===> "+ e.getMessage() + " for URL: "+url);
+				logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Timeout in "+timeout + " ===> "+ e.getMessage() + " for URL: "+url);
 
 				/** in case server is not up .. putting status 404 */
 				responseMap.put("statuscode", 404);
@@ -477,7 +477,7 @@ public class httpClientWrap
 
 					rd = new BufferedReader( new InputStreamReader(httpResponse.getEntity().getContent()));
 				}catch(NullPointerException e){
-					logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : No RESPONSE RECEIVED FROM URL: "+url);
+					logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : No RESPONSE RECEIVED FROM URL: "+url);
 				}
 
 				StringBuffer response = new StringBuffer();
@@ -493,7 +493,7 @@ public class httpClientWrap
 			}
 
 		}catch (Exception e) {
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception while sending get request - "+e.getMessage(), e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception while sending get request - "+e.getMessage(), e);
 		}
 
 		return responseMap;
@@ -528,10 +528,10 @@ public class httpClientWrap
 			JSONParser jp = new JSONParser();
 			jsonResultObject = (org.json.simple.JSONObject) jp.parse(responseResult);
 
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " - " + " response received: "+jsonResultObject);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " - " + " response received: "+jsonResultObject);
 
 		}catch(Exception e){
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " - " +e.getMessage(), e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get() + " - " +e.getMessage(), e);
 		}
 
 		return jsonResultObject; 

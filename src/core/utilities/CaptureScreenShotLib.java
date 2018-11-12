@@ -26,7 +26,7 @@ import core.classes.HandlerLib;
 import core.classes.SingletonTestObject;
 import core.classes.TestCaseObject;
 import io.appium.java_client.AppiumDriver;
-import tests.TestSuiteClass;
+import tests.SuiteClass;
 
 
 public class CaptureScreenShotLib 
@@ -68,7 +68,7 @@ public class CaptureScreenShotLib
 			if(driver instanceof AppiumDriver<?>) {
 
 				/** get appium driver url from testcase object */
-				TestCaseObject testCaseObject = SingletonTestObject.getSingletonTestObject().getTestCaseObjectMap().get(TestSuiteClass.UNIQ_EXECUTION_ID.get());
+				TestCaseObject testCaseObject = SingletonTestObject.getSingletonTestObject().getTestCaseObjectMap().get(SuiteClass.UNIQ_EXECUTION_ID.get());
 				String serverURL = testCaseObject.getAppiumDriverURL();
 				String sessionId = testCaseObject.getAppiumDriverSessionId().toString();
 
@@ -79,7 +79,7 @@ public class CaptureScreenShotLib
 				if( (response == null || response.isEmpty()) || (Integer)response.get("statuscode") != 200 || response.get("response").toString().isEmpty()) 
 				{
 					proceed = false;
-					try{logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+ " from url: " +serverURL + " - no screenshot will be taken in case of appium driver. received map: " +response);}catch (Exception e) {}
+					try{logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+ " from url: " +serverURL + " - no screenshot will be taken in case of appium driver. received map: " +response);}catch (Exception e) {}
 				}
 			}
 
@@ -94,20 +94,20 @@ public class CaptureScreenShotLib
 					File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);				
 					FileUtils.copyFile(scrFile, new File(locationToSaveSceenShot));
 
-					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot captured and saved at: " +locationToSaveSceenShot +" and page url is = "+driver.getCurrentUrl());
+					logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot captured and saved at: " +locationToSaveSceenShot +" and page url is = "+driver.getCurrentUrl());
 				}	
 			}
 		} 
 		catch (Exception e) 
 		{
 			new HandlerLib().checkIfAlertPresent(driver);
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occured while capturing browser screenshot, now capturing whole system screen.", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occured while capturing browser screenshot, now capturing whole system screen.", e);
 
 			captureScreenShot(locationToSaveSceenShot);
 		}
 	}
 	else {
-		logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+": Not taking screenshort in case of Null driver ");
+		logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+": Not taking screenshort in case of Null driver ");
 	}
 	}
 
@@ -132,12 +132,12 @@ public class CaptureScreenShotLib
 				BufferedImage image = robot.createScreenCapture(screenRectangle);
 				ImageIO.write(image, "png", new File(locationToSaveSceenShot));
 
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot captured and saved at: " +locationToSaveSceenShot);
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot captured and saved at: " +locationToSaveSceenShot);
 			}		
 		} 
 		catch (Exception e) 
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occured while capturing screenshot. ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occured while capturing screenshot. ", e);
 		}
 	}
 

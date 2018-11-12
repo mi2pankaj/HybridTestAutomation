@@ -18,7 +18,7 @@ import jxl.Workbook;
 import jxl.write.Label;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
-import tests.TestSuiteClass;
+import tests.SuiteClass;
 
 
 public class WriteTestResults {
@@ -32,7 +32,7 @@ public class WriteTestResults {
 	public void addResultColumn(File testResultFile, String sheetName, String resultLabel)
 	{
 		try{
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Adding label: "+resultLabel +" column in file: "+testResultFile + " in sheet: "+sheetName);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Adding label: "+resultLabel +" column in file: "+testResultFile + " in sheet: "+sheetName);
 
 			Workbook book = Workbook.getWorkbook(testResultFile);
 			WritableWorkbook copiedBook = Workbook.createWorkbook(testResultFile, book);
@@ -46,7 +46,7 @@ public class WriteTestResults {
 			book.close();
 		}catch(Exception e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Error occurred while adding Test Result column in file: "+testResultFile, e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Error occurred while adding Test Result column in file: "+testResultFile, e);
 		}
 	}
 
@@ -136,7 +136,7 @@ public class WriteTestResults {
 
 		}catch (Exception e) {
 			flag = false;
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get() + " : " + " Exception while writing results ." , e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get() + " : " + " Exception while writing results ." , e);
 		}
 
 		return flag;

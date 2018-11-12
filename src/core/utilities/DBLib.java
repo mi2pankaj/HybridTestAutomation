@@ -15,7 +15,7 @@ import com.mysql.jdbc.ResultSet;
 import com.mysql.jdbc.Statement;
 import com.mysql.jdbc.exceptions.MySQLNonTransientConnectionException;
 
-import tests.TestSuiteClass;
+import tests.SuiteClass;
 
 
 public class DBLib 
@@ -48,7 +48,7 @@ public class DBLib
 		try
 		{
 			String NewSqlQuery = "SELECT sum(COUNT) FROM (SELECT COUNT(*) AS COUNT FROM adplatform.ad_log1 UNION ALL SELECT COUNT(*) AS COUNT FROM adplatform.ad_log0) AS temp;";
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Running Query in DB : " + NewSqlQuery);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Running Query in DB : " + NewSqlQuery);
 
 			Connection NewCon =  GenericMethodsLib.CreateSQLConnection();
 			//Connection NewCon =  MobileTestClass_Methods.CreateServeSQLConnection();
@@ -64,7 +64,7 @@ public class DBLib
 		}
 		catch(Exception e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Error occurred while getting adlog count:", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Error occurred while getting adlog count:", e);
 		}
 		return ad_format_value;
 
@@ -82,7 +82,7 @@ public class DBLib
 		
 		try
 		{
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Running Query - " + sqlQuery);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Running Query - " + sqlQuery);
 
 			Statement NewStmt = (Statement) NewCon.createStatement();
 			ResultSet recordSet = (ResultSet) NewStmt.executeQuery(sqlQuery);
@@ -102,7 +102,7 @@ public class DBLib
 		}
 		catch(Exception e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while getting the information from db: ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while getting the information from db: ", e);
 		}
 
 		return hashmap;
@@ -118,7 +118,7 @@ public class DBLib
 		boolean flag;
 		try
 		{
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Running Query in DB : " + sql);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Running Query in DB : " + sql);
 			Statement statement = (Statement) connection.createStatement();
 			statement.executeUpdate(sql);
 
@@ -126,12 +126,12 @@ public class DBLib
 		}catch(CommunicationsException | MySQLNonTransientConnectionException w)
 		{
 			flag = false;
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : SQL connection was closed while executing query. ");
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : SQL connection was closed while executing query. ");
 		}
 		catch(Exception e)
 		{
 			flag = false;
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while executing query: "+sql, e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while executing query: "+sql, e);
 		}
 		return flag;
 	}

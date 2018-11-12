@@ -22,7 +22,7 @@ import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 
-import tests.TestSuiteClass;
+import tests.SuiteClass;
 
 
 public class ExecuteCommands 
@@ -34,7 +34,7 @@ public class ExecuteCommands
 	@SuppressWarnings("finally")
 	public static String ExecuteCommand_ReturnsOutput(String inputCommand) 
 	{	
-		logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Command: " + inputCommand + " is being executed:");
+		logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Command: " + inputCommand + " is being executed:");
 		StringBuffer output = new StringBuffer();
 		try
 		{
@@ -46,15 +46,15 @@ public class ExecuteCommands
 
 			while (reader.readLine()!= null) 
 			{
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Enterd In While Loop: " +reader.readLine());
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Enterd In While Loop: " +reader.readLine());
 				output.append(reader.readLine() + "\n");
 			}
 
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Command Output - " +output);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Command Output - " +output);
 		}
 		catch(Exception e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception handled by method: ExecuteCommand_ReturnsOutput. ",e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception handled by method: ExecuteCommand_ReturnsOutput. ",e);
 		}
 		finally
 		{
@@ -67,11 +67,11 @@ public class ExecuteCommands
 	@SuppressWarnings("finally")
 	public static String ExecuteCommand_ReturnsOutput(String []inputCommand)  
 	{	
-		logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Command: " + inputCommand.toString() + " is being executed:");
+		logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Command: " + inputCommand.toString() + " is being executed:");
 		StringBuffer output = new StringBuffer();
 		try
 		{
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Reading Command Output....");
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Reading Command Output....");
 			ProcessBuilder builder = new ProcessBuilder( inputCommand);
 			builder.redirectErrorStream(true);
 			Process p = builder.start();
@@ -83,11 +83,11 @@ public class ExecuteCommands
 				output.append(reader.readLine() + "\n");
 			}
 
-			logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Command Exit Status: "+p.exitValue());
+			logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Command Exit Status: "+p.exitValue());
 		}
 		catch(Exception e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception handled by method: ExecuteCommand_ReturnsOutput. ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception handled by method: ExecuteCommand_ReturnsOutput. ", e);
 		}
 		finally
 		{
@@ -100,7 +100,7 @@ public class ExecuteCommands
 	@SuppressWarnings("finally")
 	public static int ExecuteCommand_ReturnsExitStatus(String []inputCommand) throws IOException, InterruptedException 
 	{	
-		logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Command: " + inputCommand.toString() + " is being executed:");
+		logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Command: " + inputCommand.toString() + " is being executed:");
 		int exitStatus = 777777;
 		StringBuffer output = new StringBuffer();
 		try
@@ -119,11 +119,11 @@ public class ExecuteCommands
 
 			exitStatus = p.exitValue();
 
-			logger.debug(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Command Exit Status: "+exitStatus);
+			logger.debug(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Command Exit Status: "+exitStatus);
 		}
 		catch(Exception e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception handled by method: ExecuteCommand_ReturnsOutput. ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception handled by method: ExecuteCommand_ReturnsOutput. ", e);
 		}
 		finally
 		{
@@ -135,7 +135,7 @@ public class ExecuteCommands
 	@SuppressWarnings("finally")
 	public static int ExecuteCommand_ReturnsExitStatus(String inputCommand) throws IOException, InterruptedException 
 	{	
-		logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Command: " + inputCommand + " is being executed:");
+		logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Command: " + inputCommand + " is being executed:");
 		int exitStatus = 777777777;
 
 		try
@@ -146,12 +146,12 @@ public class ExecuteCommands
 			p.waitFor();
 
 			exitStatus = p.exitValue();
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exit Status: " +exitStatus);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exit Status: " +exitStatus);
 		}
 		catch(Exception e)
 		{
 			exitStatus = 777777777;
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception handled by method: ExecuteCommand_ReturnsExitStatus. ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception handled by method: ExecuteCommand_ReturnsExitStatus. ", e);
 		}
 		finally
 		{
@@ -163,7 +163,7 @@ public class ExecuteCommands
 	@SuppressWarnings("finally")
 	public static String ExecuteMacCommand_ReturnsOutput(String inputCommand)  
 	{	
-		logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Executing Command: " + inputCommand);
+		logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Executing Command: " + inputCommand);
 		String line = "";
 		String output = "";
 
@@ -175,7 +175,7 @@ public class ExecuteCommands
 
 			BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
 
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Reading Command Output....");
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Reading Command Output....");
 
 			while ((line = reader.readLine())!= null) 
 			{
@@ -185,7 +185,7 @@ public class ExecuteCommands
 		catch(Exception e)
 		{
 			output = "";
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception handled by method: ExecuteMacCommand_ReturnsOutput. ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception handled by method: ExecuteMacCommand_ReturnsOutput. ", e);
 		}
 		finally
 		{
@@ -197,7 +197,7 @@ public class ExecuteCommands
 	@SuppressWarnings("finally")
 	public static int ExecuteMacCommand_ReturnsExitStatus(String inputCommand)  
 	{	
-		logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Command: " + inputCommand + " is being executed:");		
+		logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Command: " + inputCommand + " is being executed:");		
 		int output = 777777777;
 
 		try
@@ -208,12 +208,12 @@ public class ExecuteCommands
 			p.waitFor();
 
 			output = p.exitValue();
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exit Status: " +output);
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exit Status: " +output);
 		}
 		catch(Exception e)
 		{			
 			output = 007;
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception handled by method: ExecuteMacCommand_ReturnsExitStatus. ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception handled by method: ExecuteMacCommand_ReturnsExitStatus. ", e);
 		}
 		finally
 		{
@@ -237,17 +237,17 @@ public class ExecuteCommands
 
 			if(session.isConnected())
 			{
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Session is established with host: " +host);
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Session is established with host: " +host);
 			}
 			else
 			{
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : ******* Session is not established with host: " +host+ " ************");
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : ******* Session is not established with host: " +host+ " ************");
 				Assert.fail("Session is not established with host: " +host);
 			}
 		}
 		catch(JSchException e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : There was a problem while establishing connection with host: " +host, e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : There was a problem while establishing connection with host: " +host, e);
 			Assert.fail("There was a problem while establishing connection with host: " +host, e);
 		}
 
@@ -274,11 +274,11 @@ public class ExecuteCommands
 
 			if(session.isConnected())
 			{
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Session is established with host: " +host);
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Session is established with host: " +host);
 			}
 			else
 			{
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : ******* Session is not established with host: " +host+ " ************");
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : ******* Session is not established with host: " +host+ " ************");
 
 				if(session == null && i < 5)
 				{
@@ -295,7 +295,7 @@ public class ExecuteCommands
 		}
 		catch(JSchException e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : There was a problem while establishing connection with host: " +host, e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : There was a problem while establishing connection with host: " +host, e);
 			if(session == null && i < 5)
 			{
 				i++;
@@ -315,7 +315,7 @@ public class ExecuteCommands
 	public static void EndSession(Session session) throws JSchException, InterruptedException
 	{
 		session.disconnect();
-		logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : session with " +session.getHost() + " is terminated");
+		logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : session with " +session.getHost() + " is terminated");
 	}
 
 
@@ -330,7 +330,7 @@ public class ExecuteCommands
 
 		if(session.isConnected())
 		{
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Session is Connected");
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Session is Connected");
 		}
 
 		Thread.sleep(1000);
@@ -339,7 +339,7 @@ public class ExecuteCommands
 
 		((ChannelExec)channel).setCommand(Command);
 
-		logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : COMMAND  : " + Command);
+		logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : COMMAND  : " + Command);
 
 		channel.connect(5000);
 
@@ -356,7 +356,7 @@ public class ExecuteCommands
 		channel.disconnect();
 		session.disconnect();
 
-		logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Command Is executed: " );
+		logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Command Is executed: " );
 
 	}
 
@@ -369,22 +369,22 @@ public class ExecuteCommands
 
 			((ChannelExec)channel).setCommand(Command);
 
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Command is being executed : ");
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Command is being executed : ");
 			logger.info(Command);
 
 			channel.connect(5000);
 
-			logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exit Status: " +channel.getExitStatus() + " For Executed Command. ");
+			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exit Status: " +channel.getExitStatus() + " For Executed Command. ");
 
 			channel.disconnect();
 		}
 		catch(JSchException e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : JSchException handled by method: ExecuteTerminalCommandUsingJsch. ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : JSchException handled by method: ExecuteTerminalCommandUsingJsch. ", e);
 		}
 		catch(Exception e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception handled by method: ExecuteTerminalCommandUsingJsch. ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception handled by method: ExecuteTerminalCommandUsingJsch. ", e);
 		}
 	}
 
@@ -423,11 +423,11 @@ public class ExecuteCommands
 		}
 		catch(JSchException e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : JSchException handled by method: ExecuteTerminalCommandUsingJschReturnsOutput. ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : JSchException handled by method: ExecuteTerminalCommandUsingJschReturnsOutput. ", e);
 		}
 		catch(Exception e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception handled by method: ExecuteTerminalCommandUsingJschReturnsOutput. ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception handled by method: ExecuteTerminalCommandUsingJschReturnsOutput. ", e);
 		}
 		finally
 		{
@@ -460,7 +460,7 @@ public class ExecuteCommands
 		}
 		catch(Exception e)
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception: ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception: ", e);
 		}
 		finally
 		{
@@ -480,7 +480,7 @@ public class ExecuteCommands
 			}
 			else
 			{
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Command yet to coded.");
+				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Command yet to coded.");
 			}
 
 			BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()));
@@ -496,7 +496,7 @@ public class ExecuteCommands
 		}
 		catch (IOException e) 
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Error in running command ' system_profiler SPUSBDataType ' to get iphone status.Error is: ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Error in running command ' system_profiler SPUSBDataType ' to get iphone status.Error is: ", e);
 		}
 
 		return stat;		
@@ -534,7 +534,7 @@ public class ExecuteCommands
 		}
 		catch (IOException e) 
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : IOException Handled By Method: GetConnectedAndroidDeviceList ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : IOException Handled By Method: GetConnectedAndroidDeviceList ", e);
 		}
 		return list;
 	}
@@ -567,7 +567,7 @@ public class ExecuteCommands
 		}
 		catch (Exception e) 
 		{
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : IOException Handled By Method: UninstallAppCommand_AndroidDevice ", e);
+			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : IOException Handled By Method: UninstallAppCommand_AndroidDevice ", e);
 		}
 		finally
 		{
