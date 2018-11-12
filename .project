@@ -3,7 +3,7 @@
 	<name>Hybrid_Automation</name>
 	<comment></comment>
 	<projects>
-		<project>Lenskart-Web</project>
+		<project>Automation</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
