@@ -12,10 +12,10 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.testng.annotations.BeforeSuite;
 
-import framework.utilities.EmailTemplate;
-import framework.utilities.EmailTemplateData;
-import framework.utilities.FileLib;
-import framework.utilities.GenericMethodsLib;
+import core.utilities.EmailTemplate;
+import core.utilities.EmailTemplateData;
+import core.utilities.FileLib;
+import core.utilities.GenericMethodsLib;
 import lenskart.tests.TestSuiteClass;
 
 import org.testng.Assert;

@@ -21,7 +21,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import framework.utilities.GenericMethodsLib;
+import core.utilities.GenericMethodsLib;
 import lenskart.api.productApiMapper.Product_Parent;
 
 

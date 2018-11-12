@@ -26,17 +26,17 @@ import org.testng.annotations.Test;
 import com.mongodb.DB;
 import com.mongodb.client.FindIterable;
 
-import framework.core.classes.InitializeSingletonTestObject;
-import framework.core.classes.ReadTestCases;
-import framework.core.classes.SingletonTestObject;
-import framework.core.classes.TestCaseObject;
-import framework.core.classes.TestObjectHandler;
-import framework.core.classes.WriteTestResults;
-import framework.utilities.CaptureScreenShotLib;
-import framework.utilities.FileLib;
-import framework.utilities.GenericMethodsLib;
-import framework.utilities.KeyBoardActionsUsingRobotLib;
-import framework.utilities.MongoDBHandler;
+import core.classes.InitializeSingletonTestObject;
+import core.classes.ReadTestCases;
+import core.classes.SingletonTestObject;
+import core.classes.TestCaseObject;
+import core.classes.TestObjectHandler;
+import core.classes.WriteTestResults;
+import core.utilities.CaptureScreenShotLib;
+import core.utilities.FileLib;
+import core.utilities.GenericMethodsLib;
+import core.utilities.KeyBoardActionsUsingRobotLib;
+import core.utilities.MongoDBHandler;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;

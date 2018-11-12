@@ -15,10 +15,10 @@ import com.google.api.services.sheets.v4.model.BatchUpdateValuesResponse;
 import com.google.api.services.sheets.v4.model.ClearValuesRequest;
 import com.google.api.services.sheets.v4.model.ValueRange;
 
-import framework.core.classes.SingletonTestObject;
-import framework.core.classes.TestCaseObject;
-import framework.googleAPI.classes.GoogleSheetAPI;
-import framework.utilities.GenericMethodsLib;
+import core.classes.SingletonTestObject;
+import core.classes.TestCaseObject;
+import core.utilities.GenericMethodsLib;
+import tpt.classes.googleAPI.GoogleSheetAPI;
 
 public class WriteFailResultInGoogleSheet {
 

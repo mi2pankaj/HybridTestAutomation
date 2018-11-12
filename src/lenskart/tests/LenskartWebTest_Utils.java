@@ -27,18 +27,18 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.mongodb.DB;
 import com.mongodb.client.FindIterable;
 
-import framework.core.classes.GetObjectRepoAsJson;
-import framework.core.classes.ReadTestCases;
-import framework.core.classes.SingletonTestObject;
-import framework.core.classes.TestCaseObject;
-import framework.core.classes.TestDataObject;
-import framework.googleAPI.classes.GoogleSheetUtils;
-import framework.googleAPI.classes.TestDataFromGoogleSheet;
-import framework.utilities.GenericMethodsLib;
-import framework.utilities.MongoDBHandler;
-import framework.utilities.httpClientWrap;
+import core.classes.GetObjectRepoAsJson;
+import core.classes.ReadTestCases;
+import core.classes.SingletonTestObject;
+import core.classes.TestCaseObject;
+import core.classes.TestDataObject;
+import core.utilities.GenericMethodsLib;
+import core.utilities.MongoDBHandler;
+import core.utilities.httpClientWrap;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
+import tpt.classes.googleAPI.GoogleSheetUtils;
+import tpt.classes.googleAPI.TestDataFromGoogleSheet;
 
 
 public class LenskartWebTest_Utils {
