@@ -37,6 +37,7 @@ import core.utilities.FileLib;
 import core.utilities.GenericMethodsLib;
 import core.utilities.KeyBoardActionsUsingRobotLib;
 import core.utilities.MongoDBHandler;
+import tpt.googleAPI.GetFailureTrendInGoogleSheet;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
@@ -336,7 +337,7 @@ public class TestClass {
 			/** write fail cases in the google sheet*/
 			if(GenericMethodsLib.generalConfigurationProperties.getProperty("data_from_google").toString().equalsIgnoreCase("yes")){
 				logger.info("**** Started writing fail test cases in google sheet ******");
-				WriteFailResultInGoogleSheet.writeFailCaseInGoogleSheet();
+				GetFailureTrendInGoogleSheet.writeFailCaseInGoogleSheet();
 			}
 			
 			logger.info("***************** Test Ended: " +channel_type + " ************************ ");

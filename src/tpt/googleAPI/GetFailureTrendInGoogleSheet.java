@@ -1,4 +1,4 @@
-package tests;
+package tpt.googleAPI;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,11 +18,10 @@ import com.google.api.services.sheets.v4.model.ValueRange;
 import core.classes.SingletonTestObject;
 import core.classes.TestCaseObject;
 import core.utilities.GenericMethodsLib;
-import tpt.googleAPI.GoogleSheetAPI;
 
-public class WriteFailResultInGoogleSheet {
+public class GetFailureTrendInGoogleSheet {
 
-	public static Logger logger = Logger.getLogger(WriteFailResultInGoogleSheet.class.getName());
+	public static Logger logger = Logger.getLogger(GetFailureTrendInGoogleSheet.class.getName());
 
 	/**
 	 * checking the updated list and writing fail test case in the Google sheet as date wise  
