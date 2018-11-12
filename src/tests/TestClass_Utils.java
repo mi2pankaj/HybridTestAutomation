@@ -11,7 +11,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.log4j.Logger;
-import org.bson.Document;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.mongojack.DBCursor;
@@ -20,17 +19,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.codoid.products.fillo.Recordset;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.DB;
-import com.mongodb.client.FindIterable;
-
 import core.classes.GetObjectRepoAsJson;
 import core.classes.ReadTestCases;
 import core.classes.SingletonTestObject;
 import core.classes.TestCaseObject;
 import core.classes.TestDataObject;
 import core.utilities.GenericMethodsLib;
-import core.utilities.MongoDBHandler;
 import core.utilities.httpClientWrap;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
@@ -92,58 +87,19 @@ public class TestClass_Utils {
 	{
 		JSONObject jsonObjectRepo = null;
 		GoogleSheetUtils googleSheetUtils= new GoogleSheetUtils();
-		
-		/** commenting this code - as we are managing only one repo -react repo */
-//		List<HashMap<String, String>> listOfRepoPhp=new ArrayList<>();
-		
-		List<HashMap<String, String>> listOfRepoMobile=new ArrayList<>();
 
 		if(channel_type.trim().equalsIgnoreCase("desktop"))
 		{
 			List<HashMap<String, String>> listOfRepoRevamp=new ArrayList<>();
 
-			/** commenting this code - as we are managing only one repo -react repo */
-			
-//			listOfRepoPhp = googleSheetUtils.getDataFromGoogle(
-//					GenericMethodsLib.googleConfigurationProperties.getProperty("desktop_php_object_repo_sheet").toString(), 
-//					GenericMethodsLib.googleConfigurationProperties.getProperty("desktop_php_object_repo_range").toString());
-//
-//			JSONObject jsonObjectRepoPhp =googleSheetUtils.getObjectRepoAsJSON(listOfRepoPhp);
-
 			/**get React/Revamp object repository as JSON object */
 			listOfRepoRevamp = googleSheetUtils.getDataFromGoogle(
-					GenericMethodsLib.googleConfigurationProperties.getProperty("desktop_revamp_object_repo_sheet").toString(), 
-					GenericMethodsLib.googleConfigurationProperties.getProperty("desktop_revamp_object_repo_range").toString());
+					GenericMethodsLib.googleConfigurationProperties.getProperty("object_repo_sheet").toString(), 
+					GenericMethodsLib.googleConfigurationProperties.getProperty("object_repo_range").toString());
 
 			JSONObject jsonObjectRepoReact = googleSheetUtils.getObjectRepoAsJSON(listOfRepoRevamp);
-
-			/** commenting this code - as we are managing only one repo -react repo */
-			//jsonObjectRepo=GenericMethodsLib.mergeJSONObject(jsonObjectRepoPhp, jsonObjectRepoReact);
-			
 			jsonObjectRepo=jsonObjectRepoReact;
-
-		}
-		else if (channel_type.trim().equalsIgnoreCase("mobile"))
-		{
-			listOfRepoMobile = googleSheetUtils.getDataFromGoogle(
-					GenericMethodsLib.googleConfigurationProperties.getProperty("mobile_object_repo_sheet").toString(), 
-					GenericMethodsLib.googleConfigurationProperties.getProperty("mobile_object_repo_range").toString());
-
-			jsonObjectRepo = googleSheetUtils.getObjectRepoAsJSON(listOfRepoMobile);
-
-		}
-		else if (channel_type.trim().equalsIgnoreCase("vsm"))
-		{
-
-			List<HashMap<String, String>> listOfRepovsm=new ArrayList<>();
-
-			/** get object repository as json object for vsm */
-			listOfRepovsm = googleSheetUtils.getDataFromGoogle(
-					GenericMethodsLib.googleConfigurationProperties.getProperty("vsm_object_repo_sheet").toString(), 
-					GenericMethodsLib.googleConfigurationProperties.getProperty("vsm_object_repo_range").toString());
-
-			jsonObjectRepo = googleSheetUtils.getObjectRepoAsJSON(listOfRepovsm);
-		}
+		}		
 		else
 		{
 			System.err.println(" *********  repo is not handled for this:  "+channel_type);
@@ -226,42 +182,17 @@ public class TestClass_Utils {
 			if(channel_type.trim().equalsIgnoreCase("desktop")){
 
 				testDataList=testDataSheet.getTestDataFromGoogle(
-						GenericMethodsLib.googleConfigurationProperties.getProperty("desktop_test_data_sheet_id").toString(),
-						GenericMethodsLib.googleConfigurationProperties.getProperty("desktop_test_data_sheet_range").toString());
+						GenericMethodsLib.googleConfigurationProperties.getProperty("test_data_sheet_id").toString(),
+						GenericMethodsLib.googleConfigurationProperties.getProperty("test_data_sheet_range").toString());
 
 				testCaseObjectList = dataSheet.getUpdatedTestCasesObjectList(testDataList, 
 						new ReadTestCases().getRunnableTestCasesObjects(
-								GenericMethodsLib.googleConfigurationProperties.getProperty("desktop_test_case_sheet_id").toString(),
-								GenericMethodsLib.googleConfigurationProperties.getProperty("desktop_test_case_summary_range").toString(), 
-								GenericMethodsLib.googleConfigurationProperties.getProperty("desktop_test_case_step_sheet_range").toString()));
+								GenericMethodsLib.googleConfigurationProperties.getProperty("test_case_sheet_id").toString(),
+								GenericMethodsLib.googleConfigurationProperties.getProperty("test_case_summary_range").toString(), 
+								GenericMethodsLib.googleConfigurationProperties.getProperty("test_case_step_sheet_range").toString()));
 
-			}else if(channel_type.trim().equalsIgnoreCase("mobile")){
-
-				testDataList=testDataSheet.getTestDataFromGoogle(
-						GenericMethodsLib.googleConfigurationProperties.getProperty("mobile_test_data_sheet_id").toString(),
-						GenericMethodsLib.googleConfigurationProperties.getProperty("mobile_test_data_sheet_range").toString());
-
-				testCaseObjectList = dataSheet.getUpdatedTestCasesObjectList(testDataList, 
-						new ReadTestCases().getRunnableTestCasesObjects(
-								GenericMethodsLib.googleConfigurationProperties.getProperty("mobile_test_case_sheet_id").toString(),
-								GenericMethodsLib.googleConfigurationProperties.getProperty("mobile_test_case_summary_range").toString(), 
-								GenericMethodsLib.googleConfigurationProperties.getProperty("mobile_test_case_step_sheet_range").toString()));
-
-			}else if(channel_type.trim().equalsIgnoreCase("vsm")) {
-
-				testCaseObjectList = new ReadTestCases().getRunnableTestCasesObjects(
-						GenericMethodsLib.googleConfigurationProperties.getProperty("vsm_test_case_sheet_id").toString(),
-						GenericMethodsLib.googleConfigurationProperties.getProperty("vsm_test_case_summary_range").toString(), 
-						GenericMethodsLib.googleConfigurationProperties.getProperty("vsm_test_case_step_sheet_range").toString());
-
-				/** Deserialize object file and storing it into list of map. Then getting the runnable data driven test cases object list*/
-				testDataList = GenericMethodsLib.dataObjectToListOfMap(testCaseObjectList);
-
-				testCaseObjectList = dataSheet.getUpdatedTestCasesObjectList(testDataList, 
-						new ReadTestCases().getRunnableTestCasesObjects(
-								GenericMethodsLib.googleConfigurationProperties.getProperty("vsm_test_case_sheet_id").toString(),
-								GenericMethodsLib.googleConfigurationProperties.getProperty("vsm_test_case_summary_range").toString(), 
-								GenericMethodsLib.googleConfigurationProperties.getProperty("vsm_test_case_step_sheet_range").toString()));
+			}else {
+				logger.error("Unable to get the updated test data object list of supplied channel type: "+channel_type);
 			}
 		}catch(Exception e){
 			logger.error("Unable to get the updated test data object list ", e);
@@ -269,59 +200,6 @@ public class TestClass_Utils {
 		logger.debug(": Test case objects are updated");
 
 		return testCaseObjectList;
-	}
-
-	/** this method get the final results either from map or from mongodb and converts that into a List of TestCaseObjects - which is 
-	 * required by writeTestObjectResults_UsingPoI method.
-	 * 
-	 * @param is_parallel_execution
-	 */
-	public boolean getUpdatedTestCaseResultsList(String is_parallel_execution) {
-
-		try {
-
-			List<TestCaseObject> updatedTestCaseObjectList = new ArrayList<>();
-
-			/** convert the testcaseobject map in a list -- as desired by write results method -- only in case of parallel execution */
-			if(is_parallel_execution.trim().equalsIgnoreCase("yes")) {
-
-				/** get result list in case of execution via mongodb */
-				if(SingletonTestObject.getSingletonTestObject().isScale_execution_via_mongo() && SingletonTestObject.getSingletonTestObject().isHubMachine()) {
-
-					logger.info("fetching all documents for collecting results from mongo - at hub ... ");
-
-					/** get all documents from mongo and iterate them */
-					FindIterable<Document> documents = new MongoDBHandler().getMongoDbDocument
-							(SingletonTestObject.getSingletonTestObject().getMongoDBClientConnnection(), "");
-
-					for(Document doc : documents)
-					{
-						/** convert doc to json and then map json to test cases objects and finally add in a list*/
-						TestCaseObject testCaseObject = new ObjectMapper().readValue(doc.toJson(), TestCaseObject.class);
-						updatedTestCaseObjectList.add(testCaseObject);
-					}
-
-					logger.info("result list is created from all mongo documents  ... ");
-				}
-
-				/** get result list in case of execution via maps */
-				else {
-					for(Entry<String, TestCaseObject> entry : SingletonTestObject.getSingletonTestObject().getTestCaseObjectMap().entrySet()){
-						updatedTestCaseObjectList.add(entry.getValue());
-					}	
-				}
-
-				/** update singleton test object  */
-				SingletonTestObject.getSingletonTestObject().setTestCaseObjectList(updatedTestCaseObjectList);
-			}
-
-			return true;
-
-		}catch (Exception e) {
-			logger.error(e.getMessage(), e);
-
-			return false;
-		}
 	}
 
 	/** this method get the final results either from map or from mongodb and converts that into a List of TestCaseObjects - which is 
@@ -443,7 +321,6 @@ public class TestClass_Utils {
 		});
 	}
 
-
 	/**
 	 * this is just a hack to handle notification in emulator in app.
 	 * @param driver
@@ -483,7 +360,6 @@ public class TestClass_Utils {
 			}
 		}
 	}
-
 
 	/** This method checks if appium server and chromedriver is up and running before every step with a timeout of 1 min by making http request
 	 * to appium server and get 200 OK response if not that means either of appium and chrome driver is not up or both are not up.

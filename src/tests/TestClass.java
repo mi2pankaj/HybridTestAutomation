@@ -104,37 +104,31 @@ public class TestClass {
 			KeyBoardActionsUsingRobotLib keyBoard = new KeyBoardActionsUsingRobotLib(rt);
 			CaptureScreenShotLib captureScreenshot = new CaptureScreenShotLib(rt);
 
+			/** getting object repository from google sheet to local */
 			List<TestCaseObject> testCaseObjectList = new ArrayList<>();
-			if(GenericMethodsLib.generalConfigurationProperties.getProperty("data_from_google").toString().equalsIgnoreCase("yes")){
+			JSONObject jsonObjectRepo = new JSONObject();
+			if(GenericMethodsLib.generalConfigurationProperties.getProperty("ifDataFromGoogleRequired").toString().equalsIgnoreCase("yes")){
 
 				/** load test case objects in list for sequential execution with data driven test object list */
 				testCaseObjectList = new TestClass_Utils().getRunnableTestCaseObjects_ChannelSpecific_FromGoogle(channel_type);
+				
+				/** get object repository as json object from google sheet */
+				jsonObjectRepo = new TestClass_Utils().getObjectRepoAsJson_TestSpecificFromGoogle(channel_type);
 
 			}else{
 
 				/** load test case objects in list for sequential execution with data driven test object list */
-				testCaseObjectList = new TestClass_Utils().getRunnableTestCaseObjects_ChannelSpecific(channel_type); 
+				testCaseObjectList = new TestClass_Utils().getRunnableTestCaseObjects_ChannelSpecific(channel_type);
+				
+				/** get object repository as json object from local excel sheet */
+				jsonObjectRepo = new TestClass_Utils().getObjectRepoAsJson_TestSpecific(channel_type);
 			}
 
 			/** update the testCaseObjectList as per test type received from testng.xml*/
 			testCaseObjectList = new TestObjectHandler().getTestCaseObjects_SuiteSpecific(testCaseObjectList);
 
 			/**  update the singleton TestObject map, load test case objects in map for parallel execution */
-			ConcurrentHashMap<String, TestCaseObject> testCaseObjectMap = new TestObjectHandler().getTestCaseObjectMap(testCaseObjectList);
-
-			/** getting object repository from google sheet ot local sheet based on configuration */
-			JSONObject jsonObjectRepo = new JSONObject();
-			if(GenericMethodsLib.generalConfigurationProperties.getProperty("data_from_google").toString().equalsIgnoreCase("yes")){
-
-				/** get object repository as json object from google sheet */
-				jsonObjectRepo = new TestClass_Utils().getObjectRepoAsJson_TestSpecificFromGoogle(channel_type);
-
-			}else{
-
-				/** get object repository as json object from local excel sheet */
-				jsonObjectRepo = new TestClass_Utils().getObjectRepoAsJson_TestSpecific(channel_type);
-			}
-
+			ConcurrentHashMap<String, TestCaseObject> testCaseObjectMap = new TestObjectHandler().getTestCaseObjectMap(testCaseObjectList);			
 
 			/** initialize an array which has only results -- this will be iterated to check pass and fail results and Jenkins will be informed */
 			resultData = new Object[testCaseObjectList.size()][3];
@@ -335,7 +329,7 @@ public class TestClass {
 			SuiteClass.templateData.SetOwnerWiseResultData(resultData, channel_type);
 
 			/** write fail cases in the google sheet*/
-			if(GenericMethodsLib.generalConfigurationProperties.getProperty("data_from_google").toString().equalsIgnoreCase("yes")){
+			if(GenericMethodsLib.generalConfigurationProperties.getProperty("ifDataFromGoogleRequired").toString().equalsIgnoreCase("yes")){
 				logger.info("**** Started writing fail test cases in google sheet ******");
 				GetFailureTrendInGoogleSheet.writeFailCaseInGoogleSheet();
 			}

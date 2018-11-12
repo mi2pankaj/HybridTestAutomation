@@ -76,15 +76,13 @@ public class GenericMethodsLib
 		Connection qaConnection = null;
 		try
 		{
-			GenericMethodsLib.InitializeConfiguration();
-
 			String dbClass = "com.mysql.jdbc.Driver";		
 			Class.forName(dbClass);
 
 			// Getting Values for dburl,dbUsername and dbPassword from configuration file
-			String dburl = generalConfigurationProperties.getProperty("dbURL").toString();
-			String dbuserName = generalConfigurationProperties.getProperty("dbUserName").toString();
-			String dbpassword = generalConfigurationProperties.getProperty("dbPassword").toString();
+			String dburl = generalConfigurationProperties.getProperty("mysqlDBURL").toString();
+			String dbuserName = generalConfigurationProperties.getProperty("mysqlDBUserName").toString();
+			String dbpassword = generalConfigurationProperties.getProperty("mysqlDBPassword").toString();
 
 			qaConnection = (Connection) DriverManager.getConnection (dburl,dbuserName,dbpassword);
 		}

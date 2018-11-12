@@ -213,9 +213,9 @@ public class GetObjects
 	 */
 	private void handleInvocationException(WebDriver driver, By byObjectCollectWebElement, String objectName)
 	{
-		if(GenericMethodsLib.generalConfigurationProperties.getProperty("isRequired_objectVisibilityExplicitDelay").toString().trim().equalsIgnoreCase("yes"))
+		if(GenericMethodsLib.generalConfigurationProperties.getProperty("ifExplicitDelayForObjectVisibility").toString().trim().equalsIgnoreCase("yes"))
 		{
-			String delay = GenericMethodsLib.generalConfigurationProperties.getProperty("objectVisibilityExplicitDelay").toString().trim();
+			String delay = GenericMethodsLib.generalConfigurationProperties.getProperty("explicitDelayForObjectVisibility").toString().trim();
 
 			/** wait for x sec until the element is not present */
 			new HandlerLib().applyExplicitWait(driver, byObjectCollectWebElement, new NoSuchElementException(""), Integer.parseInt(delay));

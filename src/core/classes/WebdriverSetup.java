@@ -99,7 +99,7 @@ public class WebdriverSetup {
 			/** setup appium driver -- implicit wait is not set up by appium driver -- setting up directly 
 			 * with chrome driver server by sending post request. -- not commenting this line - coz this code will log the request in appium log */			
 			driver.manage().timeouts().implicitlyWait(
-					Integer.parseInt(GenericMethodsLib.generalConfigurationProperties.getProperty("driverImplicitDelay").toString()), 
+					Integer.parseInt(GenericMethodsLib.generalConfigurationProperties.getProperty("implicitDelayForWebdriver").toString()), 
 					TimeUnit.SECONDS);
 			setupTimeout_ChromedriverLaunchedByAppiumServer();
 
@@ -126,7 +126,7 @@ public class WebdriverSetup {
 		try {
 
 			String chromedriverURL = getChromeDriverURLFromAppiumLogFile()+"/timeouts";
-			int timeout = Integer.parseInt(GenericMethodsLib.generalConfigurationProperties.getProperty("driverImplicitDelay").toString());
+			int timeout = Integer.parseInt(GenericMethodsLib.generalConfigurationProperties.getProperty("implicitDelayForWebdriver").toString());
 			String postData = "{\"type\":\"implicit\",\"ms\":"+timeout*1000+"}";
 
 			HashMap<Object, Object> response = new httpClientWrap().sendPostRequestWithParams(chromedriverURL, postData);
@@ -673,10 +673,10 @@ public class WebdriverSetup {
 
 					/** apply browser dimension  */
 					driver = applyBrowserDimension(driver, browserDimensionWidth, browserDimensionHeight);
-					int driverImplicitDelay = Integer.parseInt(GenericMethodsLib.generalConfigurationProperties.getProperty("driverImplicitDelay").toString());
+					int implicitDelayForWebdriver = Integer.parseInt(GenericMethodsLib.generalConfigurationProperties.getProperty("implicitDelayForWebdriver").toString());
 
 					/** setting up implicit driver delay */
-					driver.manage().timeouts().implicitlyWait(driverImplicitDelay, TimeUnit.SECONDS);
+					driver.manage().timeouts().implicitlyWait(implicitDelayForWebdriver, TimeUnit.SECONDS);
 
 				}catch(Exception e){
 					logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Error while creating mobile browser emulation. ", e);
@@ -1014,10 +1014,10 @@ public class WebdriverSetup {
 				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : No Support For: "+browser +" Browser. ");
 			}			
 
-			int driverImplicitDelay = Integer.parseInt(GenericMethodsLib.generalConfigurationProperties.getProperty("driverImplicitDelay").toString());
+			int implicitDelayForWebdriver = Integer.parseInt(GenericMethodsLib.generalConfigurationProperties.getProperty("implicitDelayForWebdriver").toString());
 
 			/** setting up implicit driver delay */
-			driver.manage().timeouts().implicitlyWait(driverImplicitDelay, TimeUnit.SECONDS);
+			driver.manage().timeouts().implicitlyWait(implicitDelayForWebdriver, TimeUnit.SECONDS);
 			//driver.manage().deleteAllCookies();
 
 			/** no action needed here, just catching exception */

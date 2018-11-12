@@ -219,19 +219,19 @@ public class InitializeSingletonTestObject {
 			else {
 
 				if(SingletonTestObject.getSingletonTestObject().getChannel_type().equalsIgnoreCase("vsm")) {
-					count = Integer.parseInt(GenericMethodsLib.generalConfigurationProperties.getProperty("vsm_parallel_executor").toString().trim());
+					count = Integer.parseInt(GenericMethodsLib.generalConfigurationProperties.getProperty("vsm_executorCapacity").toString().trim());
 
 				}else if(SingletonTestObject.getSingletonTestObject().getChannel_type().equalsIgnoreCase("mobile")) {
 
-					try{count = Integer.parseInt(GenericMethodsLib.generalConfigurationProperties.getProperty("mobile_parallel_executor").toString().trim());}
+					try{count = Integer.parseInt(GenericMethodsLib.generalConfigurationProperties.getProperty("mobile_executorCapacity").toString().trim());}
 					catch (Exception e) {
 						
-						/** if key is not there then fall back to parallel_executor */
-						count = Integer.parseInt(GenericMethodsLib.generalConfigurationProperties.getProperty("parallel_executor").toString().trim());
+						/** if key is not there then fall back to  executorCapacity*/
+						count = Integer.parseInt(GenericMethodsLib.generalConfigurationProperties.getProperty("executorCapacity").toString().trim());
 					}
 				}
 				else {
-					count = Integer.parseInt(GenericMethodsLib.generalConfigurationProperties.getProperty("parallel_executor").toString().trim());
+					count = Integer.parseInt(GenericMethodsLib.generalConfigurationProperties.getProperty("executorCapacity").toString().trim());
 				}
 
 				logger.info("setting up local executor capacity: "+count + " for channel: "+SingletonTestObject.getSingletonTestObject().getChannel_type());
