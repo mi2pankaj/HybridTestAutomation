@@ -6,7 +6,7 @@
 	<test name="Hybrid Automated Test Suite">
 	
 		<!-- this value be set by hub server and passed to node via jenkins and will be used. For other cases, supplied value will be used. -->
-		<parameter name="channel_type" value="" />
+		<parameter name="channel_type" value="desktop" />
 		
 		<!-- Node configuration will always have parallel execution true thats why GRID is being used. -->
 		<parameter name="is_parallel_execution" value="yes" />
