@@ -744,7 +744,7 @@ public class WebdriverSetup {
 				proxyServer.setCaptureContent(true);
 				proxyServer.newHar("requests_"+new Date().getTime());
 
-				/** check if there is any proxy property file with name proxy.properties is found at root of AUTOMATION_HOME then use it else
+				/** check if there is any proxy property file with name proxy.properties is found in properties folder of AUTOMATION_HOME then use it else
 				 * use the supplied params */
 				PropertiesConfiguration proxyProperties = getProxyProperties();
 				if(proxyProperties !=null) {
@@ -837,7 +837,7 @@ public class WebdriverSetup {
 		PropertiesConfiguration proxyProperties = null;
 		try {
 
-			File proxyConfigFile = new File(TestSuiteClass.AUTOMATION_HOME.concat("/proxy.properties"));
+			File proxyConfigFile = new File(TestSuiteClass.AUTOMATION_HOME.concat("/properties/proxy.properties"));
 
 			/** read file - only if it is not empty */
 			if(FileLib.ReadContentOfFile(proxyConfigFile.getAbsolutePath()).toString().isEmpty()) {
