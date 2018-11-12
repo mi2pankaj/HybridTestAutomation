@@ -28,10 +28,10 @@ import com.mysql.jdbc.Connection;
 import io.appium.java_client.AppiumDriver;
 import jxl.Sheet;
 import jxl.Workbook;
-import lenskart.tests.LenskartWebTest_Utils;
-import lenskart.tests.TestSuiteClass;
 import net.lightbody.bmp.proxy.ProxyServer;
-import tpt.classes.googleAPI.GoogleSheetUtils;
+import tests.LenskartWebTest_Utils;
+import tests.TestSuiteClass;
+import tpt.googleAPI.GoogleSheetUtils;
 
 
 @SuppressWarnings("deprecation")

@@ -1,4 +1,4 @@
-package tpt.classes.googleAPI;
+package tpt.googleAPI;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -1,6 +1,5 @@
-package lenskart.tests;
+package tests;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -21,9 +20,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.codoid.products.fillo.Recordset;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.mongodb.DB;
 import com.mongodb.client.FindIterable;
 
@@ -37,8 +34,8 @@ import core.utilities.MongoDBHandler;
 import core.utilities.httpClientWrap;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
-import tpt.classes.googleAPI.GoogleSheetUtils;
-import tpt.classes.googleAPI.TestDataFromGoogleSheet;
+import tpt.googleAPI.GoogleSheetUtils;
+import tpt.googleAPI.TestDataFromGoogleSheet;
 
 
 public class LenskartWebTest_Utils {
@@ -272,83 +269,6 @@ public class LenskartWebTest_Utils {
 		logger.debug(": Test case objects are updated");
 
 		return testCaseObjectList;
-	}
-
-	/**
-	 * collect all data object files at the supplied location - de-serialize, merge them and then serailze them at Automation_Home.
-	 */
-	public boolean serializeMergedDataObjectJson(String basePath) {
-		try
-		{
-			ObjectMapper mapper = new ObjectMapper();
-			mapper.enable(SerializationFeature.INDENT_OUTPUT);
-
-			List<DataObject> dataObject = mergeDataObjectFiles(basePath);
-			logger.info("Finally Serializing "+ dataObject.size() +" Data Objects " );
-
-			if(!dataObject.isEmpty()) {
-				mapper.writeValue(new File(TestSuiteClass.AUTOMATION_HOME+"/dataObject"), dataObject);
-			}
-
-			return true;
-		}
-		catch (Exception e) {
-			logger.error(e.getMessage(), e);
-			return false;
-		}
-	}
-
-	/**
-	 * this method will collect and merge all the dataObject json files which will have a time stamp in the name after dataObject
-	 * located in Automation_Home.
-	 * @return
-	 */
-	public List<DataObject> mergeDataObjectFiles (String basePath){
-
-		List<DataObject> dataObjectList = new ArrayList<>();
-		try
-		{
-			File[] files = new File(basePath).listFiles();
-			for(int i=0; i<files.length; i++)
-			{
-				if(files[i].isFile() && files[i].getName().startsWith("dataObject")) {
-
-					List<DataObject> dataObject = loadDataObjectJson(files[i].getAbsolutePath());
-					logger.info("Received Data Objects : " + dataObject.size() + " from file : "+files[i].getAbsolutePath());
-
-					/** read json file and keep on adding the received objects in the main list - dataObjectList */
-					dataObjectList.addAll(dataObject);
-
-					files[i].delete();
-				}
-			}
-		}catch (Exception e) {
-			logger.error(e.getMessage(), e);
-		}
-
-		return dataObjectList;
-	}
-
-	/** load dataObject json in object list - de-serialize using jackson api.
-	 * 
-	 * @param dataObjectFile
-	 * @return
-	 */
-	public List<DataObject> loadDataObjectJson(String dataObjectFile)
-	{
-		List<DataObject> dataObjectList = new ArrayList<>();
-		try
-		{
-			ObjectMapper mapper = new ObjectMapper();
-			TypeReference<List<DataObject>> typereference = new TypeReference<List<DataObject>>() {};
-
-			dataObjectList = mapper.readValue(new File(dataObjectFile), typereference);
-			logger.info("data loaded from file : "+dataObjectFile);
-		}catch (Exception e) {
-			logger.error(e.getMessage(), e);
-		}
-
-		return dataObjectList;
 	}
 
 	/** this method get the final results either from map or from mongodb and converts that into a List of TestCaseObjects - which is 
@@ -608,9 +528,3 @@ public class LenskartWebTest_Utils {
 
 
 }
-
-
-
-
-
-

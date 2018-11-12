@@ -18,7 +18,7 @@ import java.util.Map;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
-import lenskart.tests.TestSuiteClass;
+import tests.TestSuiteClass;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

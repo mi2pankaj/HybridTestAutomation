@@ -1,4 +1,4 @@
-package lenskart.tests;
+package tests;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,7 +18,7 @@ import com.google.api.services.sheets.v4.model.ValueRange;
 import core.classes.SingletonTestObject;
 import core.classes.TestCaseObject;
 import core.utilities.GenericMethodsLib;
-import tpt.classes.googleAPI.GoogleSheetAPI;
+import tpt.googleAPI.GoogleSheetAPI;
 
 public class WriteFailResultInGoogleSheet {
 

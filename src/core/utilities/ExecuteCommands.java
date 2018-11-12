@@ -22,7 +22,7 @@ import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 
-import lenskart.tests.TestSuiteClass;
+import tests.TestSuiteClass;
 
 
 public class ExecuteCommands 

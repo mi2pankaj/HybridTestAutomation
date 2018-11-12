@@ -4,7 +4,7 @@
  * Purpose of change: 
  */
 
-package lenskart.tests;
+package tests;
 
 import java.awt.Robot;
 import java.time.Duration;
@@ -102,14 +102,6 @@ public class LenskartWebTest {
 			Robot rt = new Robot();
 			KeyBoardActionsUsingRobotLib keyBoard = new KeyBoardActionsUsingRobotLib(rt);
 			CaptureScreenShotLib captureScreenshot = new CaptureScreenShotLib(rt);
-
-			System.out.println("#### robot class initialized #### ");
-
-			System.out.println("robot execute");
-			/** collect all dataObject json files located in at AUTOMATION_HOME/.. - this is for jenkins - basically all the other testsuites
-			 * will copy the dataObject file at AUTOMATION_HOME/.. of VSM_Test_Suite therefore need collect all and merge in one json 
-			 * to make it usable by VSM Execution test */
-			new LenskartWebTest_Utils().serializeMergedDataObjectJson(TestSuiteClass.AUTOMATION_HOME+"/..");
 
 			List<TestCaseObject> testCaseObjectList = new ArrayList<>();
 			if(GenericMethodsLib.generalConfigurationProperties.getProperty("data_from_google").toString().equalsIgnoreCase("yes")){

@@ -14,7 +14,7 @@ import java.io.FileWriter;
 import org.apache.log4j.Logger;
 
 import core.utilities.XlsLib;
-import lenskart.tests.TestSuiteClass;
+import tests.TestSuiteClass;
 
 
 public class Excel2Html 

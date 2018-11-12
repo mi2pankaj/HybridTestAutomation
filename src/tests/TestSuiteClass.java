@@ -4,7 +4,7 @@
  * Purpose of change: 
  */
 
-package lenskart.tests;
+package tests;
 
 import java.net.InetAddress;
 import java.util.TreeMap;
@@ -16,9 +16,8 @@ import core.utilities.EmailTemplate;
 import core.utilities.EmailTemplateData;
 import core.utilities.FileLib;
 import core.utilities.GenericMethodsLib;
-import lenskart.tests.TestSuiteClass;
+import tests.TestSuiteClass;
 
-import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 
 public class TestSuiteClass
@@ -87,10 +86,7 @@ public class TestSuiteClass
 	@AfterSuite
 	public void afterSuite()  
 	{
-		try{
- 
-			GenericMethodsLib.storeOrderData_UsingJacksonMapper(AUTOMATION_HOME+"/dataObject", AUTOMATION_HOME+"/automationOrders");
-
+		try{ 
 			/** create property file to store results summary for jenkins email */
 			TestSuiteClass.templateData.testDataInPropertiesFile();
 			

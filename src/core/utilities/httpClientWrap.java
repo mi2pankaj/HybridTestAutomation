@@ -26,7 +26,7 @@ import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
 import org.json.simple.parser.JSONParser;
 
-import lenskart.tests.TestSuiteClass; 
+import tests.TestSuiteClass; 
 
 
 public class httpClientWrap 

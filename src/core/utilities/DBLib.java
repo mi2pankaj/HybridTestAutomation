@@ -15,7 +15,7 @@ import com.mysql.jdbc.ResultSet;
 import com.mysql.jdbc.Statement;
 import com.mysql.jdbc.exceptions.MySQLNonTransientConnectionException;
 
-import lenskart.tests.TestSuiteClass;
+import tests.TestSuiteClass;
 
 
 public class DBLib 

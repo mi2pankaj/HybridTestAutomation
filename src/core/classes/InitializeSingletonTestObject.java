@@ -18,7 +18,7 @@ import core.grid.Node;
 import core.utilities.GenericMethodsLib;
 import core.utilities.MongoDBHandler;
 import core.utilities.httpClientWrap;
-import lenskart.tests.LenskartWebTest_Utils;
+import tests.LenskartWebTest_Utils;
 
 /**
  * 

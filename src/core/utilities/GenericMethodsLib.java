@@ -8,7 +8,6 @@ package core.utilities;
 
 
 import java.io.File;
-import java.io.FileWriter;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -21,16 +20,12 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import lenskart.tests.DataObject;
-import lenskart.tests.TestSuiteClass;
 
 import org.apache.commons.configuration.*;
 import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.ResultSet;
@@ -39,6 +34,7 @@ import com.mysql.jdbc.exceptions.MySQLSyntaxErrorException;
 
 import core.classes.SingletonTestObject;
 import core.classes.TestCaseObject;
+import tests.TestSuiteClass;
 
 
 public class GenericMethodsLib 
@@ -740,45 +736,6 @@ public class GenericMethodsLib
 			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Unable to get merged JSON", e);
 		}
 		return mergedJSONObject;
-	}
-
-
-	/**
-	 * This method will deserialize the dataobject and store the order information in a separate file and this file will be send with the test result
-	 */
-	public static String storeOrderData_UsingJacksonMapper(String objectFilePath, String dataFilePath){
-
-		String text="";
-		FileWriter fileWriter= null;
-
-		/** de-serialize json object */
-		ObjectMapper mapper = new ObjectMapper();
-
-		try{
-			fileWriter=new FileWriter(dataFilePath);
-			TypeReference<List<DataObject>> typeReference = new TypeReference<List<DataObject>>() {};
-			List<DataObject> dataObject = mapper.readValue(new File(objectFilePath), typeReference);
-
-			for(int i =0 ; i<dataObject.size(); i++){
-
-				if(dataObject.get(i).getOrder_Id() != null && !dataObject.get(i).getOrder_Id().equalsIgnoreCase("null") && !dataObject.get(i).getOrder_Id().isEmpty()){
-
-					if(dataObject.get(i).getDesktop_TC_ID() != null) {
-						text = text + "" + dataObject.get(i).getDesktop_TC_ID() + " ==> " + dataObject.get(i).getOrder_Id()+"\n";	
-					}
-					if(dataObject.get(i).getMobile_TC_ID() != null) {
-						text = text + "" + dataObject.get(i).getMobile_TC_ID() + " ==> " + dataObject.get(i).getOrder_Id()+"\n";	
-					}
-				}
-			}
-
-			fileWriter.write(text);
-			fileWriter.close();
-
-		}catch(Exception e){
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : unable to get orders from serialized file. ", e);
-		}
-		return text;
 	}
 
 }

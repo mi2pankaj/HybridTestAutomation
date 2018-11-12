@@ -55,8 +55,8 @@ import core.utilities.IntegerLib;
 import core.utilities.KeyBoardActionsUsingRobotLib;
 import core.utilities.httpClientWrap;
 import io.appium.java_client.AppiumDriver;
-import lenskart.tests.TestSuiteClass;
 import net.lightbody.bmp.proxy.ProxyServer;
+import tests.TestSuiteClass;
 
 
 // TODO: Auto-generated Javadoc

@@ -85,7 +85,7 @@ import java.awt.event.KeyEvent;
 import org.apache.log4j.Logger; 
 import org.openqa.selenium.WebDriver;
 
-import lenskart.tests.TestSuiteClass;
+import tests.TestSuiteClass;
 
 
 

@@ -14,8 +14,8 @@ import org.openqa.selenium.WebDriver;
 import com.mysql.jdbc.Connection;
 
 import core.utilities.GenericMethodsLib;
-import lenskart.tests.TestSuiteClass;
 import net.lightbody.bmp.proxy.ProxyServer;
+import tests.TestSuiteClass;
 
 
 @SuppressWarnings("deprecation")

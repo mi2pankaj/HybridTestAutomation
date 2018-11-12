@@ -27,7 +27,7 @@ import com.mongodb.client.MongoDatabase;
 
 import core.classes.SingletonTestObject;
 import core.classes.TestCaseObject;
-import lenskart.tests.TestSuiteClass;
+import tests.TestSuiteClass;
 
 public class MongoDBHandler {
 

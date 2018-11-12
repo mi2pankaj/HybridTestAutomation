@@ -26,7 +26,7 @@ import core.classes.HandlerLib;
 import core.classes.SingletonTestObject;
 import core.classes.TestCaseObject;
 import io.appium.java_client.AppiumDriver;
-import lenskart.tests.TestSuiteClass;
+import tests.TestSuiteClass;
 
 
 public class CaptureScreenShotLib 

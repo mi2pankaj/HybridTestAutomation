@@ -31,14 +31,9 @@ package core.classes;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.lang.reflect.Method;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -54,7 +49,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotVisibleException;
@@ -71,8 +65,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mysql.jdbc.Connection;
 
 import core.utilities.CaptureScreenShotLib;
@@ -80,9 +72,8 @@ import core.utilities.CustomException;
 import core.utilities.GenericMethodsLib;
 import core.utilities.IntegerLib;
 import core.utilities.httpClientWrap;
-import lenskart.tests.DataObject;
-import lenskart.tests.TestSuiteClass;
 import net.lightbody.bmp.proxy.ProxyServer;
+import tests.TestSuiteClass;
 
 public class HandlerLib 
 {
@@ -1140,54 +1131,6 @@ public class HandlerLib
 		return conditionResult;
 	}
 
-	/** This method is used to store data in serialized json form to process further using jackson api 
-	 * 
-	 * @param data
-	 * @return
-	 */
-	public synchronized String storedataobject_UsingJacksonMapper(String data){
-
-		try{
-			if(!data.isEmpty()){
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" data json is " + data);
-
-				ObjectMapper mapper = new ObjectMapper();
-
-				/** create a list of object to serializes the data in json array format */
-				List<DataObject> dataObjectList = new ArrayList<>();
-				TypeReference<List<DataObject>> typeReference = new TypeReference<List<DataObject>>() {};
-
-				/** first read the received json string as a Class Object */
-				DataObject dataObjectFromTestCase = mapper.readValue(data, DataObject.class);
-
-				/** then read the existing json string as a Class Object, if there is any serialized json file found,
-				 * in case none is found - handle file not found exception */
-				try {
-					dataObjectList = mapper.readValue(new File(TestSuiteClass.AUTOMATION_HOME.concat("/dataObject")), typeReference);
-				}catch (FileNotFoundException e) {}
-
-				/** merge test case json object with the existing json array (if found) to be written as json array later on */
-				dataObjectList.add(dataObjectFromTestCase);
-
-				/** now serialized the merged / updated object list as json array */
-				mapper.writeValue(new File(TestSuiteClass.AUTOMATION_HOME.concat("/dataObject")), dataObjectList);
-
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" data is serialized in the dataObject" + data);
-				return "Pass: ";
-			}
-			else{
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" Data is empty hence nothing is added in json object" + data);
-				return "Skip: " + " Empty data is received from test case to serialize. ";
-			}
-
-		}catch(Exception e){
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : error occured with writing data to object for "+data, e);
-			return "Fail: " + e.getMessage();
-		}
-
-	}
-
-
 	/** This method will return the callable task to be consumed by verify verifyelementpresent_parallel keyword.
 	 * 
 	 * @param connection
@@ -1319,49 +1262,6 @@ public class HandlerLib
 		}
 
 		return headerString;
-	}
-
-
-	/** This code - de-serializes the dataObject using jackson mapper and covert the whole json into Class Objects so that its very easy to do the manipulation.
-	 * 
-	 * @param data
-	 * @return
-	 */
-	public synchronized String changeVsmExecutionStatus_UsingJacksonMapper(String data){
-
-		logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" data json is " + data);
-
-		try{
-			if(!data.isEmpty()){
-				ObjectMapper mapper = new ObjectMapper();
-
-				/** create a type reference to readt json file */
-				TypeReference<List<DataObject>> typereference = new TypeReference<List<DataObject>>() {};
-				List<DataObject> dataObjectList =mapper.readValue(new File(TestSuiteClass.AUTOMATION_HOME.concat("/dataObject")), typereference);
-
-				/** iterate this list to manipulate the data */
-				for(int i=0; i<dataObjectList.size(); i++) {					
-					if(dataObjectList.get(i).getOrder_Id().equalsIgnoreCase(data)) {
-						dataObjectList.get(i).setVsm_Execution("true");
-					}
-				}
-
-				/** serialize the updated json file */
-				mapper.writeValue(new File(TestSuiteClass.AUTOMATION_HOME.concat("/dataObject")), dataObjectList);
-
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" data is added in the dataObject" + data);
-				return "Pass: ";
-			}
-			else{
-				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" Data is empty hence nothing is added in json object" + data);
-				return "Skip: " + " Empty data is received from test case to update the serialized json file. ";
-			}
-		}
-
-		catch(Exception e){
-			logger.error(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : error occured with writing data to object for "+data, e);
-			return "Fail: " + e.getMessage();
-		}
 	}
 
 	/**

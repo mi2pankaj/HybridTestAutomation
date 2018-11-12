@@ -23,7 +23,7 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.client.FindIterable;
 
 import core.utilities.MongoDBHandler;
-import lenskart.tests.TestSuiteClass;
+import tests.TestSuiteClass;
 
 
 public class TestObjectHandler {

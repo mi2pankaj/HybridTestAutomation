@@ -26,7 +26,7 @@ import org.openqa.selenium.WebElement;
 import core.utilities.CaptureScreenShotLib;
 import core.utilities.CustomException;
 import core.utilities.GenericMethodsLib;
-import lenskart.tests.TestSuiteClass;
+import tests.TestSuiteClass;
 
 
 /**

@@ -14,7 +14,8 @@ import java.util.List;
 import jxl.read.biff.BiffException;
 import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
-import lenskart.tests.TestSuiteClass;
+import tests.TestSuiteClass;
+
 import org.apache.log4j.Logger;
 
 import com.mysql.jdbc.Connection;

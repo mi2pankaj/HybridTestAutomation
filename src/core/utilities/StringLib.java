@@ -16,7 +16,7 @@ import java.util.TreeMap;
 
 import org.apache.log4j.Logger;
 
-import lenskart.tests.TestSuiteClass; 
+import tests.TestSuiteClass; 
 
 
 

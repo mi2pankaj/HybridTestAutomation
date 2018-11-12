@@ -45,8 +45,8 @@ import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServerHasNotBeenStartedLocallyException;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
-import lenskart.tests.TestSuiteClass;
 import net.lightbody.bmp.proxy.ProxyServer;
+import tests.TestSuiteClass;
 
 public class WebdriverSetup {
 

@@ -18,7 +18,7 @@ import jxl.Workbook;
 import jxl.write.Label;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
-import lenskart.tests.TestSuiteClass;
+import tests.TestSuiteClass;
 
 
 public class WriteTestResults {
