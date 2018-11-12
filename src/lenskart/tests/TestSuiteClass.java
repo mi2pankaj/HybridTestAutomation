@@ -74,33 +74,7 @@ public class TestSuiteClass
 
 			/** get the live ip address of lenskart.com */
 			liveIpAddress_Lenskart_Com = InetAddress.getByName("api.lenskart.com").getHostAddress();
-			
-			/**********  Checking the Basic set of API's working fine or not ************/
-			try{
-				if(System.getProperty("api_test_run").toString().equalsIgnoreCase("yes")){
-					APIVerification verifyAPI = new APIVerification();
-					String result =""; 
-					
-					if(currentTestEnv.equalsIgnoreCase("prod")){
-						result =verifyAPI.apiVerification("api.lenskart.com");
-					}else{
-						result =verifyAPI.apiVerification("api-"+currentTestEnv.trim()+".lenskart.com");
-					}
-					
-					if(result.contains("Fail")){
-						
-						logger.error("API verification failed");
-						System.out.println("API verification failed please check the logs for more details");
-						Assert.fail("API verification failed please check the logs for more details");
-						
-					}
-				}else{
-					logger.info("Skipping API test run as the run_mode is set to false");
-				}
-			}catch(NullPointerException e){
-				logger.info("Skipping API test run as the run_mode is not set");
-			}
-						
+									
 			System.out.println("****** Running Test In Test Environment: "+currentTestEnv + " **********");
 
 		}
