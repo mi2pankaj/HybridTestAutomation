@@ -65,7 +65,7 @@ public class GenericMethodsLib
 			String varAutomationHome = TestSuiteClass.AUTOMATION_HOME;
 
 			/** Now we will add path to conf folder and qaconf.properties is the file which will be needed to fetch the configurations. */
-			String config = varAutomationHome.concat("/conf/generalConfiguration.properties");
+			String config = varAutomationHome.concat("/properties/generalConfiguration.properties");
 			generalConfigurationProperties.load(config);
 			
 			/** get roster mobile number from google sheet and then load it it general config property */
@@ -79,7 +79,7 @@ public class GenericMethodsLib
 			logger.info("Final Guest Mobile Number --> "+generalConfigurationProperties.getProperty("guest_mobile_number"));
 			
 			googleConfigurationProperties = new PropertiesConfiguration();
-			googleConfigurationProperties.load(TestSuiteClass.AUTOMATION_HOME+"/conf/googleConfiguration.properties");
+			googleConfigurationProperties.load(TestSuiteClass.AUTOMATION_HOME+"/properties/googleConfiguration.properties");
 		}
 		catch (Exception e) 
 		{

@@ -12,7 +12,6 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.testng.annotations.BeforeSuite;
 
-import framework.core.classes.SingletonTestObject;
 import framework.utilities.EmailTemplate;
 import framework.utilities.EmailTemplateData;
 import framework.utilities.FileLib;
@@ -59,7 +58,7 @@ public class TestSuiteClass
 			GenericMethodsLib.InitializeConfiguration();
 
 			/** Loading log4j.properties file for logger and creating logs folder in advance */
-			PropertyConfigurator.configure(TestSuiteClass.AUTOMATION_HOME.concat("/conf/log4j.properties"));
+			PropertyConfigurator.configure(TestSuiteClass.AUTOMATION_HOME.concat("/properties/log4j.properties"));
 			FileLib.CreateDirectory(TestSuiteClass.AUTOMATION_HOME.concat("/logs"));
 			
 			try{

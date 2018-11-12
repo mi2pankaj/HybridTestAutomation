@@ -347,9 +347,9 @@ public class WebdriverSetup {
 
 		/** trying with appium reset capability to install the desired chrome version coz default chrome version is v55 */
 		desirecap.setCapability(MobileCapabilityType.FULL_RESET, true);
-		desirecap.setCapability(MobileCapabilityType.APP, System.getProperty("user.dir")+"/tpt/drivers/com.android.chrome_v.67.0.apk");
+		desirecap.setCapability(MobileCapabilityType.APP, System.getProperty("user.dir")+"/drivers/com.android.chrome_v.67.0.apk");
 
-		desirecap.setCapability("chromedriverExecutableDir", TestSuiteClass.AUTOMATION_HOME.concat("/tpt/drivers"));
+		desirecap.setCapability("chromedriverExecutableDir", TestSuiteClass.AUTOMATION_HOME.concat("/drivers"));
 		desirecap.setCapability(MobileCapabilityType.SUPPORTS_JAVASCRIPT, true);
 
 		desirecap.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 300);
@@ -576,11 +576,11 @@ public class WebdriverSetup {
 					if(browser.equalsIgnoreCase("chrome")){
 
 						if(System.getProperty("os.name").matches("^Windows.*")){
-							chromeDriver = TestSuiteClass.AUTOMATION_HOME.concat("/tpt/drivers/windows/chromedriver.exe");
+							chromeDriver = TestSuiteClass.AUTOMATION_HOME.concat("/drivers/windows/chromedriver.exe");
 						}else if (System.getProperty("os.name").matches("Linux.*")){
-							chromeDriver = TestSuiteClass.AUTOMATION_HOME.concat("/tpt/drivers/linux/chromedriver");
+							chromeDriver = TestSuiteClass.AUTOMATION_HOME.concat("/drivers/linux/chromedriver");
 						}else {
-							chromeDriver = TestSuiteClass.AUTOMATION_HOME.concat("/tpt/drivers/mac/chromedriver");
+							chromeDriver = TestSuiteClass.AUTOMATION_HOME.concat("/drivers/mac/chromedriver");
 						}
 						/** create chrome driver service */
 						ChromeDriverService service = retryChromeDriverService(chromeDriver);
@@ -633,12 +633,12 @@ public class WebdriverSetup {
 
 						String firfoxDriverPath;
 						if(System.getProperty("os.name").toLowerCase().startsWith("windows")) {
-							firfoxDriverPath =TestSuiteClass.AUTOMATION_HOME.concat("/tpt/drivers/windows/geckodriver.exe");
+							firfoxDriverPath =TestSuiteClass.AUTOMATION_HOME.concat("/drivers/windows/geckodriver.exe");
 						}else if(System.getProperty("os.name").toLowerCase().startsWith("linux")){
-							firfoxDriverPath =TestSuiteClass.AUTOMATION_HOME.concat("/tpt/drivers/linux/geckodriver");
+							firfoxDriverPath =TestSuiteClass.AUTOMATION_HOME.concat("/drivers/linux/geckodriver");
 
 						}else{
-							firfoxDriverPath =TestSuiteClass.AUTOMATION_HOME.concat("/tpt/drivers/mac/geckodriver");
+							firfoxDriverPath =TestSuiteClass.AUTOMATION_HOME.concat("/drivers/mac/geckodriver");
 						}
 
 						System.setProperty("webdriver.gecko.driver",firfoxDriverPath);
@@ -904,12 +904,12 @@ public class WebdriverSetup {
 				logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Firefox is being setup");
 
 				if(System.getProperty("os.name").toLowerCase().startsWith("window")) {
-					firfoxDriverPath =TestSuiteClass.AUTOMATION_HOME.concat("/tpt/drivers/windows/geckodriver.exe");
+					firfoxDriverPath =TestSuiteClass.AUTOMATION_HOME.concat("/drivers/windows/geckodriver.exe");
 				}else if(System.getProperty("os.name").toLowerCase().startsWith("linux")){
-					firfoxDriverPath =TestSuiteClass.AUTOMATION_HOME.concat("/tpt/drivers/linux/geckodriver");
+					firfoxDriverPath =TestSuiteClass.AUTOMATION_HOME.concat("/drivers/linux/geckodriver");
 				}
 				else {
-					firfoxDriverPath =TestSuiteClass.AUTOMATION_HOME.concat("/tpt/drivers/mac/geckodriver");
+					firfoxDriverPath =TestSuiteClass.AUTOMATION_HOME.concat("/drivers/mac/geckodriver");
 				}
 
 				System.setProperty("webdriver.gecko.driver",firfoxDriverPath);
@@ -937,14 +937,14 @@ public class WebdriverSetup {
 				String chromeDriver = null;
 				if(System.getProperty("os.name").matches("^Windows.*"))
 				{
-					chromeDriver = TestSuiteClass.AUTOMATION_HOME.concat("/tpt/drivers/windows/chromedriver.exe");
+					chromeDriver = TestSuiteClass.AUTOMATION_HOME.concat("/drivers/windows/chromedriver.exe");
 				}
 				else if(System.getProperty("os.name").matches("Linux.*")){
-					chromeDriver = TestSuiteClass.AUTOMATION_HOME.concat("/tpt/drivers/linux/chromedriver");
+					chromeDriver = TestSuiteClass.AUTOMATION_HOME.concat("/drivers/linux/chromedriver");
 				}
 				else
 				{
-					chromeDriver = TestSuiteClass.AUTOMATION_HOME.concat("/tpt/drivers/mac/chromedriver");
+					chromeDriver = TestSuiteClass.AUTOMATION_HOME.concat("/drivers/mac/chromedriver");
 				}
 
 				/** create chrome driver service */

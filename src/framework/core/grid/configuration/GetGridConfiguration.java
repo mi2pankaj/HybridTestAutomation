@@ -23,7 +23,7 @@ public class GetGridConfiguration {
 		try
 		{
 			ObjectMapper mapper = new ObjectMapper();
-			gridConfiguration = mapper.readValue(new File(System.getProperty("user.dir")+"/conf/gridConfiguration.properties"), GridConfigurationMapping.class);
+			gridConfiguration = mapper.readValue(new File(System.getProperty("user.dir")+"/properties/gridConfiguration.properties"), GridConfigurationMapping.class);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
