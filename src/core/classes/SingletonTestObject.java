@@ -14,7 +14,7 @@ import core.grid.Node;
 
 public class SingletonTestObject {
 
-	/** The object of this singleton class must be set and filled by the test classes like LenskartWebTest etc. 
+	/** The object of this singleton class must be set and filled by the test classes. 
 	 */
 	private static SingletonTestObject singletonTestObject;
 	private ConcurrentHashMap<String, TestCaseObject> testCaseObjectMap;
@@ -30,7 +30,7 @@ public class SingletonTestObject {
 	private JacksonDBCollection<TestCaseObject, String> mongoDBCollection;
 	private JSONObject jsonObjectRepository;
 
-	/** lenskart specific */
+	/** test specific */
 	private String channel_type; 
 
 	static {

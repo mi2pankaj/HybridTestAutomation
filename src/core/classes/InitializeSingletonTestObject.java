@@ -103,7 +103,7 @@ public class InitializeSingletonTestObject {
 			/** set executor size for grid - in case of no scaling - this size will be used for running locally for maps */
 			setExecutorSize();
 
-			/** set db connection - Lenskart - not setting up */
+			/** set db connection -- customize */
 			SingletonTestObject.getSingletonTestObject().setMysqlDbConnection(null);
 
 		} catch (Exception e) {

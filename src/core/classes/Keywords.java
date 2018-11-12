@@ -360,7 +360,7 @@ public class Keywords {
 					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Switched window has title: "+driver.getTitle());
 				}
 				/** special case handling - where web page is closed and driver has to be moved to new window then 
-				 * -- reference Facebook Login on Lenskart */
+				 **/
 				else if(currentState==""){
 					driver.switchTo().window(handles);
 					logger.info(TestSuiteClass.UNIQ_EXECUTION_ID.get()+" : Switched window has title: "+driver.getTitle());
