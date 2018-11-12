@@ -1,2 +1,5 @@
-Adding Remote Repo
+Adding Remote Repo to existing project
 https://help.github.com/articles/adding-a-remote/
+
+sample command to execute test suite using maven and testNG
+mvn clean test -Dsurefire.suiteXmlFiles=testNG/node.xml -Dtest_suite_type=Daily_Morning_Sanity  -Dhost_ip_www= -Dhost_ip_api= -Dtest_env=prod -Dblock_optimizely=no -Dapi_test_run=No -DANDROID_HOME=C:\Users\Automation\AppData\Local\Android\sdk
