@@ -41,7 +41,7 @@ import org.apache.commons.io.comparator.LastModifiedFileComparator;
 import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.apache.log4j.Logger;
 
-import core.utilities.GenericMethodsLib; 
+import core.utilities.GenericUtils; 
 
 
 public class FileLib 
@@ -92,7 +92,7 @@ public class FileLib
 
 		//Printing Test Start Time.
 		logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : ###################################################################");
-		logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : ******* Test Suite Execution Started At Time ********: " +GenericMethodsLib.DateTimeStamp("MMddyyyy_hhmmss"));
+		logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : ******* Test Suite Execution Started At Time ********: " +GenericUtils.DateTimeStamp("MMddyyyy_hhmmss"));
 		logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : ###################################################################");
 	}
 

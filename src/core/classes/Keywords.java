@@ -50,7 +50,7 @@ import core.utilities.CaptureScreenShotLib;
 import core.utilities.CustomException;
 import core.utilities.CustomExceptionStopExecution;
 import core.utilities.DBLib;
-import core.utilities.GenericMethodsLib;
+import core.utilities.GenericUtils;
 import core.utilities.IntegerLib;
 import core.utilities.KeyBoardActionsUsingRobotLib;
 import core.utilities.httpClientWrap;
@@ -154,7 +154,7 @@ public class Keywords {
 			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred: "+e+" while launching browser: "+data, e);
 
 			/** Taking screenshot during exception */
-			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 		return result;
@@ -207,7 +207,7 @@ public class Keywords {
 			/** kill emulator for appium driver */
 			if(driver instanceof AppiumDriver<?>) {
 				String deviceUDID = SingletonTestObject.getSingletonTestObject().getTestCaseObjectMap().get(SuiteClass.UNIQ_EXECUTION_ID.get()).getDeviceUDID();
-				new GenericMethodsLib().killEmulator(deviceUDID);
+				new GenericUtils().killEmulator(deviceUDID);
 			}else {
 				/** for normal browser */
 				driver.quit();
@@ -220,7 +220,7 @@ public class Keywords {
 			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while closing browser. ", e);
 
 			/** Taking screenshot during exception */
-			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 		return result;
@@ -269,7 +269,7 @@ public class Keywords {
 			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred: "+e+" while navigating url : "+data+ " at browser : " +driver, e);
 
 			/** Taking screenshot during exception */
-			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 		return result;
@@ -315,7 +315,7 @@ public class Keywords {
 			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred: "+e+" while navigating back url : "+data+ "at browser : " +driver, e);
 
 			/** Taking screenshot during exception */
-			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 		return result;
@@ -374,7 +374,7 @@ public class Keywords {
 			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred: "+e+" while moving to new window ", e);
 
 			/** Taking screenshot during exception */
-			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 		return result;
@@ -431,7 +431,7 @@ public class Keywords {
 			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while uploading file : "+data, e);
 
 			/** Taking screenshot during exception */
-			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 		return result;
@@ -521,12 +521,12 @@ public class Keywords {
 			if(!(e instanceof NullPointerException)) {
 
 				/** Taking screenshot during exception */
-				CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+				CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 			}
 			else
 			{
-				CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+				CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" :  Taking Screenshot For Nullpointer Exception. ");
 			}
 		}
@@ -617,7 +617,7 @@ public class Keywords {
 			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Element is not available" +e.getMessage());
 
 			/** Taking screenshot during exception */
-			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 
@@ -659,7 +659,7 @@ public class Keywords {
 			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while selecting radio button option : ", e);
 
 			/** Taking screenshot during exception */
-			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 
@@ -731,7 +731,7 @@ public class Keywords {
 			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while clearing checkbox : " +webelement, e);
 
 			/** Taking screenshot during exception */
-			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 		return result;
@@ -768,7 +768,7 @@ public class Keywords {
 			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while checking selection of checkbox : " +webelement, e);
 
 			/** Taking screenshot during exception */
-			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 
 		}
@@ -828,7 +828,7 @@ public class Keywords {
 			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while selecting value: "+data +" from list. ");
 
 			/** Taking screenshot during exception */
-			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 		return result;
@@ -883,7 +883,7 @@ public class Keywords {
 			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred: "+e+" while Typing the value : " + data + " in the element: " + webelement, e);
 
 			/** Taking screenshot during exception */
-			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 
@@ -935,7 +935,7 @@ public class Keywords {
 			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred: "+e+" while Typing the value : " + data + " in the element: " + webelement, e);
 
 			/** Taking screenshot during exception */
-			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 
@@ -1052,7 +1052,7 @@ public class Keywords {
 			result = failed_status + "Could not retrieve the text."; 
 
 			/** Taking screenshot during exception */
-			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 		logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Current url: "+driver.getCurrentUrl());
@@ -1092,7 +1092,7 @@ public class Keywords {
 				String sqlQuery = objectName.replace("\"", "'");
 				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Executing supplied query: "+sqlQuery);
 
-				String [] records = GenericMethodsLib.ExecuteMySQLQueryReturns1DArray(connection, sqlQuery);
+				String [] records = GenericUtils.ExecuteMySQLQueryReturns1DArray(connection, sqlQuery);
 
 				/** proceed to test only if received records is not null */
 				if(records != null)
@@ -1236,7 +1236,7 @@ public class Keywords {
 			result = failed_status + "Could not get database details. "; 
 
 			/** Taking screenshot during exception */
-			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 		return result;
@@ -1283,7 +1283,7 @@ public class Keywords {
 			result = failed_status + "Could not get database details. "; 
 
 			/** Taking screenshot during exception */
-			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 		return result;
@@ -1385,7 +1385,7 @@ public class Keywords {
 			result = failed_status + "Could not retrieve the text."; 
 
 			/** Taking screenshot during exception */
-			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 		return result;
@@ -1427,7 +1427,7 @@ public class Keywords {
 			logger.error(failed_status + "Exception occurred while verifying the title: " + data + " in the element: " +driver, e);
 
 			/** Taking screenshot during exception */
-			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 
 			return failed_status + ": could not retrive the browser title."; 
@@ -1457,7 +1457,7 @@ public class Keywords {
 			logger.error(failed_status + "Exception occurred  "+e+" while getting the text from the element: " +webelement, e);
 
 			/** Taking screenshot during exception */
-			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 
 			return failed_status + "could not retrieve the text.";
@@ -1491,7 +1491,7 @@ public class Keywords {
 			logger.error(failed_status + "Exception occurred while verifying the alert text. ", e);
 
 			/** Taking screenshot during exception */
-			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 
 			return failed_status + "could not retrieve the alert text."; 
@@ -1520,7 +1520,7 @@ public class Keywords {
 			logger.error(failed_status + " Exception occurred while verifying the text in page source. ", e);
 
 			/** Taking screenshot during exception */
-			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 
 			return String.valueOf(false); 
@@ -1549,7 +1549,7 @@ public class Keywords {
 			logger.error(failed_status + "Exception occurred  "+e+" while getting the browser title from the element: " +driver, e);
 
 			/** Taking screenshot during exception */
-			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 
 			return failed_status + " : could not retrive the page title"; 
@@ -1600,7 +1600,7 @@ public class Keywords {
 			 * and call recursively verifyelementpresent */
 			if(data.toLowerCase().trim().startsWith("select") && data.toLowerCase().trim().contains("from"))
 			{
-				String [] arrayData = GenericMethodsLib.ExecuteMySQLQueryReturns1DArray(connection, data);
+				String [] arrayData = GenericUtils.ExecuteMySQLQueryReturns1DArray(connection, data);
 
 				/** iterating the received data */
 				for(int i=0; i<arrayData.length; i++)
@@ -1627,7 +1627,7 @@ public class Keywords {
 				logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while checking the presence of element. ", e);
 
 				/** Taking screenshot during exception */
-				CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+				CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 			}
 		}
@@ -1682,7 +1682,7 @@ public class Keywords {
 			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while checking the presence of element. ", e);
 
 			/** Taking screenshot during exception */
-			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 
@@ -1801,7 +1801,7 @@ public class Keywords {
 				logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while checking the presence of element. ", e);
 
 				/** Taking screenshot during exception */
-				CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+				CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 			}
 		}
@@ -1844,7 +1844,7 @@ public class Keywords {
 			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while accepting alert. ", e);
 
 			/** Taking screenshot during exception */
-			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 		return result;
@@ -1885,7 +1885,7 @@ public class Keywords {
 			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while dismissing alert. ", e);
 
 			/** Taking screenshot during exception */
-			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 		return result;
@@ -1938,7 +1938,7 @@ public class Keywords {
 			logger.error(failed_status + "Exception occurred while verifying the alert text. ", e);
 
 			/** Taking screenshot during exception */
-			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 
 			return failed_status + "could not retrieve the alert text."; 
@@ -1977,7 +1977,7 @@ public class Keywords {
 			logger.error(failed_status + "Exception occurred while verifying the presence of alert. ", e);
 
 			/** Taking screenshot during exception */
-			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 
 			return failed_status + "could not verify the presence of alert.";
@@ -2014,7 +2014,7 @@ public class Keywords {
 			logger.error(failed_status + "Exception occurred while verifying the presence of alert. ", e);
 
 			/** Taking screenshot during exception */
-			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 
 			return failed_status + "could not verify the presence of alert.";
@@ -2081,7 +2081,7 @@ public class Keywords {
 			result = failed_status + "Could not retrieve the value."; 
 
 			/** Taking screenshot during exception */
-			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 
 		}
@@ -2113,7 +2113,7 @@ public class Keywords {
 		catch(Exception e){
 			result = failed_status + ": Unable to scroll the bar";
 			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while scrolling the bar ", e);
-			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 		return result;
@@ -2144,7 +2144,7 @@ public class Keywords {
 				}
 			}
 			else{
-				CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+				CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 				result = failed_status + "Element is not visible. ";
 			}
 		}catch(Exception ex){
@@ -2152,7 +2152,7 @@ public class Keywords {
 
 			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" Unable to wait for the element visibility because of: ", ex);
 
-			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 		return result;
@@ -2285,7 +2285,7 @@ public class Keywords {
 			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred: "+e+" while moving foucs on element: " +webelement, e);
 
 			/** Taking screenshot during exception */
-			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 
@@ -2366,7 +2366,7 @@ public class Keywords {
 			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred: ", e);
 
 			/** Taking screenshot during exception */
-			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 
@@ -2572,7 +2572,7 @@ public class Keywords {
 			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while executing java script: "+data +" for supplied element: "+webelement, ex);
 
 			/** Taking screenshot during exception */
-			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 
 			return failed_status+ "Java Script Executed With Errors. ";
@@ -2739,7 +2739,7 @@ public class Keywords {
 			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : error occurred while hover ", e);
 
 			/** Taking screenshot during exception */
-			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 
@@ -2777,7 +2777,7 @@ public class Keywords {
 			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : error occurred while scrolling ", e);
 
 			/** Taking screenshot during exception */
-			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 
@@ -2811,7 +2811,7 @@ public class Keywords {
 			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : error occurred while hover ", e);
 
 			/** Taking screenshot during exception */
-			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 
@@ -2834,7 +2834,7 @@ public class Keywords {
 			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : error occurred getting url.", e);
 
 			/** Taking screenshot during exception */
-			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 
 			return failed_status + " couldn't get driver url. ";
@@ -2879,7 +2879,7 @@ public class Keywords {
 				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " : " + " null element found, skipping execute js. ");
 
 				/** Taking screenshot during exception */
-				CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+				CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 
 				return failed_status + "Null Element Received, Java Script Execution Skipped. ";
@@ -2977,7 +2977,7 @@ public class Keywords {
 			/** kill emulator for appium driver */
 			if(driver instanceof AppiumDriver<?>) {
 				String deviceUDID = SingletonTestObject.getSingletonTestObject().getTestCaseObjectMap().get(SuiteClass.UNIQ_EXECUTION_ID.get()).getDeviceUDID();
-				new GenericMethodsLib().killEmulator(deviceUDID);
+				new GenericUtils().killEmulator(deviceUDID);
 			}
 			else{
 				
@@ -2992,7 +2992,7 @@ public class Keywords {
 			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while closing browser tab. ", e);
 
 			/** Taking screenshot during exception */
-			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 		return result;

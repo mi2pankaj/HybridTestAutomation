@@ -34,7 +34,7 @@ import core.classes.TestObjectHandler;
 import core.classes.WriteTestResults;
 import core.utilities.CaptureScreenShotLib;
 import core.utilities.FileLib;
-import core.utilities.GenericMethodsLib;
+import core.utilities.GenericUtils;
 import core.utilities.KeyBoardActionsUsingRobotLib;
 import core.utilities.MongoDBHandler;
 import tpt.googleAPI.GetFailureTrendInGoogleSheet;
@@ -74,7 +74,7 @@ public class TestClass {
 		{		
 			logger.info("***************** Test Started: " +channel_type + " ************************ ");
 
-			GenericMethodsLib.InitializeConfiguration();
+			GenericUtils.InitializeConfiguration();
 
 			startTime=Instant.now();
 
@@ -107,7 +107,7 @@ public class TestClass {
 			/** getting object repository from google sheet to local */
 			List<TestCaseObject> testCaseObjectList = new ArrayList<>();
 			JSONObject jsonObjectRepo = new JSONObject();
-			if(GenericMethodsLib.generalConfigurationProperties.getProperty("ifDataFromGoogleRequired").toString().equalsIgnoreCase("yes")){
+			if(GenericUtils.generalConfigurationProperties.getProperty("ifDataFromGoogleRequired").toString().equalsIgnoreCase("yes")){
 
 				/** load test case objects in list for sequential execution with data driven test object list */
 				testCaseObjectList = new TestClass_Utils().getRunnableTestCaseObjects_ChannelSpecific_FromGoogle(channel_type);
@@ -318,7 +318,7 @@ public class TestClass {
 			}
 
 			/** kill all running process */
-			GenericMethodsLib.cleanProcesses();
+			GenericUtils.cleanProcesses();
 
 			endTime =Instant.now();
 			executionDuration=Duration.between(startTime, endTime);
@@ -329,7 +329,7 @@ public class TestClass {
 			SuiteClass.templateData.SetOwnerWiseResultData(resultData, channel_type);
 
 			/** write fail cases in the google sheet*/
-			if(GenericMethodsLib.generalConfigurationProperties.getProperty("ifDataFromGoogleRequired").toString().equalsIgnoreCase("yes")){
+			if(GenericUtils.generalConfigurationProperties.getProperty("ifDataFromGoogleRequired").toString().equalsIgnoreCase("yes")){
 				logger.info("**** Started writing fail test cases in google sheet ******");
 				GetFailureTrendInGoogleSheet.writeFailCaseInGoogleSheet();
 			}

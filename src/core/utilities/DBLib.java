@@ -50,7 +50,7 @@ public class DBLib
 			String NewSqlQuery = "SELECT sum(COUNT) FROM (SELECT COUNT(*) AS COUNT FROM adplatform.ad_log1 UNION ALL SELECT COUNT(*) AS COUNT FROM adplatform.ad_log0) AS temp;";
 			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Running Query in DB : " + NewSqlQuery);
 
-			Connection NewCon =  GenericMethodsLib.CreateSQLConnection();
+			Connection NewCon =  GenericUtils.CreateSQLConnection();
 			//Connection NewCon =  MobileTestClass_Methods.CreateServeSQLConnection();
 			Statement NewStmt = (Statement) NewCon.createStatement();
 			ResultSet NewRs = (ResultSet) NewStmt.executeQuery(NewSqlQuery);

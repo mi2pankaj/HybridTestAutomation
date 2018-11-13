@@ -15,7 +15,7 @@ import org.testng.annotations.BeforeSuite;
 import core.utilities.EmailTemplate;
 import core.utilities.EmailTemplateData;
 import core.utilities.FileLib;
-import core.utilities.GenericMethodsLib;
+import core.utilities.GenericUtils;
 import tests.SuiteClass;
 
 import org.testng.annotations.AfterSuite;
@@ -54,7 +54,7 @@ public class SuiteClass
 			System.out.println("AUTOMATION_HOME is: "+AUTOMATION_HOME);
 
 			/** 1. Initialize configuration */
-			GenericMethodsLib.InitializeConfiguration();
+			GenericUtils.InitializeConfiguration();
 
 			/** Loading log4j.properties file for logger and creating logs folder in advance */
 			PropertyConfigurator.configure(SuiteClass.AUTOMATION_HOME.concat("/properties/log4j.properties"));
@@ -90,7 +90,7 @@ public class SuiteClass
 			/** create property file to store results summary for jenkins email */
 			SuiteClass.templateData.testDataInPropertiesFile();
 			
-			GenericMethodsLib.cleanProcesses();			
+			GenericUtils.cleanProcesses();			
 		}
 		catch(Exception e)
 		{

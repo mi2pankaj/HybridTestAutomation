@@ -11,7 +11,7 @@ import org.openqa.selenium.WebDriver;
 import com.mysql.jdbc.Connection;
 
 import core.utilities.CaptureScreenShotLib;
-import core.utilities.GenericMethodsLib;
+import core.utilities.GenericUtils;
 import net.lightbody.bmp.proxy.ProxyServer;
 import tests.SuiteClass;
 
@@ -279,7 +279,7 @@ public class RetryController {
 					if(result.contains("Fail:")){
 
 						/** Taking screenshot during exception */
-						CaptureScreenShotLib.captureScreenShot(driver, new KeywordsExtended(connection, jsonObjectRepo, proxyServer).locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+						CaptureScreenShotLib.captureScreenShot(driver, new KeywordsExtended(connection, jsonObjectRepo, proxyServer).locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 						logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Retry - Screenshot is captured at: "+new KeywordsExtended(connection, jsonObjectRepo, proxyServer).locationToSaveSceenShot);
 					}
 				}

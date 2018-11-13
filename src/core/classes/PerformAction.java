@@ -13,7 +13,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mysql.jdbc.Connection;
 
-import core.utilities.GenericMethodsLib;
+import core.utilities.GenericUtils;
 import net.lightbody.bmp.proxy.ProxyServer;
 import tests.SuiteClass;
 
@@ -58,7 +58,7 @@ public class PerformAction {
 				String key = data.substring(data.indexOf("getconfig(")+10, data.lastIndexOf(")"));
 				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " getting config value of key: "+key);
 
-				String configValue = GenericMethodsLib.generalConfigurationProperties.getProperty(key).toString();
+				String configValue = GenericUtils.generalConfigurationProperties.getProperty(key).toString();
 
 				/** replace getconfig with value */
 				data = data.replace(data.substring(data.indexOf("getconfig("), data.lastIndexOf(")")+1), configValue);

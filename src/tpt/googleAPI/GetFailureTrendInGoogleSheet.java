@@ -17,7 +17,7 @@ import com.google.api.services.sheets.v4.model.ValueRange;
 
 import core.classes.SingletonTestObject;
 import core.classes.TestCaseObject;
-import core.utilities.GenericMethodsLib;
+import core.utilities.GenericUtils;
 
 public class GetFailureTrendInGoogleSheet {
 
@@ -87,8 +87,8 @@ public class GetFailureTrendInGoogleSheet {
 		try{
 
 			Sheets sheetservice=new GoogleSheetAPI().getSheetsService();
-			String sheetid=GenericMethodsLib.googleConfigurationProperties.getProperty("failed_testcases_result_sheet").toString();
-			String sheetrange=GenericMethodsLib.googleConfigurationProperties.getProperty("failed_testcases_result_sheet_Range").toString();
+			String sheetid=GenericUtils.googleConfigurationProperties.getProperty("failed_testcases_result_sheet").toString();
+			String sheetrange=GenericUtils.googleConfigurationProperties.getProperty("failed_testcases_result_sheet_Range").toString();
 			
 			/** below code will delete the sheet data */
 			sheetservice.spreadsheets().values().clear(sheetid, sheetrange, new ClearValuesRequest()).execute();
@@ -150,8 +150,8 @@ public class GetFailureTrendInGoogleSheet {
 	public static HashMap<String, List<Object>> getGooglesheetData(){
 		HashMap<String, List<Object>>sheetdata=new HashMap<>();
 		try{
-			String sheetid=GenericMethodsLib.googleConfigurationProperties.getProperty("failed_testcases_result_sheet").toString();
-			String sheetrange=GenericMethodsLib.googleConfigurationProperties.getProperty("failed_testcases_result_sheet_Range").toString();
+			String sheetid=GenericUtils.googleConfigurationProperties.getProperty("failed_testcases_result_sheet").toString();
+			String sheetrange=GenericUtils.googleConfigurationProperties.getProperty("failed_testcases_result_sheet_Range").toString();
 			List<List<Object>> values=new GoogleSheetAPI().getSpreadSheetRecords(sheetid, sheetrange);
 
 			for(int i=0;i<values.size();i++){

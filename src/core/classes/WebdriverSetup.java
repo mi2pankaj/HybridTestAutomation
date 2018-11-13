@@ -35,7 +35,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import core.utilities.FileLib;
-import core.utilities.GenericMethodsLib;
+import core.utilities.GenericUtils;
 import core.utilities.httpClientWrap;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -51,7 +51,7 @@ import tests.SuiteClass;
 public class WebdriverSetup {
 
 
-	static Logger logger = Logger.getLogger(GenericMethodsLib.class.getName());
+	static Logger logger = Logger.getLogger(GenericUtils.class.getName());
 
 	/**
 	 *  start appium server and create appium driver, 
@@ -99,7 +99,7 @@ public class WebdriverSetup {
 			/** setup appium driver -- implicit wait is not set up by appium driver -- setting up directly 
 			 * with chrome driver server by sending post request. -- not commenting this line - coz this code will log the request in appium log */			
 			driver.manage().timeouts().implicitlyWait(
-					Integer.parseInt(GenericMethodsLib.generalConfigurationProperties.getProperty("implicitDelayForWebdriver").toString()), 
+					Integer.parseInt(GenericUtils.generalConfigurationProperties.getProperty("implicitDelayForWebdriver").toString()), 
 					TimeUnit.SECONDS);
 			setupTimeout_ChromedriverLaunchedByAppiumServer();
 
@@ -110,7 +110,7 @@ public class WebdriverSetup {
 		}catch(Exception e) {
 
 			/** in case of any exception kill respective emulator - to avoid any hanging or test execution stuck issues .., normally testexecution id is emulator name..  */
-			new GenericMethodsLib().killEmulator(SuiteClass.UNIQ_EXECUTION_ID.get().toString());	//--need to supply device id here not the name -- correction required
+			new GenericUtils().killEmulator(SuiteClass.UNIQ_EXECUTION_ID.get().toString());	//--need to supply device id here not the name -- correction required
 
 			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+": exception occurred while starting the Appium Server. ",e);
 		}
@@ -126,7 +126,7 @@ public class WebdriverSetup {
 		try {
 
 			String chromedriverURL = getChromeDriverURLFromAppiumLogFile()+"/timeouts";
-			int timeout = Integer.parseInt(GenericMethodsLib.generalConfigurationProperties.getProperty("implicitDelayForWebdriver").toString());
+			int timeout = Integer.parseInt(GenericUtils.generalConfigurationProperties.getProperty("implicitDelayForWebdriver").toString());
 			String postData = "{\"type\":\"implicit\",\"ms\":"+timeout*1000+"}";
 
 			HashMap<Object, Object> response = new httpClientWrap().sendPostRequestWithParams(chromedriverURL, postData);
@@ -214,7 +214,7 @@ public class WebdriverSetup {
 			try {
 				/** in case of exception, first find the emulator name from apiumLog file and then kill emulator then try to start driver. */
 				String emulatorName = getEmulatorNameFromAppiumLogFile();
-				new GenericMethodsLib().killEmulator(emulatorName);
+				new GenericUtils().killEmulator(emulatorName);
 
 				driver =new AndroidDriver<MobileElement>(appiumDriverLocalService.getUrl(), desirecap);
 				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " - retried driver, after killing the - "+emulatorName);
@@ -673,7 +673,7 @@ public class WebdriverSetup {
 
 					/** apply browser dimension  */
 					driver = applyBrowserDimension(driver, browserDimensionWidth, browserDimensionHeight);
-					int implicitDelayForWebdriver = Integer.parseInt(GenericMethodsLib.generalConfigurationProperties.getProperty("implicitDelayForWebdriver").toString());
+					int implicitDelayForWebdriver = Integer.parseInt(GenericUtils.generalConfigurationProperties.getProperty("implicitDelayForWebdriver").toString());
 
 					/** setting up implicit driver delay */
 					driver.manage().timeouts().implicitlyWait(implicitDelayForWebdriver, TimeUnit.SECONDS);
@@ -1014,7 +1014,7 @@ public class WebdriverSetup {
 				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : No Support For: "+browser +" Browser. ");
 			}			
 
-			int implicitDelayForWebdriver = Integer.parseInt(GenericMethodsLib.generalConfigurationProperties.getProperty("implicitDelayForWebdriver").toString());
+			int implicitDelayForWebdriver = Integer.parseInt(GenericUtils.generalConfigurationProperties.getProperty("implicitDelayForWebdriver").toString());
 
 			/** setting up implicit driver delay */
 			driver.manage().timeouts().implicitlyWait(implicitDelayForWebdriver, TimeUnit.SECONDS);

@@ -37,10 +37,10 @@ import core.classes.TestCaseObject;
 import tests.SuiteClass;
 
 
-public class GenericMethodsLib 
+public class GenericUtils 
 {
 
-	static Logger logger = Logger.getLogger(GenericMethodsLib.class.getName());
+	static Logger logger = Logger.getLogger(GenericUtils.class.getName());
 
 	public static PropertiesConfiguration generalConfigurationProperties;
 	public static PropertiesConfiguration googleConfigurationProperties;

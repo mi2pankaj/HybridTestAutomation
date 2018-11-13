@@ -69,7 +69,7 @@ import com.mysql.jdbc.Connection;
 
 import core.utilities.CaptureScreenShotLib;
 import core.utilities.CustomException;
-import core.utilities.GenericMethodsLib;
+import core.utilities.GenericUtils;
 import core.utilities.IntegerLib;
 import core.utilities.httpClientWrap;
 import net.lightbody.bmp.proxy.ProxyServer;
@@ -386,7 +386,7 @@ public class HandlerLib
 				/** in case time stamp is passed */
 				if(key.equalsIgnoreCase("time"))
 				{
-					value = GenericMethodsLib.DateTimeStamp("MMddyy_hhmmss");
+					value = GenericUtils.DateTimeStamp("MMddyy_hhmmss");
 				}
 				/** random parameter #random# is passed */
 				else if(key.equalsIgnoreCase("random"))
@@ -396,12 +396,12 @@ public class HandlerLib
 				/** random parameter #nonzero_random# is passed */
 				else if(key.equalsIgnoreCase("nonzero_random"))
 				{
-					value = GenericMethodsLib.DateTimeStamp("MMM").concat("_"+GenericMethodsLib.DateTimeStamp("hhmmss").replace("0", "z"));
+					value = GenericUtils.DateTimeStamp("MMM").concat("_"+GenericUtils.DateTimeStamp("hhmmss").replace("0", "z"));
 				}
 				/** get date for the days given in the input sheet */
 				else if(key.contains("currentdate"))
 				{
-					data=GenericMethodsLib.getDateInString(data);
+					data=GenericUtils.getDateInString(data);
 				}
 				else
 				{
@@ -420,7 +420,7 @@ public class HandlerLib
 			 * but don't execute query for verifydbdetails keyword, coz this keyword expects a query */
 			if(data.toLowerCase().trim().startsWith("select") && data.contains("from") && !keyword.equalsIgnoreCase("verifydbdetails") )
 			{
-				String queryResult = GenericMethodsLib.ExecuteMySQLQueryReturns1DArray(connection, data)[0];
+				String queryResult = GenericUtils.ExecuteMySQLQueryReturns1DArray(connection, data)[0];
 
 				if(queryResult == null){
 					data = "";
@@ -448,7 +448,7 @@ public class HandlerLib
 	{
 		String [] records = null;
 		try {
-			records = GenericMethodsLib.ExecuteMySQLQueryReturns1DArray(connection, data);
+			records = GenericUtils.ExecuteMySQLQueryReturns1DArray(connection, data);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
@@ -700,7 +700,7 @@ public class HandlerLib
 					iselementDisplayed = false;
 
 					/** Taking screenshot during exception */
-					CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+					CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 					logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : received webelement as null, Screenshot is captured at: "+locationToSaveSceenShot);
 
 					result = failed_status + "Element is not present. ";
@@ -733,7 +733,7 @@ public class HandlerLib
 							result = failed_status + "Element is not present. ";
 
 							logger.info(SuiteClass.UNIQ_EXECUTION_ID.get() + " : " + " element not found, taking screenshot ... ");
-							CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+							CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 						}
 					}
 				}
@@ -762,7 +762,7 @@ public class HandlerLib
 						logger.info(suppliedObjectList.get(i) + " wasn't found on web page. ");
 
 						/** Taking screenshot during exception */
-						CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+						CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 						logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 					}
 				}
@@ -793,7 +793,7 @@ public class HandlerLib
 				logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while checking the presence of element. ", e);
 
 				/** Taking screenshot during exception */
-				CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+				CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 			}
 		}
@@ -832,7 +832,7 @@ public class HandlerLib
 				iselementDisplayed = false;
 
 				/** Taking screenshot during exception */
-				CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+				CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 				logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : element threw NullPointer - Screenshot is captured at: "+locationToSaveSceenShot);
 			}
 
@@ -847,7 +847,7 @@ public class HandlerLib
 			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while checking the presence of element. ", e);
 
 			/** Taking screenshot during exception */
-			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 		return result;
@@ -890,7 +890,7 @@ public class HandlerLib
 			logger.error(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Exception occurred while clicking checkbox : " +webelement, e);
 
 			/** Taking screenshot during exception */
-			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericMethodsLib.DateTimeStamp("MMdd_hhmmss") + ".png"));
+			CaptureScreenShotLib.captureScreenShot(driver, locationToSaveSceenShot.concat(GenericUtils.DateTimeStamp("MMdd_hhmmss") + ".png"));
 			logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : Screenshot is captured at: "+locationToSaveSceenShot);
 		}
 

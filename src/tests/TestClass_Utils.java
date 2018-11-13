@@ -25,7 +25,7 @@ import core.classes.ReadTestCases;
 import core.classes.SingletonTestObject;
 import core.classes.TestCaseObject;
 import core.classes.TestDataObject;
-import core.utilities.GenericMethodsLib;
+import core.utilities.GenericUtils;
 import core.utilities.httpClientWrap;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
@@ -56,7 +56,7 @@ public class TestClass_Utils {
 			JSONObject jsonObjectRepoPhp=new GetObjectRepoAsJson().getObjectRepoAsJson(objectRepoPhp);
 
 			/** combine both repo - for react */
-			jsonObjectRepo=GenericMethodsLib.mergeJSONObject(jsonObjectRepoPhp, jsonObjectRepoReact);
+			jsonObjectRepo=GenericUtils.mergeJSONObject(jsonObjectRepoPhp, jsonObjectRepoReact);
 		}
 		else if (channel_type.trim().equalsIgnoreCase("mobile"))
 		{
@@ -94,8 +94,8 @@ public class TestClass_Utils {
 
 			/**get React/Revamp object repository as JSON object */
 			listOfRepoRevamp = googleSheetUtils.getDataFromGoogle(
-					GenericMethodsLib.googleConfigurationProperties.getProperty("object_repo_sheet").toString(), 
-					GenericMethodsLib.googleConfigurationProperties.getProperty("object_repo_range").toString());
+					GenericUtils.googleConfigurationProperties.getProperty("object_repo_sheet").toString(), 
+					GenericUtils.googleConfigurationProperties.getProperty("object_repo_range").toString());
 
 			JSONObject jsonObjectRepoReact = googleSheetUtils.getObjectRepoAsJSON(listOfRepoRevamp);
 			jsonObjectRepo=jsonObjectRepoReact;
@@ -152,7 +152,7 @@ public class TestClass_Utils {
 						System.getProperty("user.dir").concat("/tc_cases/vsmSite/vsm_Test_Cases.xls"));
 
 				/** Deserialize object file and storing it into list of map. Then getting the runnable data driven test cases object list*/
-				List<HashMap<String, String>> listOfMap=GenericMethodsLib.dataObjectToListOfMap(testCaseObjectList);
+				List<HashMap<String, String>> listOfMap=GenericUtils.dataObjectToListOfMap(testCaseObjectList);
 
 				testCaseObjectList = new TestDataObject().getUpdatedTestCasesObjectList(listOfMap, testCaseObjectList);
 			}
@@ -182,14 +182,14 @@ public class TestClass_Utils {
 			if(channel_type.trim().equalsIgnoreCase("desktop")){
 
 				testDataList=testDataSheet.getTestDataFromGoogle(
-						GenericMethodsLib.googleConfigurationProperties.getProperty("test_data_sheet_id").toString(),
-						GenericMethodsLib.googleConfigurationProperties.getProperty("test_data_sheet_range").toString());
+						GenericUtils.googleConfigurationProperties.getProperty("test_data_sheet_id").toString(),
+						GenericUtils.googleConfigurationProperties.getProperty("test_data_sheet_range").toString());
 
 				testCaseObjectList = dataSheet.getUpdatedTestCasesObjectList(testDataList, 
 						new ReadTestCases().getRunnableTestCasesObjects(
-								GenericMethodsLib.googleConfigurationProperties.getProperty("test_case_sheet_id").toString(),
-								GenericMethodsLib.googleConfigurationProperties.getProperty("test_case_summary_range").toString(), 
-								GenericMethodsLib.googleConfigurationProperties.getProperty("test_case_step_sheet_range").toString()));
+								GenericUtils.googleConfigurationProperties.getProperty("test_case_sheet_id").toString(),
+								GenericUtils.googleConfigurationProperties.getProperty("test_case_summary_range").toString(), 
+								GenericUtils.googleConfigurationProperties.getProperty("test_case_step_sheet_range").toString()));
 
 			}else {
 				logger.error("Unable to get the updated test data object list of supplied channel type: "+channel_type);
@@ -293,8 +293,8 @@ public class TestClass_Utils {
 									public Object call() throws Exception {
 
 										/** first an existing avd and then create it -- clean setup */
-										new GenericMethodsLib().deleteAVDDynamically(testCaseObject.getTestCaseId());
-										new GenericMethodsLib().createAVDDynamically(testCaseObject.getTestCaseId());
+										new GenericUtils().deleteAVDDynamically(testCaseObject.getTestCaseId());
+										new GenericUtils().createAVDDynamically(testCaseObject.getTestCaseId());
 
 										return true;
 									}

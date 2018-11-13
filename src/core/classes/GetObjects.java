@@ -25,7 +25,7 @@ import org.openqa.selenium.WebElement;
 
 import core.utilities.CaptureScreenShotLib;
 import core.utilities.CustomException;
-import core.utilities.GenericMethodsLib;
+import core.utilities.GenericUtils;
 import tests.SuiteClass;
 
 
@@ -213,9 +213,9 @@ public class GetObjects
 	 */
 	private void handleInvocationException(WebDriver driver, By byObjectCollectWebElement, String objectName)
 	{
-		if(GenericMethodsLib.generalConfigurationProperties.getProperty("ifExplicitDelayForObjectVisibility").toString().trim().equalsIgnoreCase("yes"))
+		if(GenericUtils.generalConfigurationProperties.getProperty("ifExplicitDelayForObjectVisibility").toString().trim().equalsIgnoreCase("yes"))
 		{
-			String delay = GenericMethodsLib.generalConfigurationProperties.getProperty("explicitDelayForObjectVisibility").toString().trim();
+			String delay = GenericUtils.generalConfigurationProperties.getProperty("explicitDelayForObjectVisibility").toString().trim();
 
 			/** wait for x sec until the element is not present */
 			new HandlerLib().applyExplicitWait(driver, byObjectCollectWebElement, new NoSuchElementException(""), Integer.parseInt(delay));

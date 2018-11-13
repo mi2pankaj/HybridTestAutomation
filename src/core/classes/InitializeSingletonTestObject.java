@@ -15,7 +15,7 @@ import com.mongodb.DB;
 
 import core.grid.GetGridConfiguration;
 import core.grid.Node;
-import core.utilities.GenericMethodsLib;
+import core.utilities.GenericUtils;
 import core.utilities.MongoDBHandler;
 import core.utilities.httpClientWrap;
 import tests.TestClass_Utils;
@@ -219,19 +219,19 @@ public class InitializeSingletonTestObject {
 			else {
 
 				if(SingletonTestObject.getSingletonTestObject().getChannel_type().equalsIgnoreCase("vsm")) {
-					count = Integer.parseInt(GenericMethodsLib.generalConfigurationProperties.getProperty("vsm_executorCapacity").toString().trim());
+					count = Integer.parseInt(GenericUtils.generalConfigurationProperties.getProperty("vsm_executorCapacity").toString().trim());
 
 				}else if(SingletonTestObject.getSingletonTestObject().getChannel_type().equalsIgnoreCase("mobile")) {
 
-					try{count = Integer.parseInt(GenericMethodsLib.generalConfigurationProperties.getProperty("mobile_executorCapacity").toString().trim());}
+					try{count = Integer.parseInt(GenericUtils.generalConfigurationProperties.getProperty("mobile_executorCapacity").toString().trim());}
 					catch (Exception e) {
 						
 						/** if key is not there then fall back to  executorCapacity*/
-						count = Integer.parseInt(GenericMethodsLib.generalConfigurationProperties.getProperty("executorCapacity").toString().trim());
+						count = Integer.parseInt(GenericUtils.generalConfigurationProperties.getProperty("executorCapacity").toString().trim());
 					}
 				}
 				else {
-					count = Integer.parseInt(GenericMethodsLib.generalConfigurationProperties.getProperty("executorCapacity").toString().trim());
+					count = Integer.parseInt(GenericUtils.generalConfigurationProperties.getProperty("executorCapacity").toString().trim());
 				}
 
 				logger.info("setting up local executor capacity: "+count + " for channel: "+SingletonTestObject.getSingletonTestObject().getChannel_type());
