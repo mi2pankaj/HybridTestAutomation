@@ -1,0 +1,18 @@
+
+************************************************** REMOTE JENKINS BUILD TRIGGER *****************************************************************************
+
+Build Remote Trigger URL:
+http://pankaj:7b4dbe2c6604b847c92586e79d406894@192.168.10.34:8080/job/PoC/build?token=ESopHdtliWMM598p
+
+Get Crumb:
+curl -s 'http://pankaj:7b4dbe2c6604b847c92586e79d406894@192.168.10.34:8080/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)'
+
+Sample URL:
+curl -X POST -H "$CRUMB" "http://USER:TOKEN@localhost:8080/createItem?name=NewJob"
+
+Final URL for PoC Job:
+curl -X POST -H "Jenkins-Crumb:cca16155a99e7ac81045f784918651e9" http://pankaj:7b4dbe2c6604b847c92586e79d406894@192.168.10.34:8080/job/PoC/build?token=ESopHdtliWMM598p
+
+Final URL for Mobile_Web_Automated_Test_Suite Job:
+curl -X POST -H "Jenkins-Crumb:efb5b5d79b1fce6f7eee641efbfa4889" http://pankaj:7b4dbe2c6604b847c92586e79d406894@192.168.10.34:8080/job/Mobile_Web_Automated_Test_Suite/build?token=9zWM7Gtpt4dmlvzL
+
