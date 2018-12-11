@@ -33,14 +33,14 @@ public class MongoDBHandler {
 
 	// forwarding ports
 	private static final String LOCAL_HOST = "localhost";
-	private static final String REMOTE_HOST = "mongo00.webqe.internal"; //"mysql-web-rw.webqe.internal";
+	private static final String REMOTE_HOST = ""; 
 	private static final Integer LOCAL_PORT = 8988;
-	private static final Integer REMOTE_PORT = 27017; // Default mongodb port
+	private static final Integer REMOTE_PORT = 27017;
 
 	// ssh connection info
-	private static final String SSH_USER = "rishik";
-	private static final String SSH_PASSWORD = "pdnMCJkyT2cM5y8bZP";
-	private static final String SSH_HOST = "52.76.206.159";
+	private static final String SSH_USER = "NONE";
+	private static final String SSH_PASSWORD = "NONE";
+	private static final String SSH_HOST = "HOST_IP";
 	private static final Integer SSH_PORT = 22;
 
 	private static Session SSH_SESSION;
@@ -152,7 +152,7 @@ public class MongoDBHandler {
 		try{
 			CodecRegistry pojoCodecRegistry = fromRegistries(MongoClient.getDefaultCodecRegistry(),
 					fromProviders(PojoCodecProvider.builder().automatic(true).build()));
-			mongoClient = new MongoClient("52.221.153.135", MongoClientOptions.builder().codecRegistry(pojoCodecRegistry).build());
+			mongoClient = new MongoClient("<IP>", MongoClientOptions.builder().codecRegistry(pojoCodecRegistry).build());
 
 			logger.info("Mongo client instance is acquired. ");
 		}catch(Exception e){
