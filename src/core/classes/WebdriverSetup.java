@@ -770,7 +770,7 @@ public class WebdriverSetup {
 					String serverIP_Lenskart=System.getProperty("host_ip_www");
 					String serverIP_Api=System.getProperty("host_ip_api");
 
-					/** setting up proxy for api-preprod.com also if current test env is preprod and there is no ip address is received for api.lenskart.com so that 
+					/** setting up proxy for <Domain> also if current test env is preprod and there is no ip address is received for api.lenskart.com so that 
 					 * all api requests go to live */
 					if((SuiteClass.currentTestEnv.equalsIgnoreCase("preprod")) && (serverIP_Api == null || serverIP_Api.trim().isEmpty()))
 					{
@@ -790,14 +790,6 @@ public class WebdriverSetup {
 					{
 						proxyServer.remapHost("api.lenskart.com", serverIP_Api);
 						logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : host entry is set in proxy server for api ="+serverIP_Api);
-					}
-
-					if((SuiteClass.currentTestEnv.equalsIgnoreCase("preprod")) && (serverIP_Api == null || serverIP_Api.trim().isEmpty()))
-					{
-						proxyServer.remapHost("api-preprod.lenskart.com", SuiteClass.liveIpAddress_Lenskart_Com);
-						proxyServer.remapHost("api.lenskart.com", SuiteClass.liveIpAddress_Lenskart_Com);
-
-						logger.info(SuiteClass.UNIQ_EXECUTION_ID.get()+" : host entry is set in proxy server for api and api-preprod ="+SuiteClass.liveIpAddress_Lenskart_Com);
 					}
 				}
 
