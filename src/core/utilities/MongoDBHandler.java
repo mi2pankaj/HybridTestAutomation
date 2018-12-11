@@ -102,7 +102,7 @@ public class MongoDBHandler {
 			//			SSH_SESSION.connect();
 			//			SSH_SESSION.setPortForwardingL(LOCAL_PORT, REMOTE_HOST, REMOTE_PORT);
 
-			MongoClient mongoClient = new MongoClient("52.221.153.135", 27017);
+			MongoClient mongoClient = new MongoClient("<IP>", 27017);
 
 			MongoCursor<String> dbNames = mongoClient.listDatabaseNames().iterator();
 			while (dbNames.hasNext()) {
