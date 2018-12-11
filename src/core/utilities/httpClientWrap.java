@@ -362,7 +362,7 @@ public class httpClientWrap
 			HttpPost httppost = new HttpPost(url);
 			
 			/** adding an authorization header - */
-			httppost.addHeader("Authorization", "Basic "+new String(org.apache.commons.codec.binary.Base64.encodeBase64("pankaj:password@123".getBytes())));
+			httppost.addHeader("Authorization", "Basic "+new String(org.apache.commons.codec.binary.Base64.encodeBase64("<User>:<Password>".getBytes())));
 			HttpResponse httpResponse = httpclient.execute(httppost);
 			HttpEntity entity = httpResponse.getEntity();
 			response = EntityUtils.toString(entity,"UTF-8");
